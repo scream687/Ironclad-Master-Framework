@@ -27,5 +27,14 @@ This file is the mandatory lookup table for all AI operations. Before performing
 - **Trigger:** Any API or logic change. **Action:** MUST activate `tdd` and create a reproduction script.
 - **Trigger:** Any new project init. **Action:** MUST activate `sparc-methodology` and create `GEMINI.md`.
 
-## 4. Ironclad Enforcement
+## 4. Advanced Scenario Routing
+| Scenario | Action / Skill Chain |
+|---|---|
+| **Performance Regression** | `diagnose` -> `V3 Performance Optimization` |
+| **Complex Refactor** | `zoom-out` -> `improve-codebase-architecture` -> `sparc-methodology` |
+| **New API Integration** | `sparc-methodology` -> `tdd` -> `mcp-server-patterns` |
+| **Visual Polish Session** | `impeccable` -> `design-motion-principles` -> `high-end-visual-design` |
+| **Security Breach/Audit** | `source-command-sparc-security-review` -> `V3 Security Overhaul` |
+
+## 5. Ironclad Enforcement
 Failure to activate the mapped skill is a breach of the Master Framework protocol. You must explicitly confirm skill activation in your response before writing code.
