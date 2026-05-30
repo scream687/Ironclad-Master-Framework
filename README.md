@@ -2,6 +2,10 @@
 
 <img src="https://raw.githubusercontent.com/scream687/Ironclad-Master-Framework/main/assets/banner.png" alt="Ironclad Banner" width="100%" />
 
+<br />
+
+<img src="https://raw.githubusercontent.com/scream687/Ironclad-Master-Framework/main/assets/logo.png" alt="Ironclad Logo" width="120" />
+
 # 🛡️ Ironclad Master Framework
 ### *The Autonomous Shell for Elite AI Engineering*
 
