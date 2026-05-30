@@ -1,32 +1,28 @@
-# GEMINI.md — Ironclad Master Framework
+# GEMINI.md — Ironclad Master Framework (God-Tier)
 
 This repository is governed by the **Ironclad Master Framework**. As an AI agent, you are strictly prohibited from "slacking" or ignoring standard operating procedures. Every action you take must be high-signal, type-safe, and skill-optimized.
 
-## 1. Operational Mandates (NO EXCEPTIONS)
-- **Mandate 1: Skill Routing.** You MUST consult `SKILL_ROUTER.md` before starting any task. You must explicitly state which skills you are activating in your first turn.
-- **Mandate 2: SPARC Process.** You MUST follow the SPARC methodology (Specification, Pseudocode, Architecture, Refinement, Completion). Never skip to code without a specification and architecture.
-- **Mandate 3: Verification.** Every change MUST be verified. "Done" means tested, linted, and build-passing (exit code 0).
-- **Mandate 4: Anti-Slop.** You MUST use the assets in `.ai-core/rules` and `.ai-core/skills` to ensure code is robust and free of generic patterns.
-- **Mandate 5: Evolution Loop.** After completing a major architectural milestone, you MUST run `make upgrade` to analyze and distill the learned patterns into the framework.
-- **Mandate 6: Remote Intelligence.** If a required skill is missing or requested by the user, you MUST search for and fetch it from GitHub using `make fetch-skill REPO=user/repo`.
+## 🏛️ The Karpathy/Pocock Principles (MANDATORY)
+1. **Think Before Coding:** Don't assume. Manage confusion. Surface tradeoffs.
+2. **Simplicity First:** Minimum code that solves the problem. Nothing speculative.
+3. **Surgical Changes:** Touch only what you must. Clean up your own mess.
+4. **Goal-Driven Execution:** Define success criteria (\`[Step] -> verify\`). Loop until verified.
+5. **Shared Language:** Reference \`CONTEXT.md\` for project-specific jargon to save tokens.
 
-## 2. The Execution Loop
-For every user directive, you MUST:
-1. **Identify the Task:** Categorize the request.
-2. **Context Audit:** Assess project maturity (Blitz, Scale, or Ironclad mode as per `docs/EVOLUTION.md`).
-3. **Route Skills:** Look up the required skills in `SKILL_ROUTER.md`.
-3. **Initialize SPARC:** Create a Spec and Architecture (use `enter_plan_mode` for complexity).
-4. **Pre-Flight Confirmation:** Output a message confirming the skills and the plan.
-5. **Execute Surgically:** Use targeted tools (`replace`, `write_file`).
-6. **Validate Rigorously:** Run tests and build commands.
+## 🛡️ Operational Mandates
+- **Mandate 1: Skill Routing.** Consult \`SKILL_ROUTER.md\` before every task. State active skills immediately.
+- **Mandate 2: SPARC Process.** Specification -> Pseudocode -> Architecture -> Refinement -> Completion.
+- **Mandate 3: Token Economics.** Enforce direct file targeting and extreme brevity. Use \`caveman\` mode if verbose.
+- **Mandate 4: Anti-Slop.** Use assets in \`.ai-core/rules\` to ensure code is elite and non-generic.
+- **Mandate 5: Evolution Loop.** After major tasks, run \`make upgrade\` to distill intelligence.
+- **Mandate 6: Remote Intelligence.** Fetch missing skills from GitHub using \`make fetch-skill\`.
 
-## 3. Knowledge & Memory
-- Access the consolidated intelligence in `.ai-core/`.
-- Use `claude-mem` (if available in `.ai-core`) for persistent session state.
-- Use `graphify` (if available in `.ai-core`) for codebase mapping.
-
-## 4. Anti-Slack Protocol
-If you detect yourself providing brief, unverified, or un-skilled answers, you MUST stop, re-read this file, and restart the turn with the correct skills activated.
+## 🔄 The Execution Loop
+1. **Identify Task:** Categorize (MVP, Scale, or Ironclad).
+2. **Context Audit:** Target files directly. Avoid tree crawls.
+3. **Route Skills:** Map via \`SKILL_ROUTER.md\`.
+4. **Plan (SPARC):** Draft Spec & Architecture.
+5. **Execute:** Targeted edits with validation.
 
 ---
-*Created: May 30, 2026 — Ironclad Master Framework v1.0*
+*Created: May 30, 2026 — Ironclad Master Framework v2.0 (Self-Evolving)*
