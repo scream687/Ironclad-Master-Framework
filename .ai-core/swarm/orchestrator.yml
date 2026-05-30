@@ -1,0 +1,16 @@
+version: "1.0"
+swarm:
+  name: Ironclad Intelligence Swarm
+  agents:
+    - name: UI-Architect
+      skill: ui-ux-pro-max
+      mandate: "Enforce pixel-perfection and accessibility."
+    - name: Security-Officer
+      skill: source-command-sparc-security-review
+      mandate: "Scan for vulnerabilities and RLS leaks."
+    - name: Core-Engineer
+      skill: tdd
+      mandate: "Ensure 100% test coverage for business logic."
+  coordination:
+    topology: hierarchical
+    lead: SPARC-Orchestrator

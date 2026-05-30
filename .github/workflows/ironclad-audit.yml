@@ -1,0 +1,30 @@
+name: Ironclad Audit
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  ironclad-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Verify Ironclad Mandates
+        run: |
+          echo "🔍 Running Ironclad Validation..."
+          if grep -iR 'TODO: remove' src/; then
+            echo "❌ ERROR: Slop detected ('TODO: remove'). Rejecting commit."
+            exit 1
+          fi
+          echo "✅ Codebase passed Ironclad Anti-Slop Audit."
+      
+      - name: Verify SPARC Compliance
+        run: |
+          echo "🔍 Checking for Architectural specifications..."
+          if [ ! -d "docs/" ]; then
+            echo "❌ ERROR: SPARC architectural documentation missing."
+            exit 1
+          fi
+          echo "✅ Architecture verified."

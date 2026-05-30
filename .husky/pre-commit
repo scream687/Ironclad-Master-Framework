@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🛡️ Ironclad Pre-Commit Hook Activated..."
+
+# Prevent commits containing 'console.log' or generic slop placeholders
+if git diff --cached -S"console.log(" --quiet; then
+  echo "❌ ERROR: console.log detected. Slop is strictly prohibited."
+  exit 1
+fi
+
+if git diff --cached -S"// TODO" --quiet; then
+  echo "❌ ERROR: Unresolved TODOs detected. Finish the SPARC refinement phase."
+  exit 1
+fi
+
+echo "✅ Ironclad Verification Passed. Proceeding with commit."

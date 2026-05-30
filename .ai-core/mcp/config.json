@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "ironclad-telemetry": {
+      "command": "node",
+      "args": ["./.ai-core/mcp/servers/telemetry-server.js"],
+      "description": "Exposes telemetry and project maturity data."
+    },
+    "knowledge-graph": {
+      "command": "python3",
+      "args": ["-m", "graphify.server"],
+      "description": "Connects to the Graphify second-brain architecture."
+    }
+  },
+  "settings": {
+    "autoConnect": true,
+    "strictTyping": true
+  }
+}
