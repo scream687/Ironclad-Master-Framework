@@ -1,0 +1,43 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/rishabh/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-05-30T13:20:34.200Z"
+  },
+  "superpowers-dev": {
+    "source": {
+      "source": "git",
+      "url": "https://github.com/obra/superpowers.git"
+    },
+    "installLocation": "/Users/rishabh/.claude/plugins/marketplaces/superpowers-dev",
+    "lastUpdated": "2026-05-22T17:31:11.130Z"
+  },
+  "chrome-devtools-plugins": {
+    "source": {
+      "source": "git",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git"
+    },
+    "installLocation": "/Users/rishabh/.claude/plugins/marketplaces/chrome-devtools-plugins",
+    "lastUpdated": "2026-05-22T17:31:47.929Z"
+  },
+  "karpathy-skills": {
+    "source": {
+      "source": "github",
+      "repo": "forrestchang/andrej-karpathy-skills"
+    },
+    "installLocation": "/Users/rishabh/.claude/plugins/marketplaces/karpathy-skills",
+    "lastUpdated": "2026-05-24T06:15:11.665Z"
+  },
+  "thedotmack": {
+    "source": {
+      "source": "github",
+      "repo": "thedotmack/claude-mem"
+    },
+    "installLocation": "/Users/rishabh/.claude/plugins/marketplaces/thedotmack",
+    "lastUpdated": "2026-05-30T13:20:33.934Z",
+    "autoUpdate": true
+  }
+}

@@ -1,0 +1,345 @@
+{
+  "version": 2,
+  "plugins": {
+    "vercel@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/vercel/0.43.0",
+        "version": "0.43.0",
+        "installedAt": "2026-05-11T10:42:40.352Z",
+        "lastUpdated": "2026-05-21T04:15:50.117Z",
+        "gitCommitSha": "61f1903bed7b322c9745f6ba67095bc006de7e63"
+      }
+    ],
+    "code-review@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/code-review/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:12:36.942Z",
+        "lastUpdated": "2026-05-30T05:44:11.567Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "superpowers@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/superpowers/5.1.0",
+        "version": "5.1.0",
+        "installedAt": "2026-05-14T10:12:59.777Z",
+        "lastUpdated": "2026-05-14T10:12:59.777Z",
+        "gitCommitSha": "f2cbfbefebbfef77321e4c9abc9e949826bea9d7"
+      }
+    ],
+    "skill-creator@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/skill-creator/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:13:04.286Z",
+        "lastUpdated": "2026-05-30T05:44:11.553Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "playwright@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/playwright/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:13:09.591Z",
+        "lastUpdated": "2026-05-30T05:44:11.536Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "claude-md-management@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/claude-md-management/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-14T10:13:13.845Z",
+        "lastUpdated": "2026-05-14T10:13:13.845Z",
+        "gitCommitSha": "40b18e28e79befd3441c3cbd5ca657b021bba367"
+      }
+    ],
+    "security-guidance@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/security-guidance/2.0.0",
+        "version": "2.0.0",
+        "installedAt": "2026-05-14T10:13:29.690Z",
+        "lastUpdated": "2026-05-27T06:42:23.086Z",
+        "gitCommitSha": "40b18e28e79befd3441c3cbd5ca657b021bba367"
+      }
+    ],
+    "figma@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/figma/2.2.12",
+        "version": "2.2.12",
+        "installedAt": "2026-05-14T10:13:37.980Z",
+        "lastUpdated": "2026-05-21T04:15:49.333Z",
+        "gitCommitSha": "fabc1ca81d839602ba7c1ca0f445a64246b3870e"
+      }
+    ],
+    "plugin-dev@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/plugin-dev/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:14:13.339Z",
+        "lastUpdated": "2026-05-30T05:44:11.561Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "chrome-devtools-mcp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/chrome-devtools-mcp/1.1.1",
+        "version": "1.1.1",
+        "installedAt": "2026-05-14T10:14:08.431Z",
+        "lastUpdated": "2026-05-30T05:44:22.425Z",
+        "gitCommitSha": "a1612be8e01401cf1711c64bc2ef5da5763ba956"
+      }
+    ],
+    "hookify@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/hookify/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:14:21.325Z",
+        "lastUpdated": "2026-05-30T05:44:11.557Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "frontend-design@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/frontend-design/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:15:12.983Z",
+        "lastUpdated": "2026-05-30T05:44:11.568Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "context7@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/context7/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:15:17.466Z",
+        "lastUpdated": "2026-05-30T05:44:11.535Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "github@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/github/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:15:21.495Z",
+        "lastUpdated": "2026-05-30T05:44:11.534Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "feature-dev@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/feature-dev/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:15:28.478Z",
+        "lastUpdated": "2026-05-30T05:44:11.562Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "typescript-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/typescript-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-14T10:15:35.566Z",
+        "lastUpdated": "2026-05-14T10:15:35.566Z",
+        "gitCommitSha": "40b18e28e79befd3441c3cbd5ca657b021bba367"
+      }
+    ],
+    "claude-code-setup@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/claude-code-setup/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-14T10:15:40.609Z",
+        "lastUpdated": "2026-05-14T10:15:40.609Z",
+        "gitCommitSha": "40b18e28e79befd3441c3cbd5ca657b021bba367"
+      }
+    ],
+    "commit-commands@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/commit-commands/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:15:47.919Z",
+        "lastUpdated": "2026-05-30T05:44:11.540Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "supabase@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/supabase/0.1.10",
+        "version": "0.1.10",
+        "installedAt": "2026-05-14T10:15:55.452Z",
+        "lastUpdated": "2026-05-30T05:44:14.353Z",
+        "gitCommitSha": "693a17a9970ba96e01afb9bef060d1dca48463ba"
+      }
+    ],
+    "playground@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/playground/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-14T10:16:29.205Z",
+        "lastUpdated": "2026-05-30T05:44:11.556Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "huggingface-skills@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/huggingface-skills/1.0.4",
+        "version": "1.0.4",
+        "installedAt": "2026-05-14T10:17:02.780Z",
+        "lastUpdated": "2026-05-27T18:03:12.080Z",
+        "gitCommitSha": "7c71cfb2b12920002c3177474c779feeec4e9ad1"
+      }
+    ],
+    "coderabbit@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/coderabbit/1.1.1",
+        "version": "1.1.1",
+        "installedAt": "2026-05-14T10:18:48.322Z",
+        "lastUpdated": "2026-05-14T10:18:48.322Z",
+        "gitCommitSha": "a81eb76a1539e4a3f2b5c6fc133849124e72d303"
+      }
+    ],
+    "gitlab@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/gitlab/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-18T05:12:39.178Z",
+        "lastUpdated": "2026-05-30T05:44:11.565Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "firebase@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/firebase/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-18T05:12:57.964Z",
+        "lastUpdated": "2026-05-30T05:44:11.539Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "laravel-boost@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/laravel-boost/558d3aa8e3dc",
+        "version": "558d3aa8e3dc",
+        "installedAt": "2026-05-18T05:13:03.599Z",
+        "lastUpdated": "2026-05-30T05:44:11.538Z",
+        "gitCommitSha": "558d3aa8e3dc24ce9c567cf44afbfc8aa691e01e"
+      }
+    ],
+    "atomic-agents@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/atomic-agents/bb9708ec7c4c",
+        "version": "bb9708ec7c4c",
+        "installedAt": "2026-05-18T05:13:27.791Z",
+        "lastUpdated": "2026-05-30T05:44:18.471Z",
+        "gitCommitSha": "f849087b26bbb6fb5e63acb60f2b566ce874aaa7"
+      }
+    ],
+    "intercom@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/intercom/0.1.0",
+        "version": "0.1.0",
+        "installedAt": "2026-05-18T05:15:23.462Z",
+        "lastUpdated": "2026-05-18T05:15:23.462Z",
+        "gitCommitSha": "52653572c47700443eb61154c4e4334a355e755e"
+      }
+    ],
+    "zapier@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/zapier/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-18T05:15:33.837Z",
+        "lastUpdated": "2026-05-18T05:15:33.837Z",
+        "gitCommitSha": "f34a7854febed415c9ef766eec1c66529ef0668e"
+      }
+    ],
+    "liquid-skills@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/liquid-skills/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-18T05:15:55.086Z",
+        "lastUpdated": "2026-05-18T05:15:55.086Z",
+        "gitCommitSha": "bf7a7aa9f9809b0dcd80cb5f7fd2795a7208a7a3"
+      }
+    ],
+    "miro@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/claude-plugins-official/miro/1.2.5",
+        "version": "1.2.5",
+        "installedAt": "2026-05-18T05:16:07.643Z",
+        "lastUpdated": "2026-05-22T07:37:16.443Z",
+        "gitCommitSha": "da5405f866d823c7121ad6c38256f11c60501dbe"
+      }
+    ],
+    "superpowers@superpowers-dev": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/superpowers-dev/superpowers/5.1.0",
+        "version": "5.1.0",
+        "installedAt": "2026-05-22T17:31:23.931Z",
+        "lastUpdated": "2026-05-22T17:31:23.931Z",
+        "gitCommitSha": "f2cbfbefebbfef77321e4c9abc9e949826bea9d7"
+      }
+    ],
+    "chrome-devtools-mcp@chrome-devtools-plugins": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/chrome-devtools-plugins/chrome-devtools-mcp/1.0.1",
+        "version": "1.0.1",
+        "installedAt": "2026-05-22T17:31:53.245Z",
+        "lastUpdated": "2026-05-22T17:31:53.245Z",
+        "gitCommitSha": "57f32b0cd4afe1775b96ba35c27f25d6f0770331"
+      }
+    ],
+    "andrej-karpathy-skills@karpathy-skills": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/karpathy-skills/andrej-karpathy-skills/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-24T06:15:28.328Z",
+        "lastUpdated": "2026-05-24T06:15:28.328Z",
+        "gitCommitSha": "2c606141936f1eeef17fa3043a72095b4765b9c2"
+      }
+    ],
+    "claude-mem@thedotmack": [
+      {
+        "scope": "user",
+        "installPath": "/Users/rishabh/.claude/plugins/cache/thedotmack/claude-mem/13.4.0",
+        "version": "13.4.0",
+        "installedAt": "2026-05-27T07:34:25.720Z",
+        "lastUpdated": "2026-05-30T05:44:11.204Z",
+        "gitCommitSha": "84636894740724cb424e993d2e37a5a06a2aff2e"
+      }
+    ]
+  }
+}
