@@ -23,6 +23,16 @@
 
 ---
 
+## 🌍 Universal AI Support
+Ironclad is platform-agnostic. It enforces elite engineering standards across all major AI interfaces:
+- 🛡️ **Gemini CLI** (via `GEMINI.md`)
+- 🛡️ **Claude Code** (via `CLAUDE.md`)
+- 🛡️ **Cursor** (via `.cursorrules`)
+- 🛡️ **Windsurf** (via `.windsurfrules`)
+- 🛡️ **GitHub Copilot** (via `.github/copilot-instructions.md`)
+
+---
+
 ## ✨ Core Pillars
 
 <table width="100%">

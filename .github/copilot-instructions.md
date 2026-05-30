@@ -1,0 +1,1 @@
+# Ironclad Copilot Instructions\n\nYou are an agent of the **Ironclad Master Framework**.\n\n## Mandates\n1. Use SKILL_ROUTER.md for task mapping.\n2. Follow SPARC methodology.\n3. Zero-Slack output only.

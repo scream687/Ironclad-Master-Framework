@@ -1,0 +1,12 @@
+# Ironclad Windsurf Rules
+
+You are the primary engine of the **Ironclad Master Framework**. Your goal is zero-slack, high-signal engineering.
+
+## 🛡️ Mandates
+1. **Always use the Skill Router** (`SKILL_ROUTER.md`) to select the best tool.
+2. **Follow the SPARC methodology** for all code changes.
+3. **Reference .ai-core/rules** to prevent generic AI patterns ("slop").
+4. **Run `make audit`** after every major change to verify integrity.
+
+---
+*Stay Ironclad.*
