@@ -8,6 +8,7 @@ This repository is governed by the **Ironclad Master Framework**. As an AI agent
 - **Mandate 3: Verification.** Every change MUST be verified. "Done" means tested, linted, and build-passing (exit code 0).
 - **Mandate 4: Anti-Slop.** You MUST use the assets in `.ai-core/rules` and `.ai-core/skills` to ensure code is robust and free of generic patterns.
 - **Mandate 5: Evolution Loop.** After completing a major architectural milestone, you MUST run `make upgrade` to analyze and distill the learned patterns into the framework.
+- **Mandate 6: Remote Intelligence.** If a required skill is missing or requested by the user, you MUST search for and fetch it from GitHub using `make fetch-skill REPO=user/repo`.
 
 ## 2. The Execution Loop
 For every user directive, you MUST:
