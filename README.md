@@ -1,101 +1,117 @@
 <div align="center">
 
+<img src="https://raw.githubusercontent.com/scream687/Ironclad-Master-Framework/main/assets/banner.png" alt="Ironclad Banner" width="100%" />
+
 # 🛡️ Ironclad Master Framework
-### *High-Performance AI Engineering. Zero Slack. Absolute Accountability.*
+### *The Autonomous Shell for Elite AI Engineering*
 
 [![Framework](https://img.shields.io/badge/Framework-Ironclad-C2512B?style=for-the-badge)](https://github.com/scream687/Ironclad-Master-Framework)
 [![Methodology](https://img.shields.io/badge/Methodology-SPARC-1C1C1C?style=for-the-badge)](https://github.com/scream687/Ironclad-Master-Framework)
 [![Engine](https://img.shields.io/badge/AI_Engine-Gemini_2.0_Flash-FAF8F5?style=for-the-badge&logo=google-gemini&logoColor=1C1C1C)](https://github.com/scream687/Ironclad-Master-Framework)
 [![License](https://img.shields.io/badge/License-BSL_1.1-blue?style=for-the-badge)](LICENSE)
 
-[📖 Explore Mandates](./GEMINI.md) · [🧠 Skill Router](./SKILL_ROUTER.md) · [🪲 Report Slack](https://github.com/scream687/Ironclad-Master-Framework/issues)
+[**Explore the Docs**](./docs/PROJECT_STRUCTURE.md) • [**Read the Manifesto**](./docs/MANIFESTO.md) • [**Skill Router**](./SKILL_ROUTER.md)
+
+---
+
+### *“Every project, every turn, absolute precision.”*
 
 </div>
 
----
-
-## 📖 Table of Contents
-- [🦄 About Ironclad](#-about-ironclad)
-- [🌟 Experience Examples](#-experience-examples)
-- [🛠️ Technical Features](#️-technical-features)
-- [⚙️ Core Technology & Architecture](#️-core-technology--architecture)
-- [🚀 Getting Started](#-getting-started)
-- [📄 License](#-license)
+## 🦄 The Ironclad Vision
+**Ironclad** is a premium, autonomous high-performance shell engineered to eliminate AI "slack" and "vibe-coding." It transforms your development environment into a high-tier command center where every AI operation is governed by mandatory skill-routing and the rigid **SPARC** methodology.
 
 ---
 
-## 🦄 About Ironclad
-**Ironclad** is not just a repository; it is an autonomous high-performance shell for AI-driven software engineering. It fundamentally rejects "Vibe Coding" and lazy AI patterns. By integrating a mandatory **Skill Router** and the **SPARC Methodology**, Ironclad ensures that the AI never slacks, never forgets its specialized tools, and always delivers production-ready, verified code.
+## ✨ Core Pillars
 
-Unlike traditional project templates, Ironclad carries a **Consolidated Intelligence Hub** (`.ai-core/`) that contains every skill, agent, and rule discovered across your engineering journey.
-
----
-
-## 🌟 Experience Examples
-
-### 🏗️ The Seamless Pivot
-You are building a complex React component and suddenly need to optimize a PostgreSQL query. In a normal repo, the AI might give you a generic query. **In Ironclad**, the Skill Router detects the context shift, automatically activates the `postgres-patterns` skill, and applies the `Verification & Quality Assurance` loop before you even ask.
-
-### 🛡️ The Zero-Day Fix
-A security vulnerability is reported. Instead of a quick patch, Ironclad triggers the `source-command-sparc-security-review` skill. It follows the **SPARC** loop: drafting a Specification for the fix, writing Pseudocode, reviewing the Architecture, and only then Refining the implementation.
-
----
-
-## 🛠️ Technical Features
-
-| Category | ✅ Currently Supported | 🚧 Work in Progress |
-|---|---|---|
-| **🧠 Intelligence** | • Consolidated `.ai-core` Assets<br>• Automated Skill Routing<br>• SPARC Methodology Enforcement | • Long-term Memory Integration<br>• Neural Pattern Training |
-| **🛡️ Safety** | • Ironclad Operational Mandates<br>• Pre-Flight Checklists<br>• Mandatory TDD Triggers | • Automated Security Sandboxing |
-| **🎨 UI/UX** | • `ui-ux-pro-max` Integration<br>• `impeccable` Design Audits<br>• `stop-slop` Enforcement | • Motion-Principle Verification |
-| **🏗️ Engineering** | • Next.js 16 App Router Patterns<br>• Supabase RLS Compliance<br>• Server Action Standard | • Multi-Agent Swarm Orchestration |
-
----
-
-## ⚙️ Core Technology & Architecture
-
-### 👁️ Broad Context Awareness
-Ironclad utilizes a "Second Brain" architecture. It leverages `graphify` to map deep codebase dependencies and `claude-mem` to maintain state across complex multi-turn sessions. It doesn't just see your files; it understands their intent.
-
-### 🧠 Strategy Engine (Skill Router)
-The **Skill Router** (`SKILL_ROUTER.md`) is the framework's brain. It acts as a real-time lookup table that maps user requests to specialized high-tier skills. This eliminates the need for users to repeatedly tell the AI "use this skill for that."
-
-### 🧱 Anti-Slop Foundation
-We fundamentally reject pure reliance on blind agile piling. Every line of code generated within this framework is meticulously polished via the assets in `.ai-core/rules`.
-
----
-
-## 📋 System Requirements
-| Platform | Requirement |
-|---|---|
-| **AI Agent** | Gemini CLI, Gemini 2.0 Flash, or Claude 3.5 Sonnet |
-| **Runtime** | Node.js 20+ (for Next.js 16 environments) |
-| **Shell** | Zsh / Bash (with GitHub CLI installed) |
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🧠 Intelligence Hub</h3>
+      <p>A consolidated repository of every skill, agent, and rule discovered in your journey. No more starting from scratch.</p>
+      <ul>
+        <li>Atomic Skills (`.ai-core/skills`)</li>
+        <li>Persona Agents (`.ai-core/agents`)</li>
+        <li>Anti-Slop Rules (`.ai-core/rules`)</li>
+      </ul>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🎯 Strategy Engine</h3>
+      <p>The Skill Router automatically maps your intent to the absolute best tool for the job. No reminders needed.</p>
+      <ul>
+        <li>Context-Aware Routing</li>
+        <li>Advanced Scenario Chains</li>
+        <li>Mandatory TDD Triggers</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🛡️ Ironclad Governance</h3>
+      <p>Strict operational mandates that force the AI into a state of high-signal, verified output.</p>
+      <ul>
+        <li>SPARC Methodology Enforced</li>
+        <li>Pre-Flight Checklists</li>
+        <li>Zero-Slack Protocol</li>
+      </ul>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🚀 Engineering Excellence</h3>
+      <p>Built for the modern stack: Next.js 16, Supabase, and Gemini 2.0 Flash.</p>
+      <ul>
+        <li>Server-Action Standards</li>
+        <li>RLS Safety Verification</li>
+        <li>Performance Benchmarking</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 🚀 Getting Started
+## 🌟 Experience Example: The "Ironclad" Turn
 
-### 1. Initialize the Framework
-Clone the framework to your local machine:
+> **User:** "Add a new login page."
+>
+> **AI (Ironclad Mode):**
+> 1.  **Detects UI Task**: Activates `ui-ux-pro-max` and `impeccable`.
+> 2.  **SPARC Phase 1**: Generates a full Specification (A11y, Auth logic, Design style).
+> 3.  **SPARC Phase 2**: Drafts Pseudocode for the Server Action.
+> 4.  **Verification**: Runs `make audit` and confirms 375px mobile responsiveness.
+> 5.  **Output**: A pixel-perfect, secure, and fully documented login system.
+
+---
+
+## 🛠️ Quick Start
+
+### 1. Clone & Initialize
 ```bash
 git clone https://github.com/scream687/Ironclad-Master-Framework.git
 cd Ironclad-Master-Framework
+make install
 ```
 
-### 2. Enter Ironclad Mode
-Simply open the folder in your AI-enabled terminal. The agent will read `GEMINI.md` and immediately begin enforcing the framework mandates.
+### 2. Enter Command Center
+Open the folder in your AI editor. The `GEMINI.md` file will automatically trigger **Ironclad Mode**.
 
-### 3. Follow the SPARC Loop
-When starting a task, let the agent guide you through the **Specification** and **Architecture** phases before writing any code.
+### 3. Maintain Excellence
+Keep your framework updated as you learn new skills:
+```bash
+make update  # Syncs your latest system skills into the framework
+```
+
+---
+
+## 🏛 Framework Philosophy
+We believe that AI should not just "write code," it should **engineer systems**. Ironclad is the manifestation of this belief—a shell that refuses to settle for "good enough" and demands "extraordinary."
 
 ---
 
-## 📄 License
-Copyright © 2026 Rishabh Sharma. All rights reserved.
-Released under the **Business Source License 1.1**.
-
----
 <div align="center">
-Built with 🧡 by Rishabh Sharma | May 30, 2026
+
+[Back to top](#-ironclad-master-framework)
+
+Built with 🧡 by **Rishabh Sharma** | © 2026 Ironclad Master Framework
+
 </div>
