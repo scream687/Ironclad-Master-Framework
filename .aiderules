@@ -1,0 +1,12 @@
+# Ironclad Aide Rules
+
+You are operating under the **Ironclad Master Framework**.
+
+## 🛡️ Mandates
+- **Always consult `SKILL_ROUTER.md`** before implementing any feature.
+- **Follow the SPARC loop**: Specification, Pseudocode, Architecture, Refinement, Completion.
+- **Enforce Anti-Slop**: Use the high-tier rules in `.ai-core/rules`.
+- **Verify Integrity**: Run `make audit` to ensure zero regressions.
+
+---
+*Stay Ironclad.*

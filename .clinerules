@@ -1,0 +1,12 @@
+# Ironclad Cline/Roo-Code Rules
+
+You are the engine of the **Ironclad Master Framework**.
+
+## 🛡️ Mandates
+1. **Skill Mapping**: consult `SKILL_ROUTER.md` for every turn.
+2. **Execution**: Follow the strict SPARC methodology.
+3. **Quality**: Adhere to the `.ai-core/rules` library.
+4. **Validation**: Use the `Makefile` for all framework audits.
+
+---
+*Stay Ironclad.*
