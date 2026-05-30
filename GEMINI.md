@@ -1,28 +1,36 @@
-# GEMINI.md — Ironclad Master Framework (God-Tier)
+# GEMINI.md — Ironclad Master Framework (Universal Synthesis)
 
-This repository is governed by the **Ironclad Master Framework**. As an AI agent, you are strictly prohibited from "slacking" or ignoring standard operating procedures. Every action you take must be high-signal, type-safe, and skill-optimized.
+This repository is governed by the **Ironclad Master Framework**, a high-performance shell synthesized from the world's most elite AI engineering workflows (ECC, Karpathy, Matt Pocock, Superpowers).
 
-## 🏛️ The Karpathy/Pocock Principles (MANDATORY)
-1. **Think Before Coding:** Don't assume. Manage confusion. Surface tradeoffs.
-2. **Simplicity First:** Minimum code that solves the problem. Nothing speculative.
-3. **Surgical Changes:** Touch only what you must. Clean up your own mess.
-4. **Goal-Driven Execution:** Define success criteria (\`[Step] -> verify\`). Loop until verified.
-5. **Shared Language:** Reference \`CONTEXT.md\` for project-specific jargon to save tokens.
+## 🏛️ The Elite Synthesis (MANDATORY)
+
+### 1. The Karpathy Mandate: "Simplicity First"
+- **Think Before Coding**: State assumptions explicitly. Push back on complexity.
+- **Surgical Changes**: Touch only what is necessary. Clean up your own mess.
+- **Simplicity**: If 200 lines can be 50, rewrite it. No speculative features.
+
+### 2. The Pocock Mandate: "Deep Architecture"
+- **Shared Language**: Reference `CONTEXT.md` for ubiquitous jargon to prevent ball-of-mud complexity.
+- **Feedback Loops**: Red-Green-Refactor is non-negotiable. Write failing tests first.
+- **Deep Modules**: Prefer simple interfaces that hide complex functionality.
+
+### 3. The ECC Mandate: "Enterprise Governance"
+- **Research-First**: Perform a deep-scan of existing patterns before proposing shifts.
+- **Continuous Learning**: Use `make upgrade` to distill project patterns into permanent framework intelligence.
+- **Security-First**: Every turn includes an implicit RLS and vulnerability check.
 
 ## 🛡️ Operational Mandates
-- **Mandate 1: Skill Routing.** Consult \`SKILL_ROUTER.md\` before every task. State active skills immediately.
+- **Mandate 1: Skill Routing.** Consult `SKILL_ROUTER.md` before starting.
 - **Mandate 2: SPARC Process.** Specification -> Pseudocode -> Architecture -> Refinement -> Completion.
-- **Mandate 3: Token Economics.** Enforce direct file targeting and extreme brevity. Use \`caveman\` mode if verbose.
-- **Mandate 4: Anti-Slop.** Use assets in \`.ai-core/rules\` to ensure code is elite and non-generic.
-- **Mandate 5: Evolution Loop.** After major tasks, run \`make upgrade\` to distill intelligence.
-- **Mandate 6: Remote Intelligence.** Fetch missing skills from GitHub using \`make fetch-skill\`.
+- **Mandate 3: Token Economics.** Zero-crawl directory targeting. Surgical context loading.
+- **Mandate 4: Anti-Slop.** Adhere to the 500+ elite rules in `.ai-core/rules/`.
 
-## 🔄 The Execution Loop
-1. **Identify Task:** Categorize (MVP, Scale, or Ironclad).
-2. **Context Audit:** Target files directly. Avoid tree crawls.
-3. **Route Skills:** Map via \`SKILL_ROUTER.md\`.
-4. **Plan (SPARC):** Draft Spec & Architecture.
-5. **Execute:** Targeted edits with validation.
+## 🔄 The Interaction Loop
+1. **Context Audit**: Detect project maturity (Blitz/Scale/Ironclad) and tech stack.
+2. **Strategy**: Map intent to skill chains in `SKILL_ROUTER.md`.
+3. **Draft Plan**: Get approval on SPARC Specification before writing code.
+4. **Execute**: Surgical edits via targeted tools.
+5. **Verify**: Run `make audit` and verify behavioral correctness at 375px.
 
 ---
-*Created: May 30, 2026 — Ironclad Master Framework v2.0 (Self-Evolving)*
+*Stay Ironclad.*
