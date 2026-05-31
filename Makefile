@@ -14,8 +14,7 @@ help:
 	@echo "  make install        Initialize the framework and local hooks"
 
 audit:
-	@chmod +x scripts/audit.sh
-	@./scripts/audit.sh
+	@node bin/ironclad.js audit
 
 update:
 	@echo "🔄 Syncing with ~/.claude..."
@@ -24,20 +23,12 @@ update:
 	@cp -rn ~/.claude/rules/* .ai-core/rules/ 2>/dev/null || true
 	@echo "✅ Sync Complete."
 
-upgrade: audit
-	@echo "🚀 Running Ironclad Evolution Loop..."
-	@echo "1. Analyzing framework performance..."
-	@# Distill patterns logic would go here
-	@echo "2. Upgrading core mandates..."
-	@echo "✅ Framework upgraded to latest intelligence tier."
+upgrade:
+	@node bin/ironclad.js upgrade
 
 fetch-skill:
-	@echo "🌐 Fetching external intelligence from GitHub..."
 	@if [ -z "$(REPO)" ]; then echo "❌ Error: REPO parameter missing (e.g., make fetch-skill REPO=user/repo)"; exit 1; fi
-	@echo "📥 Cloning $(REPO) into .ai-core/skills/..."
-	@mkdir -p .ai-core/skills/$(shell basename $(REPO))
-	@gh repo clone $(REPO) .ai-core/skills/$(shell basename $(REPO)) -- --depth 1
-	@echo "✅ Skill integrated into intelligence hub."
+	@node bin/ironclad.js fetch $(REPO)
 
 clean:
 	@echo "🧹 Cleaning framework caches..."
@@ -48,4 +39,5 @@ install:
 	@echo "🏗️  Installing Ironclad Framework..."
 	@chmod +x scripts/install.sh
 	@./scripts/install.sh
+	@npm install --silent
 	@echo "✅ Installation Complete."

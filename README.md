@@ -79,13 +79,15 @@ A "Second Brain" for your repository, containing:
 ```bash
 git clone https://github.com/scream687/Ironclad-Master-Framework.git
 cd Ironclad-Master-Framework
-make install
+make install # Initializes repo and installs the Command Center CLI
 ```
 
-### 2. Operational Commands
-- `make audit` — Run the full Anti-Slop verification suite.
+### 2. Command Center (CLI)
+The framework is powered by an elite Node.js CLI.
+- `make audit` — Run the full Anti-Slop verification suite via `ironclad audit`.
 - `make update` — Sync remote intelligence into your local hub.
-- `make upgrade` — Trigger the Evolution Engine self-upgrade.
+- `make upgrade` — Trigger the Evolution Engine self-upgrade via `ironclad upgrade`.
+- `make fetch-skill REPO=user/repo` — Integrate new intelligence via `ironclad fetch`.
 
 ---
 
