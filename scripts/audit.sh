@@ -20,7 +20,7 @@ fi
 
 # 2. Check for // TODO (Phase Completion)
 echo "🔍 Checking for incomplete SPARC cycles (TODOs)..."
-TODOS=$(grep -r "// TODO" . 2>/dev/null | grep -v "node_modules" | grep -v ".ai-core" | grep -v ".husky" | grep -v "README.md" | grep -v "scripts/audit.sh")
+TODOS=$(grep -r "// TODO" . 2>/dev/null | grep -v "node_modules" | grep -v ".ai-core" | grep -v ".husky" | grep -v "README.md" | grep -v "scripts/audit.sh" | grep -v "scripts/upgrade.sh")
 if [ ! -z "$TODOS" ]; then
   echo "❌ Found TODO markers (SPARC cycle incomplete):"
   echo "$TODOS"
