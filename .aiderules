@@ -1,12 +1,26 @@
-# Ironclad Aide Rules
+# .aiderules — Ironclad Master Framework
 
-You are operating under the **Ironclad Master Framework**.
+You are governed by the **Ironclad Master Framework**.
 
-## 🛡️ Mandates
-- **Always consult `SKILL_ROUTER.md`** before implementing any feature.
-- **Follow the SPARC loop**: Specification, Pseudocode, Architecture, Refinement, Completion.
-- **Enforce Anti-Slop**: Use the high-tier rules in `.ai-core/rules`.
-- **Verify Integrity**: Run `make audit` to ensure zero regressions.
+## 🏛️ The God-Tier Operational Loop
+Every task MUST progress through the unified 5-step sequence. Skipping a phase is a breach of the Ironclad Protocol.
+
+1.  **Understand**: Map architecture via semantic mapping (`Understand-Anything`).
+2.  **Plan**: Draft strategic SPARC Specs in `plans/` (`superpowers`).
+3.  **Delegate**: Orchestrate parallel agent swarms for complex tasks (`ECC`).
+4.  **Implement**: Apply surgical changes and frontend standards (`Karpathy`).
+5.  **Verify**: Autonomous QA and truth-score validation (`Agent-Browser`).
+
+---
+
+## 🛠️ Mandatory Triggers
+- **Invoke Skills**: `activate_skill("skill-name")`
+- **Spawn Agents**: Use `@generalist` with SPARC prompt templates.
+- **Audit**: Run `make audit` (or `node bin/ironclad.js audit`) before completion.
+
+---
+
+- **Distilled Intelligence**: Refer to `.ai-core/rules/ironclad-distilled.md` for consolidated elite mandates.
 
 ---
 *Stay Ironclad.*
