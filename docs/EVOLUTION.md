@@ -1,3 +1,7 @@
+<div align="center">
+  <a href="../README.md">README</a> • <a href="MANIFESTO.md">MANIFESTO</a> • <a href="SYSTEM_DESIGN.md">SYSTEM DESIGN</a> • <b>EVOLUTION</b>
+</div>
+
 # 🔄 Ironclad Evolution Engine
 
 The **Ironclad Evolution Engine** ensures that the framework never becomes stagnant. It is designed to adapt to any project context and upgrade its own intelligence based on real-world performance.

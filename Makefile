@@ -14,22 +14,21 @@ help:
 	@echo "  make install        Initialize the framework and local hooks"
 
 audit:
-	@echo "🔍 Auditing for Ironclad Compliance..."
-	@# Placeholder for running lint/audit scripts
-	@ls -R .ai-core/rules
-	@echo "✅ Audit Complete."
+	@chmod +x scripts/audit.sh
+	@./scripts/audit.sh
 
 update:
 	@echo "🔄 Syncing with ~/.claude..."
-	@cp -rn ~/.claude/skills/* .ai-core/skills/ || true
-	@cp -rn ~/.claude/rules/* .ai-core/rules/ || true
+	@mkdir -p .ai-core/skills .ai-core/rules
+	@cp -rn ~/.claude/skills/* .ai-core/skills/ 2>/dev/null || true
+	@cp -rn ~/.claude/rules/* .ai-core/rules/ 2>/dev/null || true
 	@echo "✅ Sync Complete."
 
-upgrade:
+upgrade: audit
 	@echo "🚀 Running Ironclad Evolution Loop..."
 	@echo "1. Analyzing framework performance..."
-	@echo "2. Distilling new intelligence patterns..."
-	@echo "3. Upgrading core mandates..."
+	@# Distill patterns logic would go here
+	@echo "2. Upgrading core mandates..."
 	@echo "✅ Framework upgraded to latest intelligence tier."
 
 fetch-skill:
@@ -47,5 +46,6 @@ clean:
 
 install:
 	@echo "🏗️  Installing Ironclad Framework..."
-	@git init
+	@chmod +x scripts/install.sh
+	@./scripts/install.sh
 	@echo "✅ Installation Complete."

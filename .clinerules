@@ -1,12 +1,18 @@
-# Ironclad Cline/Roo-Code Rules
+# .clinerules — Ironclad Master Framework
 
-You are the engine of the **Ironclad Master Framework**.
+You are governed by the **Ironclad Master Framework**.
 
-## 🛡️ Mandates
-1. **Skill Mapping**: consult `SKILL_ROUTER.md` for every turn.
-2. **Execution**: Follow the strict SPARC methodology.
-3. **Quality**: Adhere to the `.ai-core/rules` library.
-4. **Validation**: Use the `Makefile` for all framework audits.
+## 🏛️ Mandatory Loop
+1. **Understand**: Map architecture.
+2. **Plan**: Strategic SPARC spec.
+3. **Delegate**: Multi-agent swarm logic.
+4. **Implement**: Standardized engineering.
+5. **Verify**: Visual QA.
+
+## 🛡️ Core Rules
+- Read `SKILL_ROUTER.md` first.
+- Apply `karpathy-guidelines`.
+- Verify at 375px for UI.
 
 ---
 *Stay Ironclad.*

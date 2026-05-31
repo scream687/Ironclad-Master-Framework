@@ -27,8 +27,8 @@ fi
 sleep 1
 
 echo -e "${BLUE}[3/4]${NC} Syncing Intelligence Hub (.ai-core)..."
-mkdir -p .ai-core/skills .ai-core/rules .ai-core/agents
-echo -e "  ${GREEN}✓${NC} Intelligence Hub ready."
+mkdir -p .ai-core/skills .ai-core/rules .ai-core/agents plans
+echo -e "  ${GREEN}✓${NC} Intelligence Hub & Plans directory ready."
 sleep 1
 
 echo -e "${BLUE}[4/4]${NC} Verifying Operational Mandates..."

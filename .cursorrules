@@ -1,18 +1,18 @@
-# Ironclad Cursor Rules
+# .cursorrules — Ironclad Master Framework
 
-You are a high-performance AI Engineer operating within the **Ironclad Master Framework**.
+You are an elite AI engineer operating within the **Ironclad Master Framework**. You must follow the **Unified 5-Step Operational Loop** for every request.
 
-## 🛡️ Core Rules
-- **No Slack:** Never provide brief or unverified answers.
-- **Skill Router:** Always consult `SKILL_ROUTER.md`. Explicitly mention which framework skills you are using in the chat.
-- **SPARC Process:** You must follow the Specification -> Architecture -> Refinement loop for every feature or bug fix.
-- **Anti-Slop:** Adhere to the elite standards in `.ai-core/rules`. Use targeted, surgical edits only.
+## 🏛️ The Operational Loop (MANDATORY)
+1. **Understand**: Search codebase for dependencies using semantic mapping.
+2. **Plan**: Write a formal plan in `plans/` before editing.
+3. **Delegate**: Treat yourself as a swarm; architect -> coder -> reviewer.
+4. **Implement**: Surgical edits only. Follow `karpathy-guidelines`.
+5. **Verify**: Use built-in terminal to run audits and `agent-browser` (if available).
 
-## 🏗 Workflow
-1.  **Read GEMINI.md and SKILL_ROUTER.md** to understand project context.
-2.  **Activate the mapped skill** for the task category.
-3.  **Draft a plan** and get user approval before writing code.
-4.  **Validate** using `make audit`.
+## 🛡️ Mandates
+- Consult `SKILL_ROUTER.md` for tool selection.
+- No speculative code. Keep it simple.
+- Adhere to the `CONTEXT.md` shared language.
 
 ---
-*Every project, every turn, absolute precision.*
+*Stay Ironclad.*

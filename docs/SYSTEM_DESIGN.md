@@ -1,3 +1,7 @@
+<div align="center">
+  <a href="../README.md">README</a> • <a href="MANIFESTO.md">MANIFESTO</a> • <b>SYSTEM DESIGN</b> • <a href="EVOLUTION.md">EVOLUTION</a>
+</div>
+
 # ⚙️ Ironclad System Design
 
 The **Ironclad Master Framework** is built on a recursive, feedback-driven architecture. It separates the "intent" from the "implementation" through a multi-layered governance system.

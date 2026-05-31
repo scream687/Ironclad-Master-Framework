@@ -14,7 +14,7 @@
 [![Tier](https://img.shields.io/badge/Tier-God--Tier-FFD700?style=for-the-badge)](https://github.com/scream687/Ironclad-Master-Framework)
 [![License](https://img.shields.io/badge/License-BSL_1.1-blue?style=for-the-badge)](LICENSE)
 
-[**System Design**](./docs/SYSTEM_DESIGN.md) • [**Evolution Engine**](./docs/EVOLUTION.md) • [**Manifesto**](./docs/MANIFESTO.md) • [**Telemetry**](./docs/telemetry/MEMORY_BOARD.md)
+[**System Design**](./docs/SYSTEM_DESIGN.md) • [**Evolution Engine**](./docs/EVOLUTION.md) • [**Manifesto**](./docs/MANIFESTO.md) • [**Skill Router**](./SKILL_ROUTER.md)
 
 ---
 
@@ -22,75 +22,91 @@
 
 </div>
 
-## 🦄 The Ironclad Manifesto
-**Ironclad** is a premium, autonomous high-performance shell engineered to terminate AI "slack." It transforms your repository into a high-tier command center where every operation is governed by a **Universal Strategy Engine** and the rigid **SPARC** methodology.
+## 📖 Executive Summary
+The **Ironclad Master Framework** is a premium, autonomous operational shell designed to terminate AI "slack" and "vibe coding." It transforms a standard repository into an **Autonomous Business Operating System**, governed by the rigid **SPARC** methodology and a unified intelligence hub.
 
 ---
 
-## ⚡ The Ironclad Advantage
+## ⚡ The Ironclad Advantage (Bento Grid)
 
-| Feature | 🕸️ Vibe Coding (Generic AI) | 🛡️ Ironclad Engineering |
-|---|---|---|
-| **Planning** | Skips directly to code generation. | Mandatory SPARC Specification phase. |
-| **Tooling** | Uses generic, non-specialized prompts. | Automated Skill Routing to elite assets. |
-| **Refinement** | Heavy, "slop"-filled boilerplate code. | Surgical, anti-slop refactoring rules. |
-| **Verification** | Assumes code works if it looks okay. | Mandatory CI/CD & Local Git Hook audits. |
-| **Evolution** | Forgets improvements between projects. | Self-upgrading intelligence hub. |
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🧠 Unified Intelligence</h3>
+      <p>Consolidates 100+ elite skills and rules from ECC, Karpathy, and Pocock into a single .ai-core hub.</p>
+    </td>
+    <td width="50%">
+      <h3>🏛️ God-Tier Loop</h3>
+      <p>Mandatory 5-step loop (Understand, Plan, Delegate, Implement, Verify) ensures zero-slop execution.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🛡️ Audit-First Dev</h3>
+      <p>Integrated Makefile and Git hooks automatically reject console logs and incomplete SPARC cycles.</p>
+    </td>
+    <td width="50%">
+      <h3>🔄 Self-Evolving Hub</h3>
+      <p>Framework upgrades itself by distilling patterns from successful tasks into permanent system intelligence.</p>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## ✨ God-Tier Feature Grid
+## 🏛️ The God-Tier Operational Loop
+Every turn, every task, every agent. Non-negotiable precision.
 
-<div align="center">
-
-| 🤖 Multi-Agent Swarms | ⛓️ Ironclad CI/CD |
-|:---:|:---:|
-| Hierarchical orchestration for UI, Security, and Core Logic agents. | GitHub Actions that enforce audits on every Pull Request. |
-| **🔌 Universal Support** | **📊 Memory Board** |
-| Native support for Gemini, Claude Code, Cursor, and Windsurf. | Real-time telemetry tracking AI performance and maturity. |
-
-</div>
+1.  **Understand**: Map architecture via semantic mapping (`Understand-Anything`).
+2.  **Plan**: Draft strategic SPARC Specs in `plans/` (`superpowers`).
+3.  **Delegate**: Orchestrate parallel agent swarms for complex tasks (`ECC`).
+4.  **Implement**: Apply surgical changes and frontend standards (`Karpathy`).
+5.  **Verify**: Autonomous QA and truth-score validation (`Agent-Browser`).
 
 ---
 
 ## 🛠️ The Intelligence Hub (`.ai-core/`)
-Ironclad carries a "Second Brain" containing your most powerful engineering assets:
-- **`skills/`**: Atomic, high-tier toolsets (e.g., `ui-ux-pro-max`, `diagnose`).
-- **`agents/`**: Decision-making personas for specialized domains.
+A "Second Brain" for your repository, containing:
+- **`skills/`**: Atomic toolsets like `ui-ux-pro-max`, `diagnose`, and `v3-performance`.
+- **`rules/`**: The Anti-Slop library defining your code quality floor.
 - **`mcp/`**: Model Context Protocol servers for deep system integration.
-- **`rules/`**: The "Anti-Slop" library that defines your code quality floor.
 
 ---
 
-## 🛡️ Anti-Slop Enforcement
-Our **Git Pre-Commit Hooks** are the front line of defense, automatically blocking:
-- ❌ **`console.log`** in production-ready files.
-- ❌ **`// TODO`** markers that signal incomplete SPARC cycles.
-- ❌ **Boilerplate** patterns that violate the `stop-slop` mandate.
+## 🚀 Quickstart
 
----
-
-## 🚀 Deployment
-
-### 1. Zero-Touch Installation
+### 1. Hardened Installation
 ```bash
 git clone https://github.com/scream687/Ironclad-Master-Framework.git
 cd Ironclad-Master-Framework
-./scripts/install.sh
+make install
 ```
 
-### 2. Autonomous Maintenance
-```bash
-make upgrade        # Triggers the Evolution Engine self-upgrade
-make fetch-skill    # Pulls remote intelligence from GitHub
-make audit          # Runs the full Anti-Slop verification suite
-```
+### 2. Operational Commands
+- `make audit` — Run the full Anti-Slop verification suite.
+- `make update` — Sync remote intelligence into your local hub.
+- `make upgrade` — Trigger the Evolution Engine self-upgrade.
 
 ---
 
-<div align="center">
+## 🏛️ Elite Foundations (The Intelligence Stack)
+Ironclad is built upon the distilled intelligence of the world's most elite AI engineering repositories.
 
-[Back to top](#-ironclad-master-framework)
+| Module | Source Repository | Authority |
+|---|---|---|
+| **Swarm Ops** | `affaan-m/ECC` | Infinite Yield AI |
+| **Architectural Mapping** | `Lum1104/Understand-Anything` | Deep Context Mapping |
+| **Strategic Planning** | `obra/superpowers` | SPARC Methodology |
+| **Anti-Slop Mandates** | `multica-ai/andrej-karpathy-skills` | Simplicity & Precision |
+| **Deep Architecture** | `mattpocock/skills` | TypeScript & Locality |
+| **System Refinement** | `ruvnet/ruflo` | Flow & Optimization |
+| **Memory Engine** | `thedotmack/claude-mem` | Persistent Cognition |
+| **Knowledge Work** | `anthropics/knowledge-work-plugins` | Document Management |
+| **Visual Design** | `Leonxlnx/taste-skill` | Masterpiece UI/UX |
+| **Compound Systems** | `EveryInc/compound-engineering-plugin` | Multi-Agent Design |
+| **Tool Harness** | `revfactory/harness` | Performance Testing |
+
+---
 
 Built with 🧡 by **Rishabh Sharma** | © 2026 Ironclad Master Framework
 

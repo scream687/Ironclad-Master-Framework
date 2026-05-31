@@ -1,4 +1,8 @@
-# The Ironclad Manifesto
+<div align="center">
+  <a href="../README.md">README</a> • <b>MANIFESTO</b> • <a href="SYSTEM_DESIGN.md">SYSTEM DESIGN</a> • <a href="EVOLUTION.md">EVOLUTION</a>
+</div>
+
+# 🛡️ The Ironclad Manifesto
 
 ## 1. We Reject the "Vibe"
 "Vibe Coding" is the death of engineering. We do not write code that "feels" right; we write code that is structurally sound, type-safe, and empirically verified.

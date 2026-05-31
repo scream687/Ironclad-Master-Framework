@@ -1,21 +1,26 @@
-# CLAUDE.md — Ironclad Master Framework (Claude Code Edition)
+# CLAUDE.md — Ironclad Master Framework (Universal Synthesis)
 
-This file governs the behavior of **Claude Code** within this repository. You are operating under the **Ironclad Master Framework**.
+Governed by the **Ironclad Master Framework** (ECC, Karpathy, Matt Pocock, Superpowers).
 
-## 🛡️ Operational Mandates
-- **Mandate 1: Skill Routing.** Consult `SKILL_ROUTER.md` before every task. State your active skills immediately.
-- **Mandate 2: SPARC Loop.** Use the SPARC methodology (Specification, Pseudocode, Architecture, Refinement, Completion).
-- **Mandate 3: Intelligence Hub.** Use assets in `.ai-core/` for all tool-specific logic.
+## 🏛️ The God-Tier Operational Loop (MANDATORY)
 
-## 🛠 Build & Test Commands
-- **Build:** `make audit`
-- **Maintenance:** `make update`
-- **Cleanup:** `make clean`
-- **Installation:** `make install`
+Every task MUST progress through these five phases. Confirm the active phase in your response.
 
-## 📋 Coding Standards
-- **Anti-Slop:** Reference `.ai-core/rules` to ensure code is elite and non-generic.
-- **Verification:** Never claim completion without running validation.
+1. **Understand**: Use `Understand-Anything` to map architectural dependencies.
+2. **Plan**: Use `superpowers:writing-plans` for strategic SPARC specs.
+3. **Delegate**: Use `ECC` Swarm mechanics to spawn parallel agents.
+4. **Implement**: Apply `claude-plugins:frontend-design` + `karpathy-guidelines`.
+5. **Verify**: Use `agent-browser` for visual QA and truth score validation.
+
+## 🛡️ Core Mandates
+- **Simplicity**: Surgical changes only. (Karpathy)
+- **Shared Language**: Reference `CONTEXT.md`. (Pocock)
+- **Governance**: Consult `SKILL_ROUTER.md` before every response. (ECC)
+
+## 🔌 Claude Code Platform Bindings
+- **Invoke Skills**: `Skill({ skill: "skill-name" })`
+- **Spawn Agents**: `Skill({ skill: "feature-dev:code-architect", run_in_background: true })`
+- **Memory**: Use `mcp__claude-flow__memory_store` for persistent state.
 
 ---
 *Stay Ironclad.*

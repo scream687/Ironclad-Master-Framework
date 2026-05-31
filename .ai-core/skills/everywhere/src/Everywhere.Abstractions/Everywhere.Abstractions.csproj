@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsDeploymentTarget>true</IsDeploymentTarget>
+    <RootNamespace>Everywhere</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm"/>
+    <PackageReference Include="DynamicData"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+    <PackageReference Include="ZLinq"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\3rd\MessagePack-CSharp\src\MessagePack.SourceGenerator\MessagePack.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer"/>
+    <ProjectReference Include="..\..\3rd\MessagePack-CSharp\src\MessagePack\MessagePack.csproj"/>
+    <ProjectReference Include="..\Everywhere.I18N\Everywhere.I18N.csproj" />
+  </ItemGroup>
+</Project>

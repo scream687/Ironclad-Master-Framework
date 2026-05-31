@@ -1,0 +1,179 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Everywhere</AssemblyName>
+    <ApplicationTitle>Everywhere</ApplicationTitle>
+    <SelfContained>true</SelfContained>
+    <TargetFramework>$(TargetFrameworkPrefix)-macos</TargetFramework>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <SupportedOSPlatformVersion>12.0</SupportedOSPlatformVersion>
+    <IsDeploymentTarget>true</IsDeploymentTarget>
+    <UseAppHost>true</UseAppHost>
+    <CreateAppBundle>true</CreateAppBundle>
+    <BundleCreateDump>true</BundleCreateDump>
+
+    <!-- The signing and packaging by SDK is broken for macOS, so we disable it and do it ourselves -->
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+
+  <Import Project="..\Build.Patches.targets" />
+
+  <!-- Workaround for TextMateSharp.Grammars libonigwrap.dylib failing in install_name_tool due to lack of header padding -->
+  <Target Name="_SkipInstallNameToolForLibOnigWrap" BeforeTargets="_InstallNameTool">
+    <Message Text="Skipping install_name_tool for libonigwrap.dylib to avoid 'larger updated load commands do not fit' error..." Importance="high" />
+    <ItemGroup>
+      <_DynamicLibraryToReidentify Remove="@(_DynamicLibraryToReidentify)" Condition="'%(Filename)' == 'libonigwrap'" />
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup>
+    <ApplicationManifest>Info.plist</ApplicationManifest>
+  </PropertyGroup>
+
+  <!-- $(IsPublish) is set to 'true' when running 'dotnet publish /p:IsPublish=true' -->
+  <PropertyGroup Condition="'$(IsPublish)' != 'true'">
+    <!-- Please run $repo_root/tools/create_dev_cert.sh to create a local dev certificate named 'EverywhereDev' -->
+    <CodesignKey>EverywhereDev</CodesignKey>
+    <UseHardenedRuntime>false</UseHardenedRuntime>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsPublish)' == 'true'">
+    <UseHardenedRuntime>true</UseHardenedRuntime>
+  </PropertyGroup>
+
+  <!-- Workaround for TextMateSharp libonigwrap.dylib failing in install_name_tool and causing dyld crash on launch -->
+  <Target Name="_HideLibOnigWrapFromMacSdk" BeforeTargets="_ComputeDynamicLibrariesToReidentify;_LinkNativeExecutable;_InstallNameTool">
+    <Message Text="Intercepting libonigwrap.dylib to prevent dyld static linking crashes..." Importance="high" />
+    <ItemGroup>
+      <_ExtractedLibOnigWrap Include="@(_FileNativeReference)" Condition="'%(Filename)' == 'libonigwrap'" />
+      <_FileNativeReference Remove="@(_ExtractedLibOnigWrap)" />
+      <_DynamicLibraryToReidentify Remove="@(_DynamicLibraryToReidentify)" Condition="'%(Filename)' == 'libonigwrap'" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="_CopyLibOnigWrapToBundle" AfterTargets="_CreateAppBundle">
+    <MakeDir Directories="$(AppBundleDir)/Contents/MonoBundle" Condition="!Exists('$(AppBundleDir)/Contents/MonoBundle')" />
+    <Copy SourceFiles="@(_ExtractedLibOnigWrap)" DestinationFolder="$(AppBundleDir)/Contents/MonoBundle" Condition="'@(_ExtractedLibOnigWrap)' != ''" />
+  </Target>
+
+  <!-- When not publishing, we sign the build output for local debugging -->
+  <Target Name="SignOnBuild" AfterTargets="Build" Condition="'$(IsPublish)' != 'true'">
+    <Message Text="[Dev Workflow] Processing build output for local debugging..." Importance="high"/>
+    <CallTarget Targets="_CoreSignAppBundle"/>
+  </Target>
+
+  <Target Name="SignAndPackageOnPublish" AfterTargets="Publish" Condition="'$(IsPublish)' == 'true'">
+    <Message Text="[Publish Workflow] Processing publish output for distribution..." Importance="high"/>
+
+    <PropertyGroup>
+      <!-- AppBundleDir is set by the SDK when CreateAppBundle is true -->
+      <InfoPlistPath>$(AppBundleDir)/Contents/Info.plist</InfoPlistPath>
+    </PropertyGroup>
+
+    <Message Text="Updating Info.plist version to $(Version)..." Importance="high"/>
+    <Error Text="Info.plist not found at $(InfoPlistPath)" Condition="!Exists('$(InfoPlistPath)')"/>
+
+    <Exec Command="/usr/libexec/PlistBuddy -c &quot;Set :CFBundleShortVersionString $(Version)&quot; &quot;$(InfoPlistPath)&quot;" ContinueOnError="true"/>
+    <Exec Command="/usr/libexec/PlistBuddy -c &quot;Set :CFBundleVersion $(Version)&quot; &quot;$(InfoPlistPath)&quot;" ContinueOnError="true"/>
+
+    <CallTarget Targets="_CoreSignAppBundle"/>
+
+    <Exec Command="codesign --verify --deep --strict --verbose=2 &quot;$(AppBundleDir)&quot;"/>
+
+    <CallTarget Targets="CreateInstallerPackage" Condition="'$(PackageSigningKey)' != ''"/>
+  </Target>
+
+
+  <Target Name="_CoreSignAppBundle">
+    <PropertyGroup>
+      <WatchdogPath>$(AppBundleDir)/Contents/Helpers/Everywhere.Watchdog</WatchdogPath>
+    </PropertyGroup>
+
+    <Message Text=">>> Signing App Bundle at: $(AppBundleDir)" Importance="high"/>
+
+    <Exec Command="xattr -cr &quot;$(AppBundleDir)&quot;"/>
+
+    <Message Text="Signing native libraries (MonoBundle)..." Importance="high"/>
+    <Exec Command="find &quot;$(AppBundleDir)/Contents/MonoBundle&quot; \( -name &quot;*.dylib&quot; -o -name &quot;*.so&quot; -o -name &quot;createdump&quot; \) -exec codesign --force --sign &quot;$(CodesignKey)&quot; --timestamp --options runtime &quot;{}&quot; \;"/>
+
+    <Message Text="Signing Watchdog..." Condition="Exists('$(WatchdogPath)')" Importance="high"/>
+    <Exec Command="codesign --force --sign &quot;$(CodesignKey)&quot; --entitlements &quot;$(CodesignEntitlements)&quot; --timestamp --options runtime &quot;$(WatchdogPath)&quot;"
+          Condition="Exists('$(WatchdogPath)')"/>
+
+    <Message Text="Signing Main Application executable..." Importance="high"/>
+    <Exec Command="codesign --force --sign &quot;$(CodesignKey)&quot; --entitlements &quot;$(CodesignEntitlements)&quot; --timestamp --options runtime &quot;$(AppBundleDir)&quot;"/>
+
+    <Message Text=">>> Signing Complete." Importance="high"/>
+  </Target>
+
+
+  <Target Name="CreateInstallerPackage">
+    <PropertyGroup>
+      <PkgName>$(AssemblyName)-$(Version).pkg</PkgName>
+      <PkgOutputPath>$(PublishDir)$(PkgName)</PkgOutputPath>
+      <IntermediatePkgPath>$(PublishDir)intermediate.pkg</IntermediatePkgPath>
+      <ComponentPlistPath>$(PublishDir)component.plist</ComponentPlistPath>
+      <PkgRoot>$(PublishDir)pkg-root</PkgRoot>
+    </PropertyGroup>
+
+    <Message Text="Creating Installer Package..." Importance="high"/>
+
+    <RemoveDir Directories="$(PkgRoot)"/>
+    <MakeDir Directories="$(PkgRoot)"/>
+    <Exec Command="ditto &quot;$(AppBundleDir)&quot; &quot;$(PkgRoot)/$(AssemblyName).app&quot;"/>
+    <Exec Command="pkgbuild --analyze --root &quot;$(PkgRoot)&quot; &quot;$(ComponentPlistPath)&quot;"/>
+    <Exec Command="sed -i '' '/&lt;key&gt;BundleIsRelocatable&lt;\/key&gt;/{n;s/&lt;true\/&gt;/&lt;false\/&gt;/;}' &quot;$(ComponentPlistPath)&quot;"/>
+    <Exec Command="pkgbuild --root &quot;$(PkgRoot)&quot; --component-plist &quot;$(ComponentPlistPath)&quot; --install-location /Applications &quot;$(IntermediatePkgPath)&quot;"/>
+
+    <PropertyGroup>
+      <DistributionXmlPath>$(PublishDir)distribution.xml</DistributionXmlPath>
+    </PropertyGroup>
+
+    <Exec Command="productbuild --synthesize --package &quot;$(IntermediatePkgPath)&quot; &quot;$(DistributionXmlPath)&quot;"/>
+    <Exec Command="grep -q &quot;&lt;title&gt;&quot; &quot;$(DistributionXmlPath)&quot; &amp;&amp; sed -i '' 's/&lt;title&gt;.*&lt;\/title&gt;/&lt;title&gt;$(ApplicationTitle)&lt;\/title&gt;/' &quot;$(DistributionXmlPath)&quot; || sed -i '' 's/&lt;installer-gui-script[^&gt;]*&gt;/&amp;&lt;title&gt;$(ApplicationTitle)&lt;\/title&gt;/' &quot;$(DistributionXmlPath)&quot;"/>
+    <Exec Command="productbuild --distribution &quot;$(DistributionXmlPath)&quot; --package-path &quot;$(PublishDir)&quot; --sign &quot;$(PackageSigningKey)&quot; &quot;$(PkgOutputPath)&quot;"/>
+    <Exec Command="rm &quot;$(IntermediatePkgPath)&quot; &quot;$(ComponentPlistPath)&quot; &quot;$(DistributionXmlPath)&quot;"/>
+    <RemoveDir Directories="$(PkgRoot)"/>
+
+    <Message Text="Installer created successfully at: $(PkgOutputPath)" Importance="high"/>
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Everywhere.Cloud\Everywhere.Cloud.csproj" />
+    <ProjectReference Include="..\Everywhere.Core\Everywhere.Core.csproj"/>
+  </ItemGroup>
+
+  <Import Project="..\Build.Watchdog.targets"/>
+
+  <ItemGroup>
+    <None Include="..\..\img\Everywhere.ico">
+      <Link>Everywhere.ico</Link>
+    </None>
+    <None Include="Everywhere.icns" PublishFolderType="Resource">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Include="$(WatchdogExecutable)" PublishFolderType="RootDirectory">
+      <Link>Contents\Helpers\Everywhere.Watchdog</Link>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="_SetShellScriptsPublishFolderType"
+          BeforeTargets="_ComputePublishLocation"
+          Condition="'$(IsMacEnabled)' == 'true'">
+    <ItemGroup>
+      <ResolvedFileToPublish
+        Condition="'%(Extension)' == '.zsh' Or '%(Extension)' == '.bash' Or '%(Extension)' == '.ps1'">
+        <PublishFolderType>Assembly</PublishFolderType>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>
