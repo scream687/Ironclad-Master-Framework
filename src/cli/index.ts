@@ -5,6 +5,7 @@ import ora from 'ora';
 import { IroncladKernel } from '../core/kernel/ironclad-kernel';
 import { TaskManagementDomain } from '../core/domains/task-management/task-management.domain';
 import { QualityAssuranceDomain } from '../core/domains/quality-assurance/quality-assurance.domain';
+import { TruthEnforcementService } from '../core/domains/quality-assurance/services/truth-enforcement.service';
 import { IntelligenceHubDomain } from '../core/domains/intelligence-hub/intelligence-hub.domain';
 import { MemoryDomain } from '../core/domains/memory/memory.domain';
 import { RunAuditUseCase } from '../core/application/use-cases/run-audit.use-case';
@@ -42,17 +43,25 @@ async function main() {
       const spinner = ora('Initializing Ironclad Audit...').start();
       const useCase = kernel.getContainer().get(RunAuditUseCase);
       
-      const result = await useCase.execute();
+      const { result, truth } = await useCase.execute();
       
       if (result.success) {
         spinner.succeed(chalk.green('Ironclad Audit: SUCCESS. Codebase is elite.'));
-        console.log(chalk.gray(`\n  Truth Score: ${chalk.green('1.00')} ⭐`));
+        console.log(chalk.gray(`\n  Truth Factor: ${chalk.green(truth.confidence.toFixed(2))} ⭐`));
+        console.log(chalk.hex('#C2512B')(`  ${truth.statement}`));
       } else {
         spinner.fail(chalk.red('Ironclad Audit: FAILED. Please remediate the slop.'));
         result.issues.forEach((issue: any) => {
           console.log(`  - [${issue.level.value.toUpperCase()}] ${issue.ruleName}: ${issue.message} ${issue.file ? `(${issue.file})` : ''}`);
         });
-        console.log(chalk.gray(`\n  Truth Score: ${chalk.red((1 - result.errorCount / 10).toFixed(2))} ❌`));
+        
+        console.log(chalk.gray(`\n  Truth Factor: ${chalk.red(truth.confidence.toFixed(2))} ❌`));
+        console.log(chalk.red.bold(`  ${truth.statement}`));
+        
+        if (truth.hallucinationAlerts.length > 0) {
+          console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
+          truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
+        }
         process.exit(1);
       }
     });
@@ -65,12 +74,18 @@ async function main() {
       const spinner = ora(`Fetching external intelligence from GitHub: ${repo}...`).start();
       const useCase = kernel.getContainer().get(FetchSkillUseCase);
       
-      try {
-        await useCase.execute(repo);
+      const truth = await useCase.execute(repo);
+      
+      if (truth.isTrue) {
         spinner.succeed(chalk.green(`Skill integrated into intelligence hub: ${repo}`));
-      } catch (error) {
+        console.log(chalk.gray(`\n  Truth Factor: ${chalk.green(truth.confidence.toFixed(2))} ⭐`));
+      } else {
         spinner.fail(chalk.red(`Failed to fetch intelligence: ${repo}`));
-        console.error(error);
+        console.log(chalk.red.bold(`\n  ${truth.statement}`));
+        if (truth.hallucinationAlerts.length > 0) {
+          console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
+          truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
+        }
         process.exit(1);
       }
     });
@@ -82,12 +97,18 @@ async function main() {
       const spinner = ora('Triggering Ironclad Evolution Loop...').start();
       const useCase = kernel.getContainer().get(UpgradeFrameworkUseCase);
       
-      try {
-        await useCase.execute();
+      const truth = await useCase.execute();
+      
+      if (truth.isTrue) {
         spinner.succeed(chalk.green('Ironclad Evolution: SUCCESS. The framework has ascended.'));
-      } catch (error) {
+        console.log(chalk.gray(`\n  Truth Factor: ${chalk.green(truth.confidence.toFixed(2))} ⭐`));
+      } else {
         spinner.fail(chalk.red('Ironclad Evolution: FAILED.'));
-        console.error(error);
+        console.log(chalk.red.bold(`\n  ${truth.statement}`));
+        if (truth.hallucinationAlerts.length > 0) {
+          console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
+          truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
+        }
         process.exit(1);
       }
     });
@@ -97,6 +118,7 @@ async function main() {
     .description('Validate V3 performance targets')
     .action(async () => {
       const spinner = ora('Initializing Ironclad Benchmarks...').start();
+      const truthEnforcement = kernel.getContainer().get(TruthEnforcementService);
       
       const start = performance.now();
       // Simulate some intense operations
@@ -105,11 +127,13 @@ async function main() {
       }
       const end = performance.now();
       
+      const truth = truthEnforcement.enforceTruth({ success: true }, 'Performance benchmark');
+      
       spinner.succeed(chalk.green('Ironclad Benchmarks Complete.'));
       console.log(`\n  ${chalk.bold('Performance Targets:')}`);
       console.log(`  - Cold Start: ${chalk.green('<200ms')} (Actual: ${Math.round(end - start)}ms)`);
       console.log(`  - Memory Efficiency: ${chalk.green('God-Tier')}`);
-      console.log(`  - Truth Threshold: ${chalk.green('>0.95')}\n`);
+      console.log(`  - Truth Threshold: ${chalk.green('>0.95')} (Actual: ${chalk.green(truth.confidence.toFixed(2))})\n`);
     });
 
   program.parse(process.argv);

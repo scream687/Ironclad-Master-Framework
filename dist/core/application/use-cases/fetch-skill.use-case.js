@@ -12,12 +12,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { injectable, inject } from 'inversify';
 import { SkillService } from '../../domains/intelligence-hub/services/skill.service';
+import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
 import { EventEmitter } from 'events';
 let FetchSkillUseCase = class FetchSkillUseCase {
     skillService;
+    truthEnforcement;
     eventBus;
-    constructor(skillService, eventBus) {
+    constructor(skillService, truthEnforcement, eventBus) {
         this.skillService = skillService;
+        this.truthEnforcement = truthEnforcement;
         this.eventBus = eventBus;
     }
     async execute(repo) {
@@ -25,18 +28,21 @@ let FetchSkillUseCase = class FetchSkillUseCase {
         try {
             await this.skillService.fetchSkill(repo);
             this.eventBus.emit('fetch_succeeded', repo);
+            return this.truthEnforcement.enforceTruth({ success: true }, `Fetch skill: ${repo}`);
         }
         catch (error) {
             this.eventBus.emit('fetch_failed', { repo, error });
-            throw error;
+            return this.truthEnforcement.enforceTruth(error, `Fetch skill: ${repo}`);
         }
     }
 };
 FetchSkillUseCase = __decorate([
     injectable(),
     __param(0, inject(SkillService)),
-    __param(1, inject('EventBus')),
+    __param(1, inject(TruthEnforcementService)),
+    __param(2, inject('EventBus')),
     __metadata("design:paramtypes", [SkillService,
+        TruthEnforcementService,
         EventEmitter])
 ], FetchSkillUseCase);
 export { FetchSkillUseCase };

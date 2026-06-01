@@ -12,31 +12,37 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { injectable, inject } from 'inversify';
 import { AuditService } from '../../domains/quality-assurance/services/audit.service';
+import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
 import { EventEmitter } from 'events';
 let RunAuditUseCase = class RunAuditUseCase {
     auditService;
+    truthEnforcement;
     eventBus;
-    constructor(auditService, eventBus) {
+    constructor(auditService, truthEnforcement, eventBus) {
         this.auditService = auditService;
+        this.truthEnforcement = truthEnforcement;
         this.eventBus = eventBus;
     }
     async execute() {
         this.eventBus.emit('audit_started');
         const result = await this.auditService.runFullAudit();
+        const truth = this.truthEnforcement.enforceTruth(result, 'Audit cycle');
         if (result.success) {
             this.eventBus.emit('audit_succeeded', result);
         }
         else {
             this.eventBus.emit('audit_failed', result);
         }
-        return result;
+        return { result, truth };
     }
 };
 RunAuditUseCase = __decorate([
     injectable(),
     __param(0, inject(AuditService)),
-    __param(1, inject('EventBus')),
+    __param(1, inject(TruthEnforcementService)),
+    __param(2, inject('EventBus')),
     __metadata("design:paramtypes", [AuditService,
+        TruthEnforcementService,
         EventEmitter])
 ], RunAuditUseCase);
 export { RunAuditUseCase };

@@ -45,8 +45,8 @@ let DistillationService = class DistillationService {
         ruleFiles.forEach(file => {
             if (fs.existsSync(file)) {
                 let fileContent = fs.readFileSync(file, 'utf-8');
-                if (!fileContent.includes('ironclad-distilled.md')) {
-                    fileContent += '\n---\n- **Distilled Intelligence**: Refer to \`.ai-core/rules/ironclad-distilled.md\` for consolidated elite mandates.';
+                if (!fileContent.includes('truth-mandate.md')) {
+                    fileContent += '\n---\n- **Truth Mandate**: Refer to \`.ai-core/rules/truth-mandate.md\` to enforce zero-hallucination and factual integrity.';
                     fs.writeFileSync(file, fileContent);
                 }
             }

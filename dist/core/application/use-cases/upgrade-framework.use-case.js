@@ -12,12 +12,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { injectable, inject } from 'inversify';
 import { DistillationService } from '../../domains/intelligence-hub/services/distillation.service';
+import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
 import { EventEmitter } from 'events';
 let UpgradeFrameworkUseCase = class UpgradeFrameworkUseCase {
     distillationService;
+    truthEnforcement;
     eventBus;
-    constructor(distillationService, eventBus) {
+    constructor(distillationService, truthEnforcement, eventBus) {
         this.distillationService = distillationService;
+        this.truthEnforcement = truthEnforcement;
         this.eventBus = eventBus;
     }
     async execute() {
@@ -26,18 +29,21 @@ let UpgradeFrameworkUseCase = class UpgradeFrameworkUseCase {
             await this.distillationService.distillPatterns();
             await this.distillationService.upgradeMandates();
             this.eventBus.emit('upgrade_succeeded');
+            return this.truthEnforcement.enforceTruth({ success: true }, 'Evolution loop');
         }
         catch (error) {
             this.eventBus.emit('upgrade_failed', error);
-            throw error;
+            return this.truthEnforcement.enforceTruth(error, 'Evolution loop');
         }
     }
 };
 UpgradeFrameworkUseCase = __decorate([
     injectable(),
     __param(0, inject(DistillationService)),
-    __param(1, inject('EventBus')),
+    __param(1, inject(TruthEnforcementService)),
+    __param(2, inject('EventBus')),
     __metadata("design:paramtypes", [DistillationService,
+        TruthEnforcementService,
         EventEmitter])
 ], UpgradeFrameworkUseCase);
 export { UpgradeFrameworkUseCase };

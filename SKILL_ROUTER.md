@@ -10,7 +10,7 @@ This file is the mandatory lookup table for all AI operations. Before performing
 | **2. Plan** | Strategic Specification | `superpowers:writing-plans` | Create `plans/*.md` |
 | **3. Delegate** | Swarm Orchestration | `ECC:Swarm-Orchestration` | Spawn parallel sub-agents |
 | **4. Implement** | Standardized Coding | `claude-plugins:frontend-design` | `karpathy-guidelines` |
-| **5. Verify** | Autonomous Visual QA | `vercel-labs:agent-browser` | Browser Snapshots + QA |
+| **5. Verify** | Autonomous Visual QA | `vercel-labs:agent-browser` | Browser Snapshots + Truth Factor |
 
 ---
 
@@ -27,7 +27,7 @@ This file is the mandatory lookup table for all AI operations. Before performing
 | **Deep Investigation** | `understand-anything` | `graphify`, `enterprise-agent-ops` |
 | **Enterprise Ops** | `enterprise-agent-ops` | `verification-quality`, `security-scan` |
 | **Memory & Knowledge** | `agentdb-memory-patterns` | `knowledge-ops`, `rules-distill` |
-| **Verification** | `verification-quality` | `browser-qa`, `agent-eval` |
+| **Verification** | `verification-quality` | `browser-qa`, `truth-factor` |
 
 ---
 
