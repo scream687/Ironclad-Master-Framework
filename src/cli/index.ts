@@ -8,9 +8,14 @@ import { QualityAssuranceDomain } from '../core/domains/quality-assurance/qualit
 import { TruthEnforcementService } from '../core/domains/quality-assurance/services/truth-enforcement.service';
 import { IntelligenceHubDomain } from '../core/domains/intelligence-hub/intelligence-hub.domain';
 import { MemoryDomain } from '../core/domains/memory/memory.domain';
+import { AutomationDomain } from '../core/domains/automation/automation.domain';
 import { RunAuditUseCase } from '../core/application/use-cases/run-audit.use-case';
 import { FetchSkillUseCase } from '../core/application/use-cases/fetch-skill.use-case';
 import { UpgradeFrameworkUseCase } from '../core/application/use-cases/upgrade-framework.use-case';
+import { RunTddUseCase } from '../core/application/use-cases/run-tdd.use-case';
+import { RunCommitUseCase } from '../core/application/use-cases/run-commit.use-case';
+import { RunDesignUseCase } from '../core/application/use-cases/run-design.use-case';
+import { RunWatchUseCase } from '../core/application/use-cases/run-watch.use-case';
 
 const IRONCLAD_LOGO = `
   ${chalk.hex('#C2512B')('🛡️  IRONCLAD MASTER FRAMEWORK')}
@@ -26,6 +31,7 @@ async function main() {
   await kernel.loadDomain(new QualityAssuranceDomain());
   await kernel.loadDomain(new IntelligenceHubDomain());
   await kernel.loadDomain(new MemoryDomain());
+  await kernel.loadDomain(new AutomationDomain());
 
   const program = new Command();
   
@@ -134,6 +140,47 @@ async function main() {
       console.log(`  - Cold Start: ${chalk.green('<200ms')} (Actual: ${Math.round(end - start)}ms)`);
       console.log(`  - Memory Efficiency: ${chalk.green('God-Tier')}`);
       console.log(`  - Truth Threshold: ${chalk.green('>0.95')} (Actual: ${chalk.green(truth.confidence.toFixed(2))})\n`);
+    });
+
+  program
+    .command('tdd <feature>')
+    .description('Execute autonomous Red-Green-Refactor loop')
+    .action(async (feature) => {
+      const useCase = kernel.getContainer().get(RunTddUseCase);
+      const truth = await useCase.execute(feature);
+      console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
+      console.log(chalk.gray(`  Truth Factor: ${chalk.green(truth.confidence.toFixed(2))} ⭐`));
+    });
+
+  program
+    .command('commit')
+    .description('Zero-touch Git automation with elite commit messages')
+    .action(async () => {
+      const spinner = ora('Analyzing diff and crafting elite commit...').start();
+      const useCase = kernel.getContainer().get(RunCommitUseCase);
+      const truth = await useCase.execute();
+      spinner.succeed(chalk.green('Git Operations Complete.'));
+      console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
+    });
+
+  program
+    .command('design <path>')
+    .description('UI/UX Anti-Slop engine for premium aesthetics')
+    .action(async (path) => {
+      const spinner = ora('Auditing aesthetics and enforcing high-end patterns...').start();
+      const useCase = kernel.getContainer().get(RunDesignUseCase);
+      const truth = await useCase.execute(path);
+      spinner.succeed(chalk.green('Aesthetic Audit Complete.'));
+      console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
+    });
+
+  program
+    .command('watch')
+    .description('Background daemon for slop-monitoring and context-compression')
+    .action(async () => {
+      const useCase = kernel.getContainer().get(RunWatchUseCase);
+      const truth = await useCase.execute();
+      console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
     });
 
   program.parse(process.argv);
