@@ -9,6 +9,8 @@ import { TruthEnforcementService } from '../core/domains/quality-assurance/servi
 import { IntelligenceHubDomain } from '../core/domains/intelligence-hub/intelligence-hub.domain';
 import { MemoryDomain } from '../core/domains/memory/memory.domain';
 import { AutomationDomain } from '../core/domains/automation/automation.domain';
+import { BootstrappingDomain } from '../core/domains/bootstrapping/bootstrapping.domain';
+
 import { RunAuditUseCase } from '../core/application/use-cases/run-audit.use-case';
 import { FetchSkillUseCase } from '../core/application/use-cases/fetch-skill.use-case';
 import { UpgradeFrameworkUseCase } from '../core/application/use-cases/upgrade-framework.use-case';
@@ -17,6 +19,8 @@ import { RunCommitUseCase } from '../core/application/use-cases/run-commit.use-c
 import { RunDesignUseCase } from '../core/application/use-cases/run-design.use-case';
 import { RunWatchUseCase } from '../core/application/use-cases/run-watch.use-case';
 import { RunDiscoveryUseCase } from '../core/application/use-cases/run-discovery.use-case';
+import { RunInitUseCase } from '../core/application/use-cases/run-init.use-case';
+import { RunExecUseCase } from '../core/application/use-cases/run-exec.use-case';
 
 const IRONCLAD_LOGO = `
   ${chalk.hex('#C2512B')('🛡️  IRONCLAD MASTER FRAMEWORK')}
@@ -33,15 +37,42 @@ async function main() {
   await kernel.loadDomain(new IntelligenceHubDomain());
   await kernel.loadDomain(new MemoryDomain());
   await kernel.loadDomain(new AutomationDomain());
+  await kernel.loadDomain(new BootstrappingDomain());
 
   const program = new Command();
   
   program
     .name('ironclad')
     .description('Autonomous Business Operating System Command Center')
-    .version('1.2.0 (V3 God-Tier)');
+    .version('1.3.0 (Universal V3)')
+    .enablePositionalOptions();
 
   console.log(IRONCLAD_LOGO);
+
+  program
+    .command('init')
+    .description('Ironclad any project instantly')
+    .action(async () => {
+      const spinner = ora('Injecting Ironclad intelligence hub and mandates...').start();
+      const useCase = kernel.getContainer().get(RunInitUseCase);
+      const truth = await useCase.execute(process.cwd());
+      spinner.succeed(chalk.green('Project successfully Ironcladded.'));
+      console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
+    });
+
+  program
+    .command('exec <cmd...>')
+    .description('Run any command with Truth Factor governance')
+    .passThroughOptions()
+    .action(async (cmdParts) => {
+      const useCase = kernel.getContainer().get(RunExecUseCase);
+      const [command, ...args] = cmdParts;
+      const truth = await useCase.execute(command, args);
+      console.log(chalk.gray(`\n  Truth Factor: ${truth.isTrue ? chalk.green(truth.confidence.toFixed(2)) : chalk.red(truth.confidence.toFixed(2))}`));
+      if (!truth.isTrue) {
+        console.log(chalk.red.bold(`  ${truth.statement}`));
+      }
+    });
 
   program
     .command('audit')
@@ -67,7 +98,7 @@ async function main() {
         
         if (truth.hallucinationAlerts.length > 0) {
           console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
-          truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
+          truth.hallucinationAlerts.forEach((alert: any) => console.log(`     - ${alert}`));
         }
         process.exit(1);
       }
@@ -91,7 +122,7 @@ async function main() {
         console.log(chalk.red.bold(`\n  ${truth.statement}`));
         if (truth.hallucinationAlerts.length > 0) {
           console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
-          truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
+          truth.hallucinationAlerts.forEach((alert: any) => console.log(`     - ${alert}`));
         }
         process.exit(1);
       }
@@ -114,7 +145,7 @@ async function main() {
         console.log(chalk.red.bold(`\n  ${truth.statement}`));
         if (truth.hallucinationAlerts.length > 0) {
           console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
-          truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
+          truth.hallucinationAlerts.forEach((alert: any) => console.log(`     - ${alert}`));
         }
         process.exit(1);
       }

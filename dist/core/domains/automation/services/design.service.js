@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a;
 import { injectable, inject } from 'inversify';
 import shell from 'shelljs';
 import fs from 'fs';
@@ -83,6 +84,6 @@ let DesignService = class DesignService {
 DesignService = __decorate([
     injectable(),
     __param(0, inject(DiscoveryService)),
-    __metadata("design:paramtypes", [DiscoveryService])
+    __metadata("design:paramtypes", [typeof (_a = typeof DiscoveryService !== "undefined" && DiscoveryService) === "function" ? _a : Object])
 ], DesignService);
 export { DesignService };

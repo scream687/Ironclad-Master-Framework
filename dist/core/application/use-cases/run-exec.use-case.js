@@ -12,24 +12,24 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var _a, _b;
 import { injectable, inject } from 'inversify';
-import { TddService } from '../../domains/automation/services/tdd.service';
+import { ExecService } from '../../domains/bootstrapping/services/exec.service';
 import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
-let RunTddUseCase = class RunTddUseCase {
-    tddService;
+let RunExecUseCase = class RunExecUseCase {
+    execService;
     truthEnforcement;
-    constructor(tddService, truthEnforcement) {
-        this.tddService = tddService;
+    constructor(execService, truthEnforcement) {
+        this.execService = execService;
         this.truthEnforcement = truthEnforcement;
     }
-    async execute(feature) {
-        const success = await this.tddService.runTracerBullet(feature);
-        return this.truthEnforcement.enforceTruth({ success }, `TDD cycle: ${feature}`);
+    async execute(command, args) {
+        const result = await this.execService.executeCommand(command, args);
+        return this.truthEnforcement.enforceTruth(result, `External execution: ${command}`);
     }
 };
-RunTddUseCase = __decorate([
+RunExecUseCase = __decorate([
     injectable(),
-    __param(0, inject(TddService)),
+    __param(0, inject(ExecService)),
     __param(1, inject(TruthEnforcementService)),
-    __metadata("design:paramtypes", [typeof (_a = typeof TddService !== "undefined" && TddService) === "function" ? _a : Object, typeof (_b = typeof TruthEnforcementService !== "undefined" && TruthEnforcementService) === "function" ? _b : Object])
-], RunTddUseCase);
-export { RunTddUseCase };
+    __metadata("design:paramtypes", [typeof (_a = typeof ExecService !== "undefined" && ExecService) === "function" ? _a : Object, typeof (_b = typeof TruthEnforcementService !== "undefined" && TruthEnforcementService) === "function" ? _b : Object])
+], RunExecUseCase);
+export { RunExecUseCase };

@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'fs';
 
 export interface MemoryEntry {
   id: string;
@@ -16,6 +17,9 @@ export class AgentDBService {
 
   constructor() {
     const dbPath = path.resolve('.ai-core', 'memory.db');
+    if (!fs.existsSync(path.dirname(dbPath))) {
+      fs.mkdirSync(path.dirname(dbPath), { recursive: true });
+    }
     this.db = new Database(dbPath);
     this.initializeSchema();
   }

@@ -12,24 +12,29 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 var _a, _b;
 import { injectable, inject } from 'inversify';
-import { TddService } from '../../domains/automation/services/tdd.service';
+import { InitService } from '../../domains/bootstrapping/services/init.service';
 import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
-let RunTddUseCase = class RunTddUseCase {
-    tddService;
+let RunInitUseCase = class RunInitUseCase {
+    initService;
     truthEnforcement;
-    constructor(tddService, truthEnforcement) {
-        this.tddService = tddService;
+    constructor(initService, truthEnforcement) {
+        this.initService = initService;
         this.truthEnforcement = truthEnforcement;
     }
-    async execute(feature) {
-        const success = await this.tddService.runTracerBullet(feature);
-        return this.truthEnforcement.enforceTruth({ success }, `TDD cycle: ${feature}`);
+    async execute(targetDir) {
+        try {
+            await this.initService.ironcladDirectory(targetDir);
+            return this.truthEnforcement.enforceTruth({ success: true }, `Project initialization: ${targetDir}`);
+        }
+        catch (error) {
+            return this.truthEnforcement.enforceTruth(error, `Project initialization: ${targetDir}`);
+        }
     }
 };
-RunTddUseCase = __decorate([
+RunInitUseCase = __decorate([
     injectable(),
-    __param(0, inject(TddService)),
+    __param(0, inject(InitService)),
     __param(1, inject(TruthEnforcementService)),
-    __metadata("design:paramtypes", [typeof (_a = typeof TddService !== "undefined" && TddService) === "function" ? _a : Object, typeof (_b = typeof TruthEnforcementService !== "undefined" && TruthEnforcementService) === "function" ? _b : Object])
-], RunTddUseCase);
-export { RunTddUseCase };
+    __metadata("design:paramtypes", [typeof (_a = typeof InitService !== "undefined" && InitService) === "function" ? _a : Object, typeof (_b = typeof TruthEnforcementService !== "undefined" && TruthEnforcementService) === "function" ? _b : Object])
+], RunInitUseCase);
+export { RunInitUseCase };

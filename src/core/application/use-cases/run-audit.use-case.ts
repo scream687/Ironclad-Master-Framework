@@ -1,16 +1,16 @@
-import { injectable, inject } from 'inversify';
-import { AuditService } from '../../domains/quality-assurance/services/audit.service';
-import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
-import { AuditResult } from '../../domains/quality-assurance/entities/audit-result.entity';
-import { TruthReport } from '../../domains/quality-assurance/entities/truth-report.entity';
+import { injectable, decorate, inject } from 'inversify';
+import { AuditService } from '../../domains/quality-assurance/services/audit.service.js';
+import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service.js';
+import { AuditResult } from '../../domains/quality-assurance/entities/audit-result.entity.js';
+import { TruthReport } from '../../domains/quality-assurance/entities/truth-report.entity.js';
 import { EventEmitter } from 'events';
 
 @injectable()
 export class RunAuditUseCase {
   constructor(
-    @inject(AuditService) private auditService: AuditService,
-    @inject(TruthEnforcementService) private truthEnforcement: TruthEnforcementService,
-    @inject('EventBus') private eventBus: EventEmitter
+    private auditService: AuditService,
+    private truthEnforcement: TruthEnforcementService,
+    private eventBus: EventEmitter
   ) {}
 
   async execute(): Promise<{ result: AuditResult; truth: TruthReport }> {
@@ -27,3 +27,7 @@ export class RunAuditUseCase {
     return { result, truth };
   }
 }
+
+decorate(inject(AuditService), RunAuditUseCase, 0);
+decorate(inject(TruthEnforcementService), RunAuditUseCase, 1);
+decorate(inject('EventBus'), RunAuditUseCase, 2);

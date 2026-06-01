@@ -14,62 +14,58 @@ let AuditService = class AuditService {
     async runFullAudit() {
         const startedAt = new Date();
         const issues = [];
-        // 1. Logs Check
-        const logsIssues = this.checkUnauthorizedLogs();
-        issues.push(...logsIssues);
-        // 2. TODO Check
-        const todoIssues = this.checkIncompleteSparcCycles();
-        issues.push(...todoIssues);
+        // 1. Language-Agnostic Logs Check
+        issues.push(...this.checkUnauthorizedLogs());
+        // 2. Cross-Language TODO Check
+        issues.push(...this.checkIncompleteSparcCycles());
         // 3. Directory Integrity
-        const dirIssues = this.checkDirectoryIntegrity();
-        issues.push(...dirIssues);
+        issues.push(...this.checkDirectoryIntegrity());
         // 4. Rule Synchronization
-        const ruleIssues = this.checkRuleSynchronization();
-        issues.push(...ruleIssues);
+        issues.push(...this.checkRuleSynchronization());
         return new AuditResult(issues, startedAt, new Date());
     }
     checkUnauthorizedLogs() {
         const issues = [];
-        const logFiles = shell.find(['src', 'docs', 'scripts']).filter(file => {
-            return file.match(/\.(js|ts|sh|md)$/) &&
-                !file.includes('node_modules') &&
-                !file.includes('.ai-core') &&
-                !file.includes('dist');
-        });
-        logFiles.forEach(file => {
-            if (fs.lstatSync(file).isDirectory())
-                return;
-            const content = fs.readFileSync(file, 'utf-8');
-            if (content.includes('console.log') &&
-                !file.includes('audit.service.ts') &&
-                !file.includes('distillation.service.ts') &&
-                !file.includes('src/cli/index.ts')) {
-                issues.push(new AuditIssue('UNAUTHORIZED_LOGS', `Found console.log in unauthorized file: ${file}`, AuditLevel.error(), file));
-            }
-        });
-        return issues;
-    }
-    checkIncompleteSparcCycles() {
-        const issues = [];
-        const allFiles = shell.find('.').filter(file => {
-            return file.match(/\.(js|ts|sh|md|sql)$/) &&
-                !file.includes('node_modules') &&
-                !file.includes('.ai-core') &&
-                !file.includes('.husky') &&
-                !file.includes('README.md') &&
-                !file.includes('.next') &&
-                !file.includes('dist');
+        const patterns = [
+            { ext: /\.(js|ts)$/, pattern: 'console.log', lang: 'JS/TS' },
+            { ext: /\.py$/, pattern: 'print(', lang: 'Python' },
+            { ext: /\.go$/, pattern: 'fmt.Print', lang: 'Go' },
+            { ext: /\.rs$/, pattern: 'println!', lang: 'Rust' }
+        ];
+        const allFiles = shell.find(['src', 'docs', 'scripts', '.']).filter(file => {
+            return !file.includes('node_modules') && !file.includes('.ai-core') && !file.includes('dist');
         });
         allFiles.forEach(file => {
             if (fs.lstatSync(file).isDirectory())
                 return;
             const content = fs.readFileSync(file, 'utf-8');
-            // Ignore // TODO if it's in the audit or distillation services themselves (where we define the rules)
-            if (content.includes('// TODO') &&
-                !file.includes('audit.service.ts') &&
-                !file.includes('distillation.service.ts')) {
-                issues.push(new AuditIssue('INCOMPLETE_SPARC', `Found incomplete SPARC cycle (TODO) in file: ${file}`, AuditLevel.error(), file));
-            }
+            patterns.forEach(({ ext, pattern, lang }) => {
+                if (file.match(ext) && content.includes(pattern) && !file.includes('audit.service.ts')) {
+                    issues.push(new AuditIssue('UNAUTHORIZED_LOGS', `Found unauthorized ${lang} log (${pattern}) in: ${file}`, AuditLevel.error(), file));
+                }
+            });
+        });
+        return issues;
+    }
+    checkIncompleteSparcCycles() {
+        const issues = [];
+        const todoPatterns = ['// TODO', '# TODO', '-- TODO', '/* TODO */'];
+        const allFiles = shell.find('.').filter(file => {
+            return !file.includes('node_modules') &&
+                !file.includes('.ai-core') &&
+                !file.includes('dist') &&
+                !file.includes('.husky') &&
+                !file.includes('README.md');
+        });
+        allFiles.forEach(file => {
+            if (fs.lstatSync(file).isDirectory())
+                return;
+            const content = fs.readFileSync(file, 'utf-8');
+            todoPatterns.forEach(pattern => {
+                if (content.includes(pattern) && !file.includes('audit.service.ts')) {
+                    issues.push(new AuditIssue('INCOMPLETE_SPARC', `Found incomplete SPARC cycle (${pattern}) in: ${file}`, AuditLevel.error(), file));
+                }
+            });
         });
         return issues;
     }

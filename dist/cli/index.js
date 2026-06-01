@@ -2,21 +2,24 @@ import 'reflect-metadata';
 import { Command } from 'commander';
 import chalk from 'chalk';
 import ora from 'ora';
-import { IroncladKernel } from '../core/kernel/ironclad-kernel';
-import { TaskManagementDomain } from '../core/domains/task-management/task-management.domain';
-import { QualityAssuranceDomain } from '../core/domains/quality-assurance/quality-assurance.domain';
-import { TruthEnforcementService } from '../core/domains/quality-assurance/services/truth-enforcement.service';
-import { IntelligenceHubDomain } from '../core/domains/intelligence-hub/intelligence-hub.domain';
-import { MemoryDomain } from '../core/domains/memory/memory.domain';
-import { AutomationDomain } from '../core/domains/automation/automation.domain';
-import { RunAuditUseCase } from '../core/application/use-cases/run-audit.use-case';
-import { FetchSkillUseCase } from '../core/application/use-cases/fetch-skill.use-case';
-import { UpgradeFrameworkUseCase } from '../core/application/use-cases/upgrade-framework.use-case';
-import { RunTddUseCase } from '../core/application/use-cases/run-tdd.use-case';
-import { RunCommitUseCase } from '../core/application/use-cases/run-commit.use-case';
-import { RunDesignUseCase } from '../core/application/use-cases/run-design.use-case';
-import { RunWatchUseCase } from '../core/application/use-cases/run-watch.use-case';
-import { RunDiscoveryUseCase } from '../core/application/use-cases/run-discovery.use-case';
+import { IroncladKernel } from '../core/kernel/ironclad-kernel.js';
+import { TaskManagementDomain } from '../core/domains/task-management/task-management.domain.js';
+import { QualityAssuranceDomain } from '../core/domains/quality-assurance/quality-assurance.domain.js';
+import { TruthEnforcementService } from '../core/domains/quality-assurance/services/truth-enforcement.service.js';
+import { IntelligenceHubDomain } from '../core/domains/intelligence-hub/intelligence-hub.domain.js';
+import { MemoryDomain } from '../core/domains/memory/memory.domain.js';
+import { AutomationDomain } from '../core/domains/automation/automation.domain.js';
+import { BootstrappingDomain } from '../core/domains/bootstrapping/bootstrapping.domain.js';
+import { RunAuditUseCase } from '../core/application/use-cases/run-audit.use-case.js';
+import { FetchSkillUseCase } from '../core/application/use-cases/fetch-skill.use-case.js';
+import { UpgradeFrameworkUseCase } from '../core/application/use-cases/upgrade-framework.use-case.js';
+import { RunTddUseCase } from '../core/application/use-cases/run-tdd.use-case.js';
+import { RunCommitUseCase } from '../core/application/use-cases/run-commit.use-case.js';
+import { RunDesignUseCase } from '../core/application/use-cases/run-design.use-case.js';
+import { RunWatchUseCase } from '../core/application/use-cases/run-watch.use-case.js';
+import { RunDiscoveryUseCase } from '../core/application/use-cases/run-discovery.use-case.js';
+import { RunInitUseCase } from '../core/application/use-cases/run-init.use-case.js';
+import { RunExecUseCase } from '../core/application/use-cases/run-exec.use-case.js';
 const IRONCLAD_LOGO = `
   ${chalk.hex('#C2512B')('🛡️  IRONCLAD MASTER FRAMEWORK')}
   ${chalk.hex('#1C1C1C')('High-Performance AI Engineering Shell')}
@@ -30,12 +33,35 @@ async function main() {
     await kernel.loadDomain(new IntelligenceHubDomain());
     await kernel.loadDomain(new MemoryDomain());
     await kernel.loadDomain(new AutomationDomain());
+    await kernel.loadDomain(new BootstrappingDomain());
     const program = new Command();
     program
         .name('ironclad')
         .description('Autonomous Business Operating System Command Center')
-        .version('1.2.0 (V3 God-Tier)');
+        .version('1.3.0 (Universal V3)');
     console.log(IRONCLAD_LOGO);
+    program
+        .command('init')
+        .description('Ironclad any project instantly')
+        .action(async () => {
+        const spinner = ora('Injecting Ironclad intelligence hub and mandates...').start();
+        const useCase = kernel.getContainer().get(RunInitUseCase);
+        const truth = await useCase.execute(process.cwd());
+        spinner.succeed(chalk.green('Project successfully Ironcladded.'));
+        console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
+    });
+    program
+        .command('exec <cmd...>')
+        .description('Run any command with Truth Factor governance')
+        .action(async (cmdParts) => {
+        const useCase = kernel.getContainer().get(RunExecUseCase);
+        const [command, ...args] = cmdParts;
+        const truth = await useCase.execute(command, args);
+        console.log(chalk.gray(`\n  Truth Factor: ${truth.isTrue ? chalk.green(truth.confidence.toFixed(2)) : chalk.red(truth.confidence.toFixed(2))}`));
+        if (!truth.isTrue) {
+            console.log(chalk.red.bold(`  ${truth.statement}`));
+        }
+    });
     program
         .command('audit')
         .description('Perform elite anti-slop verification')
