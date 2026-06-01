@@ -31,13 +31,19 @@ let AuditService = class AuditService {
     checkUnauthorizedLogs() {
         const issues = [];
         const logFiles = shell.find(['src', 'docs', 'scripts']).filter(file => {
-            return file.match(/\.(js|ts|sh|md)$/) && !file.includes('node_modules') && !file.includes('.ai-core');
+            return file.match(/\.(js|ts|sh|md)$/) &&
+                !file.includes('node_modules') &&
+                !file.includes('.ai-core') &&
+                !file.includes('dist');
         });
         logFiles.forEach(file => {
             if (fs.lstatSync(file).isDirectory())
                 return;
             const content = fs.readFileSync(file, 'utf-8');
-            if (content.includes('console.log') && !file.includes('audit.js') && !file.includes('upgrade.js') && !file.includes('ironclad.js')) {
+            if (content.includes('console.log') &&
+                !file.includes('audit.service.ts') &&
+                !file.includes('distillation.service.ts') &&
+                !file.includes('src/cli/index.ts')) {
                 issues.push(new AuditIssue('UNAUTHORIZED_LOGS', `Found console.log in unauthorized file: ${file}`, AuditLevel.error(), file));
             }
         });
@@ -51,13 +57,17 @@ let AuditService = class AuditService {
                 !file.includes('.ai-core') &&
                 !file.includes('.husky') &&
                 !file.includes('README.md') &&
-                !file.includes('.next');
+                !file.includes('.next') &&
+                !file.includes('dist');
         });
         allFiles.forEach(file => {
             if (fs.lstatSync(file).isDirectory())
                 return;
             const content = fs.readFileSync(file, 'utf-8');
-            if (content.includes('// TODO') && !file.includes('audit.js') && !file.includes('upgrade.js')) {
+            // Ignore // TODO if it's in the audit or distillation services themselves (where we define the rules)
+            if (content.includes('// TODO') &&
+                !file.includes('audit.service.ts') &&
+                !file.includes('distillation.service.ts')) {
                 issues.push(new AuditIssue('INCOMPLETE_SPARC', `Found incomplete SPARC cycle (TODO) in file: ${file}`, AuditLevel.error(), file));
             }
         });
