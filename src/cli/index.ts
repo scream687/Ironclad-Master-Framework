@@ -16,6 +16,7 @@ import { RunTddUseCase } from '../core/application/use-cases/run-tdd.use-case';
 import { RunCommitUseCase } from '../core/application/use-cases/run-commit.use-case';
 import { RunDesignUseCase } from '../core/application/use-cases/run-design.use-case';
 import { RunWatchUseCase } from '../core/application/use-cases/run-watch.use-case';
+import { RunDiscoveryUseCase } from '../core/application/use-cases/run-discovery.use-case';
 
 const IRONCLAD_LOGO = `
   ${chalk.hex('#C2512B')('🛡️  IRONCLAD MASTER FRAMEWORK')}
@@ -171,6 +172,17 @@ async function main() {
       const useCase = kernel.getContainer().get(RunDesignUseCase);
       const truth = await useCase.execute(path);
       spinner.succeed(chalk.green('Aesthetic Audit Complete.'));
+      console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
+    });
+
+  program
+    .command('discover')
+    .description('Refresh UI intelligence hub from curated elite libraries')
+    .action(async () => {
+      const spinner = ora('Fetching elite library metadata and syncing with AgentDB...').start();
+      const useCase = kernel.getContainer().get(RunDiscoveryUseCase);
+      const truth = await useCase.execute();
+      spinner.succeed(chalk.green('UI Intelligence Hub Refreshed.'));
       console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
     });
 

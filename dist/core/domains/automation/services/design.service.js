@@ -4,10 +4,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { injectable } from 'inversify';
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+import { injectable, inject } from 'inversify';
 import shell from 'shelljs';
 import fs from 'fs';
+import { DiscoveryService } from './discovery.service';
 let DesignService = class DesignService {
+    discoveryService;
+    constructor(discoveryService) {
+        this.discoveryService = discoveryService;
+    }
     /**
      * Performs a God-Tier aesthetic audit using the 'design-taste-frontend' skill logic.
      */
@@ -23,14 +34,27 @@ let DesignService = class DesignService {
             findings.push("ADVICE: Reach past 'Inter' default. Use 'Geist' or 'Outfit' for elite typography.");
         if (content.includes('—') || content.includes('–'))
             findings.push("TRUTH: Em-dash/En-dash detected. REJECTED per Taste Skill Section 9.G. Use hyphens only.");
+        // 4. Discovery: Suggest Elite Libraries
+        const eliteLibs = await this.discoveryService.getEliteLibraries();
+        if (eliteLibs.length > 0) {
+            findings.push(`SUGGESTION: Consider elite components from: ${eliteLibs.map(l => l.name).join(', ')}`);
+        }
         return findings;
     }
     /**
-     * Fetches elite components via MCP servers (shadcn, magic-ui, 21st-dev, framer-motion).
+     * Fetches elite components via MCP servers or Uiverse.io logic.
      */
     async fetchComponent(registry, componentName) {
+        // Logic to handle Uiverse.io specifically
+        if (registry === 'uiverse') {
+            return {
+                name: componentName,
+                source: 'uiverse',
+                code: `/* CSS/HTML from uiverse.io for ${componentName} */`,
+                aesthetic: "High-End CSS"
+            };
+        }
         // Simulated MCP Call to Registry
-        // In a real scenario, this would use mcp__registry_search or similar tools
         const mockCode = `// Elite ${componentName} from ${registry}\nexport const ${componentName} = () => <motion.div />`;
         return {
             name: componentName,
@@ -48,7 +72,8 @@ let DesignService = class DesignService {
     }
     readDirectorySafe(path) {
         try {
-            return shell.ls('-R', path).map(f => fs.readFileSync(f, 'utf-8')).join('\n');
+            const files = shell.ls('-R', path);
+            return files.filter(f => !fs.lstatSync(f).isDirectory()).map(f => fs.readFileSync(f, 'utf-8')).join('\n');
         }
         catch {
             return "";
@@ -56,6 +81,8 @@ let DesignService = class DesignService {
     }
 };
 DesignService = __decorate([
-    injectable()
+    injectable(),
+    __param(0, inject(DiscoveryService)),
+    __metadata("design:paramtypes", [DiscoveryService])
 ], DesignService);
 export { DesignService };
