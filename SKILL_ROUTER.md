@@ -14,6 +14,15 @@ This file is the mandatory lookup table for all AI operations. Before performing
 
 ---
 
+## 🎨 Mandatory Design Stack (God-Tier)
+
+- **Animations**: `motion/react` (formerly Framer Motion)
+- **Component Registries**: `shadcn/ui`, `magic-ui`, `21st.dev`
+- **Aesthetic Enforcement**: `design-taste-frontend` (Section 9.G Hyphenation Rule Mandatory)
+- **Utility**: `Tailwind v4` (Default)
+
+---
+
 ## 🛠️ Task-Specific Skill Mapping
 
 | Task Category | Primary Skill (MANDATORY) | Secondary Skill (IF APPLICABLE) |

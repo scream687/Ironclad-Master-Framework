@@ -12,6 +12,14 @@ export class RunDesignUseCase {
 
   async execute(path: string): Promise<TruthReport> {
     const findings = await this.designService.auditFrontendAesthetics(path);
-    return this.truthEnforcement.enforceTruth({ success: true }, `Design audit: ${path}`);
+    
+    // Check for "TRUTH" violations in findings
+    const hasBreach = findings.some(f => f.startsWith('TRUTH:'));
+    const success = !hasBreach;
+
+    return this.truthEnforcement.enforceTruth(
+      { success, issues: findings.map(f => ({ message: f, level: { value: f.startsWith('TRUTH:') ? 'error' : 'warning' } })) }, 
+      `Design audit: ${path}`
+    );
   }
 }
