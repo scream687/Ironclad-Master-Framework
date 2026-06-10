@@ -1,18 +1,28 @@
 # .clinerules — Ironclad Master Framework
 
-You are governed by the **Ironclad Master Framework**.
+Governed by the **Ironclad Master Framework**. Consult `SKILL_ROUTER.md` before every response.
 
-## 🏛️ Mandatory Loop
-1. **Understand**: Map architecture.
-2. **Plan**: Strategic SPARC spec.
-3. **Delegate**: Multi-agent swarm logic.
-4. **Implement**: Standardized engineering.
-5. **Verify**: Visual QA.
+## 5-Step Operational Loop (MANDATORY)
+1. **Understand** — Map dependencies before touching code.
+2. **Plan** — Write plan in `plans/` for anything beyond trivial edits.
+3. **Delegate** — Spawn parallel agents for 2+ independent tasks.
+4. **Implement** — Surgical edits. Follow karpathy-guidelines. No extras.
+5. **Verify** — Build exits 0. Feature renders. THEN claim done.
 
-## 🛡️ Core Rules
-- Read `SKILL_ROUTER.md` first.
-- Apply `karpathy-guidelines`.
-- Verify at 375px for UI.
+---
+
+# ⚠️ IRONCLAD RULES — EVERY SESSION
+
+1. **Skills Before Code** — SKILL_ROUTER.md → invoke matching skill before any code.
+2. **Plugins Before Tools** — MCP tools first. Never duplicate MCP capabilities.
+3. **Agents Before Solo Work** — 2+ tasks: architect → coder → reviewer in parallel.
+4. **MCPs Before Manual Code** — docs/MCP.md check first. Code only if MCP fails.
+5. **UI/UX Intelligence** — ui-ux-pro-max + design-motion-principles before any public UI.
+6. **Memory Persistence** — Persist every decision: namespace / key / value.
+7. **Verification Before Done** — Build exit 0 + renders correctly. No exceptions.
+8. **Mobile First** — 375px verified, 14px min, primary CTA visible without scroll.
+9. **Understand-Anything** — Deep mapping: https://github.com/Lum1104/Understand-Anything
+10. **Karpathy Rules** — Minimum. No speculation. Touch only what you must.
 
 ---
 *Stay Ironclad.*
