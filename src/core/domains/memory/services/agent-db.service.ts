@@ -34,7 +34,34 @@ export class AgentDBService {
         created_at INTEGER NOT NULL
       )
     `);
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS tasks (
+        id TEXT PRIMARY KEY,
+        parent_id TEXT,
+        description TEXT NOT NULL,
+        status TEXT NOT NULL,
+        priority TEXT NOT NULL,
+        metadata TEXT,
+        created_at INTEGER NOT NULL,
+        updated_at INTEGER NOT NULL
+      )
+    `);
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS thoughts (
+        id TEXT PRIMARY KEY,
+        task_id TEXT,
+        thought TEXT NOT NULL,
+        tool_snapshot TEXT,
+        created_at INTEGER NOT NULL
+      )
+    `);
     this.db.exec(`CREATE INDEX IF NOT EXISTS idx_memories_created_at ON memories(created_at)`);
+    this.db.exec(`CREATE INDEX IF NOT EXISTS idx_tasks_parent_id ON tasks(parent_id)`);
+    this.db.exec(`CREATE INDEX IF NOT EXISTS idx_thoughts_task_id ON thoughts(task_id)`);
+  }
+
+  public get dbInstance(): Database.Database {
+    return this.db;
   }
 
   public async store(entry: MemoryEntry): Promise<void> {

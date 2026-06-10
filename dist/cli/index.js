@@ -2,29 +2,20 @@ import 'reflect-metadata';
 import { Command } from 'commander';
 import chalk from 'chalk';
 import ora from 'ora';
-import { IroncladKernel } from '../core/kernel/ironclad-kernel.js';
-import { TaskManagementDomain } from '../core/domains/task-management/task-management.domain.js';
-import { QualityAssuranceDomain } from '../core/domains/quality-assurance/quality-assurance.domain.js';
-import { TruthEnforcementService } from '../core/domains/quality-assurance/services/truth-enforcement.service.js';
-import { IntelligenceHubDomain } from '../core/domains/intelligence-hub/intelligence-hub.domain.js';
-import { MemoryDomain } from '../core/domains/memory/memory.domain.js';
-import { AutomationDomain } from '../core/domains/automation/automation.domain.js';
-import { BootstrappingDomain } from '../core/domains/bootstrapping/bootstrapping.domain.js';
-import { RunAuditUseCase } from '../core/application/use-cases/run-audit.use-case.js';
-import { FetchSkillUseCase } from '../core/application/use-cases/fetch-skill.use-case.js';
-import { UpgradeFrameworkUseCase } from '../core/application/use-cases/upgrade-framework.use-case.js';
-import { RunTddUseCase } from '../core/application/use-cases/run-tdd.use-case.js';
-import { RunCommitUseCase } from '../core/application/use-cases/run-commit.use-case.js';
-import { RunDesignUseCase } from '../core/application/use-cases/run-design.use-case.js';
-import { RunWatchUseCase } from '../core/application/use-cases/run-watch.use-case.js';
-import { RunDiscoveryUseCase } from '../core/application/use-cases/run-discovery.use-case.js';
-import { RunInitUseCase } from '../core/application/use-cases/run-init.use-case.js';
-import { RunExecUseCase } from '../core/application/use-cases/run-exec.use-case.js';
-const IRONCLAD_LOGO = `
-  ${chalk.hex('#C2512B')('🛡️  IRONCLAD MASTER FRAMEWORK')}
-  ${chalk.hex('#1C1C1C')('High-Performance AI Engineering Shell')}
-  ${chalk.dim('----------------------------------------')}
-`;
+import { IroncladKernel } from '../core/kernel/ironclad-kernel';
+import { TaskManagementDomain } from '../core/domains/task-management/task-management.domain';
+import { QualityAssuranceDomain } from '../core/domains/quality-assurance/quality-assurance.domain';
+import { IntelligenceHubDomain } from '../core/domains/intelligence-hub/intelligence-hub.domain';
+import { MemoryDomain } from '../core/domains/memory/memory.domain';
+import { AutomationDomain } from '../core/domains/automation/automation.domain';
+import { BootstrappingDomain } from '../core/domains/bootstrapping/bootstrapping.domain';
+import { StrategicPlanningDomain } from '../core/domains/strategic-planning/strategic-planning.domain';
+import { MVPRunAuditUseCase } from '../core/application/use-cases/mvp-run-audit.use-case';
+import { GeneratePlanUseCase } from '../core/application/use-cases/generate-plan.use-case';
+import { BrainstormUseCase } from '../core/application/use-cases/brainstorm.use-case';
+import { RunHarnessUseCase } from '../core/application/use-cases/run-harness.use-case';
+import { InfinityHarnessService } from '../core/domains/automation/services/infinity-harness.service';
+import { TerminalUI } from '../formatter/terminal-ui';
 async function main() {
     const kernel = new IroncladKernel();
     // Load Domains
@@ -34,168 +25,88 @@ async function main() {
     await kernel.loadDomain(new MemoryDomain());
     await kernel.loadDomain(new AutomationDomain());
     await kernel.loadDomain(new BootstrappingDomain());
+    await kernel.loadDomain(new StrategicPlanningDomain());
+    // Register Use Cases
+    kernel.getContainer().bind(MVPRunAuditUseCase).toSelf().inSingletonScope();
+    kernel.getContainer().bind(GeneratePlanUseCase).toSelf().inSingletonScope();
+    kernel.getContainer().bind(BrainstormUseCase).toSelf().inSingletonScope();
+    kernel.getContainer().bind(RunHarnessUseCase).toSelf().inSingletonScope();
     const program = new Command();
     program
         .name('ironclad')
         .description('Autonomous Business Operating System Command Center')
-        .version('1.3.0 (Universal V3)');
-    console.log(IRONCLAD_LOGO);
-    program
-        .command('init')
-        .description('Ironclad any project instantly')
-        .action(async () => {
-        const spinner = ora('Injecting Ironclad intelligence hub and mandates...').start();
-        const useCase = kernel.getContainer().get(RunInitUseCase);
-        const truth = await useCase.execute(process.cwd());
-        spinner.succeed(chalk.green('Project successfully Ironcladded.'));
-        console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
-    });
-    program
-        .command('exec <cmd...>')
-        .description('Run any command with Truth Factor governance')
-        .action(async (cmdParts) => {
-        const useCase = kernel.getContainer().get(RunExecUseCase);
-        const [command, ...args] = cmdParts;
-        const truth = await useCase.execute(command, args);
-        console.log(chalk.gray(`\n  Truth Factor: ${truth.isTrue ? chalk.green(truth.confidence.toFixed(2)) : chalk.red(truth.confidence.toFixed(2))}`));
-        if (!truth.isTrue) {
-            console.log(chalk.red.bold(`  ${truth.statement}`));
-        }
-    });
+        .version('1.0.0-mvp')
+        .enablePositionalOptions();
     program
         .command('audit')
-        .description('Perform elite anti-slop verification')
-        .action(async () => {
-        const spinner = ora('Initializing Ironclad Audit...').start();
-        const useCase = kernel.getContainer().get(RunAuditUseCase);
-        const { result, truth } = await useCase.execute();
-        if (result.success) {
-            spinner.succeed(chalk.green('Ironclad Audit: SUCCESS. Codebase is elite.'));
-            console.log(chalk.gray(`\n  Truth Factor: ${chalk.green(truth.confidence.toFixed(2))} ⭐`));
-            console.log(chalk.hex('#C2512B')(`  ${truth.statement}`));
+        .description('Perform cinematic Truth Score verification')
+        .option('--fix-preview', 'Show projected score and time saved via auto-fixes')
+        .action(async (options) => {
+        TerminalUI.renderHeader();
+        const useCase = kernel.getContainer().get(MVPRunAuditUseCase);
+        const stats = useCase.getStats();
+        TerminalUI.renderStats(stats.files, stats.components, stats.routes);
+        const result = await useCase.execute();
+        if (options.fixPreview) {
+            TerminalUI.renderFixPreview(result);
         }
         else {
-            spinner.fail(chalk.red('Ironclad Audit: FAILED. Please remediate the slop.'));
-            result.issues.forEach((issue) => {
-                console.log(`  - [${issue.level.value.toUpperCase()}] ${issue.ruleName}: ${issue.message} ${issue.file ? `(${issue.file})` : ''}`);
-            });
-            console.log(chalk.gray(`\n  Truth Factor: ${chalk.red(truth.confidence.toFixed(2))} ❌`));
-            console.log(chalk.red.bold(`  ${truth.statement}`));
-            if (truth.hallucinationAlerts.length > 0) {
-                console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
-                truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
-            }
-            process.exit(1);
+            TerminalUI.renderTruthScore(result);
+            const allIssues = Object.values(result.categories).flatMap((c) => c.issues);
+            TerminalUI.renderTopIssues(allIssues);
+            TerminalUI.renderCertification(result);
         }
     });
     program
-        .command('fetch')
-        .description('Integrate external intelligence from GitHub')
-        .argument('<repo>', 'GitHub repository (user/repo)')
-        .action(async (repo) => {
-        const spinner = ora(`Fetching external intelligence from GitHub: ${repo}...`).start();
-        const useCase = kernel.getContainer().get(FetchSkillUseCase);
-        const truth = await useCase.execute(repo);
-        if (truth.isTrue) {
-            spinner.succeed(chalk.green(`Skill integrated into intelligence hub: ${repo}`));
-            console.log(chalk.gray(`\n  Truth Factor: ${chalk.green(truth.confidence.toFixed(2))} ⭐`));
-        }
-        else {
-            spinner.fail(chalk.red(`Failed to fetch intelligence: ${repo}`));
-            console.log(chalk.red.bold(`\n  ${truth.statement}`));
-            if (truth.hallucinationAlerts.length > 0) {
-                console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
-                truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
-            }
-            process.exit(1);
-        }
+        .command('plan')
+        .description('Generate a strategic SPARC specification')
+        .argument('<goal>', 'The goal of the plan')
+        .option('-c, --context <context>', 'Additional context for the plan', '')
+        .action(async (goal, options) => {
+        const useCase = kernel.getContainer().get(GeneratePlanUseCase);
+        const spinner = ora(`Generating SPARC spec for: ${goal}...`).start();
+        const result = await useCase.execute(goal, options.context);
+        spinner.succeed(`Plan generated at ${chalk.cyan(result.path)}`);
+        console.log(chalk.gray('---'));
+        console.log(result.content);
     });
     program
-        .command('upgrade')
-        .description('Trigger the Ironclad Evolution Engine')
+        .command('brainstorm')
+        .description('Generate creative strategies or ideas')
+        .argument('<topic>', 'The topic to brainstorm')
+        .action(async (topic) => {
+        const useCase = kernel.getContainer().get(BrainstormUseCase);
+        const spinner = ora(`Brainstorming ideas for: ${topic}...`).start();
+        const ideas = await useCase.execute(topic);
+        spinner.succeed(`Brainstorming complete!`);
+        console.log(chalk.gray('---'));
+        ideas.forEach((idea, i) => console.log(`${i + 1}. ${idea}`));
+    });
+    program
+        .command('mcp')
+        .description('Start the Ironclad MCP Server')
         .action(async () => {
-        const spinner = ora('Triggering Ironclad Evolution Loop...').start();
-        const useCase = kernel.getContainer().get(UpgradeFrameworkUseCase);
-        const truth = await useCase.execute();
-        if (truth.isTrue) {
-            spinner.succeed(chalk.green('Ironclad Evolution: SUCCESS. The framework has ascended.'));
-            console.log(chalk.gray(`\n  Truth Factor: ${chalk.green(truth.confidence.toFixed(2))} ⭐`));
-        }
-        else {
-            spinner.fail(chalk.red('Ironclad Evolution: FAILED.'));
-            console.log(chalk.red.bold(`\n  ${truth.statement}`));
-            if (truth.hallucinationAlerts.length > 0) {
-                console.log(chalk.yellow('\n  ⚠️  TRUTH MANDATE ACTIVATED:'));
-                truth.hallucinationAlerts.forEach(alert => console.log(`     - ${alert}`));
-            }
-            process.exit(1);
-        }
+        console.log(chalk.cyan('Starting Ironclad MCP Server...'));
+        // We import it dynamically to avoid loading MCP dependencies if not needed
+        const { runMcpServer } = await import('../mcp/index.js');
+        // @ts-ignore
+        await runMcpServer();
     });
     program
-        .command('benchmark')
-        .description('Validate V3 performance targets')
-        .action(async () => {
-        const spinner = ora('Initializing Ironclad Benchmarks...').start();
-        const truthEnforcement = kernel.getContainer().get(TruthEnforcementService);
-        const start = performance.now();
-        // Simulate some intense operations
-        for (let i = 0; i < 1000; i++) {
-            kernel.getContainer().get(RunAuditUseCase);
-        }
-        const end = performance.now();
-        const truth = truthEnforcement.enforceTruth({ success: true }, 'Performance benchmark');
-        spinner.succeed(chalk.green('Ironclad Benchmarks Complete.'));
-        console.log(`\n  ${chalk.bold('Performance Targets:')}`);
-        console.log(`  - Cold Start: ${chalk.green('<200ms')} (Actual: ${Math.round(end - start)}ms)`);
-        console.log(`  - Memory Efficiency: ${chalk.green('God-Tier')}`);
-        console.log(`  - Truth Threshold: ${chalk.green('>0.95')} (Actual: ${chalk.green(truth.confidence.toFixed(2))})\n`);
+        .command('harness')
+        .description('Start the Ironclad Eternal Harness for autonomous continuity')
+        .argument('<goal>', 'The high-level goal to accomplish')
+        .action(async (goal) => {
+        const useCase = kernel.getContainer().get(RunHarnessUseCase);
+        await useCase.execute(goal);
     });
     program
-        .command('tdd <feature>')
-        .description('Execute autonomous Red-Green-Refactor loop')
-        .action(async (feature) => {
-        const useCase = kernel.getContainer().get(RunTddUseCase);
-        const truth = await useCase.execute(feature);
-        console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
-        console.log(chalk.gray(`  Truth Factor: ${chalk.green(truth.confidence.toFixed(2))} ⭐`));
-    });
-    program
-        .command('commit')
-        .description('Zero-touch Git automation with elite commit messages')
-        .action(async () => {
-        const spinner = ora('Analyzing diff and crafting elite commit...').start();
-        const useCase = kernel.getContainer().get(RunCommitUseCase);
-        const truth = await useCase.execute();
-        spinner.succeed(chalk.green('Git Operations Complete.'));
-        console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
-    });
-    program
-        .command('design <path>')
-        .description('UI/UX Anti-Slop engine for premium aesthetics')
-        .action(async (path) => {
-        const spinner = ora('Auditing aesthetics and enforcing high-end patterns...').start();
-        const useCase = kernel.getContainer().get(RunDesignUseCase);
-        const truth = await useCase.execute(path);
-        spinner.succeed(chalk.green('Aesthetic Audit Complete.'));
-        console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
-    });
-    program
-        .command('discover')
-        .description('Refresh UI intelligence hub from curated elite libraries')
-        .action(async () => {
-        const spinner = ora('Fetching elite library metadata and syncing with AgentDB...').start();
-        const useCase = kernel.getContainer().get(RunDiscoveryUseCase);
-        const truth = await useCase.execute();
-        spinner.succeed(chalk.green('UI Intelligence Hub Refreshed.'));
-        console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
-    });
-    program
-        .command('watch')
-        .description('Background daemon for slop-monitoring and context-compression')
-        .action(async () => {
-        const useCase = kernel.getContainer().get(RunWatchUseCase);
-        const truth = await useCase.execute();
-        console.log(chalk.hex('#C2512B')(`\n  ${truth.statement}`));
+        .command('infinity')
+        .description('Launch the God-Tier Ironclad Infinity Loop for infinite autonomous continuity')
+        .argument('<objective>', 'The high-level objective to accomplish')
+        .action(async (objective) => {
+        const service = kernel.getContainer().get(InfinityHarnessService);
+        await service.runInfinityLoop(objective);
     });
     program.parse(process.argv);
 }

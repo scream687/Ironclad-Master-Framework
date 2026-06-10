@@ -7,10 +7,12 @@ import { TaskCompletedEvent, TaskResult } from '../events/task-completed.event';
 
 interface TaskProps {
   id: TaskId;
+  parentId?: string | undefined;
   description: string;
   priority: Priority;
   status: TaskStatus;
-  assignedAgentId?: string;
+  metadata: Record<string, any>;
+  assignedAgentId?: string | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,12 +25,14 @@ export class Task extends AggregateRoot<TaskId> {
     this.props = props;
   }
 
-  static create(description: string, priority: Priority): Task {
+  static create(description: string, priority: Priority, parentId?: string): Task {
     const task = new Task({
       id: TaskId.create(),
+      parentId,
       description,
       priority,
       status: TaskStatus.pending(),
+      metadata: {},
       createdAt: new Date(),
       updatedAt: new Date()
     });

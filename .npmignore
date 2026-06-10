@@ -1,0 +1,40 @@
+# NPM Ignore - Final Pruning
+
+# 1. Dev & Meta garbage
+**/node_modules/
+**/.git/
+**/.github/
+**/.husky/
+**/.vscode/
+**/.DS_Store
+package-lock.json
+*.tgz
+*.log
+tests/
+**/__tests__/
+
+# 2. Binary & Media Purge (Recursive across all whitelisted folders)
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.webp
+**/*.mov
+**/*.mp4
+**/*.wasm
+**/*.heapsnapshot
+**/*.gz
+**/*.node
+**/*.zip
+**/*.tar.gz
+
+# 3. Exceptions for brand assets (Whitelisted in package.json anyway, but being safe)
+!assets/logo.png
+!assets/banner.png
+
+# 4. Framework specific garbage
+.ai-core/plugins/
+.ai-core/external/
+.ai-core/backups/
+.ai-core/memory.db
+.ai-core/cache/

@@ -10,10 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { injectable } from 'inversify';
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'fs';
 let AgentDBService = class AgentDBService {
     db;
     constructor() {
         const dbPath = path.resolve('.ai-core', 'memory.db');
+        if (!fs.existsSync(path.dirname(dbPath))) {
+            fs.mkdirSync(path.dirname(dbPath), { recursive: true });
+        }
         this.db = new Database(dbPath);
         this.initializeSchema();
     }
@@ -27,7 +31,33 @@ let AgentDBService = class AgentDBService {
         created_at INTEGER NOT NULL
       )
     `);
+        this.db.exec(`
+      CREATE TABLE IF NOT EXISTS tasks (
+        id TEXT PRIMARY KEY,
+        parent_id TEXT,
+        description TEXT NOT NULL,
+        status TEXT NOT NULL,
+        priority TEXT NOT NULL,
+        metadata TEXT,
+        created_at INTEGER NOT NULL,
+        updated_at INTEGER NOT NULL
+      )
+    `);
+        this.db.exec(`
+      CREATE TABLE IF NOT EXISTS thoughts (
+        id TEXT PRIMARY KEY,
+        task_id TEXT,
+        thought TEXT NOT NULL,
+        tool_snapshot TEXT,
+        created_at INTEGER NOT NULL
+      )
+    `);
         this.db.exec(`CREATE INDEX IF NOT EXISTS idx_memories_created_at ON memories(created_at)`);
+        this.db.exec(`CREATE INDEX IF NOT EXISTS idx_tasks_parent_id ON tasks(parent_id)`);
+        this.db.exec(`CREATE INDEX IF NOT EXISTS idx_thoughts_task_id ON thoughts(task_id)`);
+    }
+    get dbInstance() {
+        return this.db;
     }
     async store(entry) {
         const stmt = this.db.prepare(`

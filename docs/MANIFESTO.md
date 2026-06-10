@@ -1,20 +1,35 @@
 <div align="center">
-  <a href="../README.md">README</a> • <b>MANIFESTO</b> • <a href="SYSTEM_DESIGN.md">SYSTEM DESIGN</a> • <a href="EVOLUTION.md">EVOLUTION</a>
+  <a href="../README.md">Home</a> • <b>Manifesto</b> • <a href="SYSTEM_DESIGN.md">Architecture</a> • <a href="UNIVERSAL_ORCHESTRATION.md">Orchestration</a> • <a href="EVOLUTION.md">Evolution</a>
 </div>
 
-# 🛡️ The Ironclad Manifesto
+---
 
-## 1. We Reject the "Vibe"
-"Vibe Coding" is the death of engineering. We do not write code that "feels" right; we write code that is structurally sound, type-safe, and empirically verified.
+# 🛡️ THE IRONCLAD MANIFESTO
+### **The Sovereign Standard for Elite AI Engineering**
 
-## 2. Methodology is Ironclad
-The **SPARC** (Specification, Pseudocode, Architecture, Refinement, Completion) process is non-negotiable. An AI that skips to the code is an AI that has failed.
-
-## 3. Intelligence must be Consolidated
-An engineer is only as good as their tools. By consolidating skills, agents, and rules into the framework, we ensure that every project starts with a decade of accumulated intelligence.
-
-## 4. Responsibility is Ours
-The AI is the engine; we are the navigators. We maintain the framework, audit the skills, and ensure that the "Ironclad" standard is upheld in every commit.
+> "Vibe Coding" is the death of excellence. We do not write code that merely *works*; we engineer systems that are structurally immutable, type-safe, and empirically verified.
 
 ---
-*Stay Ironclad.*
+
+## 🏛️ I. Rejection of the "Vibe"
+We reject the erratic, hallucination-prone nature of standard AI outputs. **Ironclad** forces the machine to think before it speaks, ensuring every line of code is born from a rigorous architectural specification.
+
+## ⚔️ II. The Methodology is Non-Negotiable
+The **SPARC Cycle** is our armor. 
+- **S**pecification: Absolute clarity of intent.
+- **P**seudocode: Logical mapping without syntactic noise.
+- **A**rchitecture: Deep structural alignment.
+- **R**efinement: Surgical precision and optimization.
+- **C**ompletion: Empirical verification of truth.
+
+## 🧠 III. Consolidated Intelligence
+An engineer's worth is measured by their tools. By consolidating the world's most elite skills, agents, and rules into a single sovereign framework, we ensure that every project inherits the baseline of a Senior Staff Engineer.
+
+## 🔱 IV. Human Sovereignty
+The AI is the engine; the Engineer is the Architect. We maintain the framework, audit the intelligence, and ensure the **Ironclad Standard** is upheld in every commit.
+
+---
+
+<div align="center">
+  <b>Ironclad Master Framework</b> • <i>Engineer the Extraordinary</i>
+</div>

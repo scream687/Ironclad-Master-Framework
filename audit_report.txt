@@ -1,0 +1,80 @@
+
+╔════════════════════════════════════╗
+║        IRONCLAD AUDIT v1.0         ║
+╚════════════════════════════════════╝
+
+  Scanning Repository...
+
+  ✓ 8246 Files Scanned
+  ✓ 275 Components Analyzed
+  ✓ 325 Routes Audited
+  ────────────────────────────
+
+  TRUTH SCORE: 60 / 100
+
+  Architecture     100
+  Testing          0
+  Security         0
+  Performance      100
+  Accessibility    100
+
+  ────────────────────────────
+
+  Issues Found: 101
+
+  Critical: 38
+  Major:    63
+  Minor:    0
+
+  TOP ISSUES
+
+  [CRITICAL]
+  Hardcoded API Key
+  .ai-core/external/ai-engineering-from-scratch/phases/19-capstone-projects/16-github-issue-to-pr-agent/code/ts/src/index.ts
+
+  Risk:
+  Credentials could be leaked to public repositories or logs.
+
+  Fix:
+  Move secret to an encrypted environment variable (.env)
+
+  ────────────────────────
+
+  [CRITICAL]
+  Hardcoded API Key
+  .ai-core/external/ECC/tests/hooks/governance-capture.test.js
+
+  Risk:
+  Credentials could be leaked to public repositories or logs.
+
+  Fix:
+  Move secret to an encrypted environment variable (.env)
+
+  ────────────────────────
+
+  [CRITICAL]
+  Hardcoded API Key
+  .ai-core/external/ECC/tests/hooks/pre-bash-commit-quality.test.js
+
+  Risk:
+  Credentials could be leaked to public repositories or logs.
+
+  Fix:
+  Move secret to an encrypted environment variable (.env)
+
+  ────────────────────────
+
+  ══════════════════════════
+
+  IRONCLAD CERTIFICATION
+
+  Truth Score: 60
+  Grade:       C
+  Repository Health:
+  CRITICAL
+
+  ══════════════════════════
+
+  Share:
+  ironclad.dev/share/onm4f2
+

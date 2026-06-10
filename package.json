@@ -9,11 +9,49 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "start": "node dist/bin/ironclad.js"
+    "start": "node dist/bin/ironclad.js",
+    "mcp": "tsx src/mcp/index.ts",
+    "postinstall": "tsx scripts/setup-mcp.ts"
   },
   "author": "Rishabh Sharma",
   "license": "BSL-1.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scream687/Ironclad-Master-Framework.git"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "mcp",
+    "framework",
+    "automation",
+    "autonomous",
+    "engineering",
+    "claude",
+    "gemini",
+    "cursor"
+  ],
+  "bugs": {
+    "url": "https://github.com/scream687/Ironclad-Master-Framework/issues"
+  },
+  "homepage": "https://github.com/scream687/Ironclad-Master-Framework#readme",
+  "files": [
+    "bin",
+    "dist",
+    "docs",
+    "plans",
+    "scripts",
+    "src",
+    ".ai-core/rules",
+    "assets/logo.png",
+    "assets/banner.png",
+    "SKILL_ROUTER.md",
+    "CLAUDE.md",
+    "MANIFESTO.md",
+    "GEMINI.md"
+  ],
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "ora": "^8.0.1",

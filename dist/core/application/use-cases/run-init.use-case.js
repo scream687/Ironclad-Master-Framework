@@ -10,31 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b;
 import { injectable, inject } from 'inversify';
-import { InitService } from '../../domains/bootstrapping/services/init.service';
-import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
+import { InitService } from '../../domains/bootstrapping/services/init.service.js';
+import { UniversalRulesService } from '../../domains/bootstrapping/services/universal-rules.service.js';
+import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service.js';
 let RunInitUseCase = class RunInitUseCase {
     initService;
+    rulesService;
     truthEnforcement;
-    constructor(initService, truthEnforcement) {
+    constructor(initService, rulesService, truthEnforcement) {
         this.initService = initService;
+        this.rulesService = rulesService;
         this.truthEnforcement = truthEnforcement;
     }
     async execute(targetDir) {
         try {
             await this.initService.ironcladDirectory(targetDir);
-            return this.truthEnforcement.enforceTruth({ success: true }, `Project initialization: ${targetDir}`);
+            await this.rulesService.syncAllRules(targetDir);
+            return this.truthEnforcement.enforceTruth({ success: true }, `Universal initialization: ${targetDir}`);
         }
         catch (error) {
-            return this.truthEnforcement.enforceTruth(error, `Project initialization: ${targetDir}`);
+            return this.truthEnforcement.enforceTruth(error, `Universal initialization: ${targetDir}`);
         }
     }
 };
 RunInitUseCase = __decorate([
     injectable(),
     __param(0, inject(InitService)),
-    __param(1, inject(TruthEnforcementService)),
-    __metadata("design:paramtypes", [typeof (_a = typeof InitService !== "undefined" && InitService) === "function" ? _a : Object, typeof (_b = typeof TruthEnforcementService !== "undefined" && TruthEnforcementService) === "function" ? _b : Object])
+    __param(1, inject(UniversalRulesService)),
+    __param(2, inject(TruthEnforcementService)),
+    __metadata("design:paramtypes", [InitService,
+        UniversalRulesService,
+        TruthEnforcementService])
 ], RunInitUseCase);
 export { RunInitUseCase };

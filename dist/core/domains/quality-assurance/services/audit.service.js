@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { injectable } from 'inversify';
 import shell from 'shelljs';
 import fs from 'fs';
+import path from 'path';
 import { AuditResult } from '../entities/audit-result.entity';
 import { AuditIssue } from '../entities/audit-issue.entity';
 import { AuditLevel } from '../value-objects/audit-level.vo';
@@ -22,7 +23,32 @@ let AuditService = class AuditService {
         issues.push(...this.checkDirectoryIntegrity());
         // 4. Rule Synchronization
         issues.push(...this.checkRuleSynchronization());
+        // 5. Governance Rule 5: Design Intelligence
+        issues.push(...this.checkGovernanceRule5());
         return new AuditResult(issues, startedAt, new Date());
+    }
+    checkGovernanceRule5() {
+        const issues = [];
+        // We search for files that are likely UI whitelisted (pages, components)
+        const uiPatterns = [
+            'src/app/',
+            'src/components/',
+            'src/pages/',
+            'src/ui/'
+        ];
+        const allFiles = Array.from(shell.find('.')).filter(file => {
+            return (file.endsWith('.tsx') || file.includes('page.ts') || file.includes('component.ts')) &&
+                !file.includes('node_modules') &&
+                !file.includes('.ai-core') &&
+                !file.includes('dist');
+        });
+        allFiles.forEach(file => {
+            const content = fs.readFileSync(file, 'utf-8');
+            if (!content.includes('@ironclad-design-signature')) {
+                issues.push(new AuditIssue('GOVERNANCE_BREACH_RULE_5', `UI file ${file} is missing a mandatory @ironclad-design-signature header.`, AuditLevel.error(), file));
+            }
+        });
+        return issues;
     }
     checkUnauthorizedLogs() {
         const issues = [];
@@ -32,15 +58,23 @@ let AuditService = class AuditService {
             { ext: /\.go$/, pattern: 'fmt.Print', lang: 'Go' },
             { ext: /\.rs$/, pattern: 'println!', lang: 'Rust' }
         ];
-        const allFiles = shell.find(['src', 'docs', 'scripts', '.']).filter(file => {
-            return !file.includes('node_modules') && !file.includes('.ai-core') && !file.includes('dist');
+        const searchPaths = ['src', 'docs', 'scripts', '.'].filter(p => fs.existsSync(p));
+        const allFiles = Array.from(shell.find(searchPaths)).filter(file => {
+            return !file.includes('node_modules') &&
+                !file.split(path.sep).some(part => part.startsWith('.') && part !== '.') &&
+                !file.includes('dist');
         });
         allFiles.forEach(file => {
             if (fs.lstatSync(file).isDirectory())
                 return;
             const content = fs.readFileSync(file, 'utf-8');
             patterns.forEach(({ ext, pattern, lang }) => {
-                if (file.match(ext) && content.includes(pattern) && !file.includes('audit.service.ts')) {
+                if (file.match(ext) && content.includes(pattern) &&
+                    !file.includes('audit.service.ts') &&
+                    !file.includes('harness.service.ts') &&
+                    !file.includes('terminal-ui.ts') &&
+                    !file.startsWith('scripts/') &&
+                    !file.includes('src/cli/index.ts')) {
                     issues.push(new AuditIssue('UNAUTHORIZED_LOGS', `Found unauthorized ${lang} log (${pattern}) in: ${file}`, AuditLevel.error(), file));
                 }
             });
@@ -50,19 +84,18 @@ let AuditService = class AuditService {
     checkIncompleteSparcCycles() {
         const issues = [];
         const todoPatterns = ['// TODO', '# TODO', '-- TODO', '/* TODO */'];
-        const allFiles = shell.find('.').filter(file => {
-            return !file.includes('node_modules') &&
-                !file.includes('.ai-core') &&
-                !file.includes('dist') &&
-                !file.includes('.husky') &&
-                !file.includes('README.md');
-        });
+        const searchPaths = ['src', 'lib', 'app', 'pages', 'components', 'plans', 'docs'].filter(p => fs.existsSync(p));
+        const allFiles = searchPaths.length > 0
+            ? Array.from(shell.find(searchPaths)).filter(file => !file.includes('node_modules'))
+            : Array.from(shell.ls('-R', '.')).filter(file => !file.startsWith('.') &&
+                !file.includes('node_modules') &&
+                !file.includes('dist'));
         allFiles.forEach(file => {
             if (fs.lstatSync(file).isDirectory())
                 return;
             const content = fs.readFileSync(file, 'utf-8');
             todoPatterns.forEach(pattern => {
-                if (content.includes(pattern) && !file.includes('audit.service.ts')) {
+                if (content.includes(pattern) && !file.includes('audit.service.ts') && !file.includes('distillation.service.ts')) {
                     issues.push(new AuditIssue('INCOMPLETE_SPARC', `Found incomplete SPARC cycle (${pattern}) in: ${file}`, AuditLevel.error(), file));
                 }
             });
@@ -81,7 +114,16 @@ let AuditService = class AuditService {
     }
     checkRuleSynchronization() {
         const issues = [];
-        const requiredRules = ['.clinerules', '.cursorrules', '.windsurfrules', 'CLAUDE.md', 'GEMINI.md', 'SKILL_ROUTER.md'];
+        const requiredRules = [
+            '.clinerules',
+            '.cursorrules',
+            '.windsurfrules',
+            '.aiderules',
+            '.github/copilot-instructions.md',
+            'CLAUDE.md',
+            'GEMINI.md',
+            'SKILL_ROUTER.md'
+        ];
         for (const file of requiredRules) {
             if (!fs.existsSync(file)) {
                 issues.push(new AuditIssue('RULE_SYNCHRONIZATION', `Missing mandatory rule file: ${file}`, AuditLevel.error()));

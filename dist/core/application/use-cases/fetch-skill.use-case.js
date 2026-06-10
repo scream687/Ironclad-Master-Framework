@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b;
 import { injectable, inject } from 'inversify';
 import { SkillService } from '../../domains/intelligence-hub/services/skill.service';
 import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
@@ -42,6 +41,8 @@ FetchSkillUseCase = __decorate([
     __param(0, inject(SkillService)),
     __param(1, inject(TruthEnforcementService)),
     __param(2, inject('EventBus')),
-    __metadata("design:paramtypes", [typeof (_a = typeof SkillService !== "undefined" && SkillService) === "function" ? _a : Object, typeof (_b = typeof TruthEnforcementService !== "undefined" && TruthEnforcementService) === "function" ? _b : Object, EventEmitter])
+    __metadata("design:paramtypes", [SkillService,
+        TruthEnforcementService,
+        EventEmitter])
 ], FetchSkillUseCase);
 export { FetchSkillUseCase };

@@ -1,86 +1,95 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/scream687/Ironclad-Master-Framework/main/assets/banner.png" alt="Ironclad Banner" width="100%" />
+<img src="https://raw.githubusercontent.com/scream687/Ironclad-Master-Framework/main/assets/banner_v3.png" alt="Ironclad Banner" width="100%" />
 
 <br />
 
-<img src="https://raw.githubusercontent.com/scream687/Ironclad-Master-Framework/main/assets/logo.png" alt="Ironclad Logo" width="120" />
+# 🛡️ IRONCLAD
+### **The Autonomous Business Operating System for Elite AI Engineers**
 
-# 🛡️ Ironclad Master Framework
-### *The Autonomous Shell for Elite AI Engineering*
+**Stop AI Slop Before It Ships. Hard-coded Senior Standards for Claude, Gemini, and Cursor.**
 
-[![Framework](https://img.shields.io/badge/Framework-Ironclad_V3-C2512B?style=for-the-badge)](https://github.com/scream687/Ironclad-Master-Framework)
-[![Architecture](https://img.shields.io/badge/Architecture-DDD--Microkernel-1C1C1C?style=for-the-badge)](https://github.com/scream687/Ironclad-Master-Framework)
-[![Tier](https://img.shields.io/badge/Tier-God--Tier-FFD700?style=for-the-badge)](https://github.com/scream687/Ironclad-Master-Framework)
-[![Truth](https://img.shields.io/badge/Truth--Score-1.00-green?style=for-the-badge)](https://github.com/scream687/Ironclad-Master-Framework)
+[![NPM Version](https://img.shields.io/npm/v/ironclad-master-framework?color=orange&style=flat-square)](https://www.npmjs.com/package/ironclad-master-framework)
+[![License](https://img.shields.io/badge/License-BSL--1.1-ivory?style=flat-square)](./LICENSE)
+[![Build Status](https://img.shields.io/badge/Build-God--Tier-charcoal?style=flat-square)](#)
 
-[**System Design**](./docs/SYSTEM_DESIGN.md) • [**Evolution Engine**](./docs/EVOLUTION.md) • [**Manifesto**](./docs/MANIFESTO.md) • [**Skill Router**](./SKILL_ROUTER.md)
-
----
-
-### *“Reject the Slop. Embrace the Precision. Engineer the Extraordinary.”*
+[**The Manifesto**](./docs/MANIFESTO.md) • [**System Architecture**](./docs/SYSTEM_DESIGN.md) • [**Skill Registry**](./SKILL_ROUTER.md)
 
 </div>
 
-## 📖 Executive Summary
-The **Ironclad Master Framework V3** is a God-Tier autonomous operational shell. It transforms a standard repository into an **Autonomous Business Operating System**, governed by strict **Domain-Driven Design (DDD)**, persistent **AgentDB Memory**, and a 15-agent hierarchical swarm.
+---
+
+## ⚡ The Ironclad Proposition
+Most AI-generated code is unmaintainable "vibe-coding" slop. **Ironclad** is the world's first **Autonomous Precision Layer** that forces LLMs to adhere to high-performance engineering standards (DDD, TDD, SPARC) with a mandatory **0.95 Truth Factor**.
 
 ---
 
-## ⚡ The Ironclad V3 Advantage
+## 🍱 The God-Tier Bento Box
 
-<table>
-  <tr>
-    <td width="50%">
-      <h3>🧠 AgentDB Vector Memory</h3>
-      <p>HNSW-indexed persistence for 150x faster intelligence retrieval across sessions.</p>
-    </td>
-    <td width="50%">
-      <h3>🏛️ DDD Microkernel</h3>
-      <p>Strict architectural boundaries separating Task, Memory, and Intelligence domains.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>🛡️ God-Tier Audit</h3>
-      <p>Mandatory Truth Scoring (>0.95) with auto-rollback ensures zero-slop execution.</p>
-    </td>
-    <td width="50%">
-      <h3>🔄 Swarm-Coordinated</h3>
-      <p>Built-in support for 15-agent hierarchical meshes via agentic-flow@alpha.</p>
-    </td>
-  </tr>
-</table>
+| 🧠 Omni-Model Governance | 🛡️ Truth-First Audit | 🎨 Cinematic Design |
+| :--- | :--- | :--- |
+| One set of mandates for Claude, Cursor, Windsurf, and Gemini. | Real-time "Slop Detection" and hallucination termination. | Integrated MCPs for high-end MagicUI/Shadcn components. |
+| **[Learn More](./docs/ORCHESTRATION.md)** | **[View Metrics](./docs/SCORING.md)** | **[See Components](./docs/DESIGN.md)** |
+
+| 📉 Context Compression | 🤖 Swarm Orchestration | 💾 AgentDB Memory |
+| :--- | :--- | :--- |
+| Save 32% in tokens with "Caveman Mode" AST stripping. | 15-agent hierarchical mesh for parallel task execution. | Persistent, HNSW-indexed business memory for amnesia-free AI. |
+| **[Optimize Usage](./docs/TOKEN_BUDGET.md)** | **[Spawn Swarms](./docs/AGENTS.md)** | **[Explore Memory](./docs/AGENT_DB.md)** |
 
 ---
 
-## 🚀 Commands
-- `ironclad audit` — Execute elite anti-slop verification (Truth Score: 1.00).
-- `ironclad benchmark` — Validate V3 performance targets (<200ms cold start).
-- `ironclad fetch <repo>` — Integrate external intelligence into the hub.
-- `ironclad upgrade` — Trigger the Evolution Engine self-ascent.
+## 🎬 See It In Action
+![Ironclad Demo GIF](https://raw.githubusercontent.com/scream687/Ironclad-Master-Framework/main/assets/demo_god_tier.gif)
+*Watch Ironclad detect a hallucination, activate the Escape Protocol, and self-correct to a 1.00 ⭐ Truth Score.*
 
 ---
 
-## 🏛️ Elite Foundations (The Intelligence Stack)
-Ironclad is built upon the distilled intelligence of the world's most elite AI engineering repositories.
+## 🚀 Quickstart
 
-| Module | Source Repository | Authority |
-|---|---|---|
-| **Swarm Ops** | `affaan-m/ECC` | Infinite Yield AI |
-| **Architectural Mapping** | `Lum1104/Understand-Anything` | Deep Context Mapping |
-| **Strategic Planning** | `obra/superpowers` | SPARC Methodology |
-| **Anti-Slop Mandates** | `multica-ai/andrej-karpathy-skills` | Simplicity & Precision |
-| **Deep Architecture** | `mattpocock/skills` | TypeScript & Locality |
-| **System Refinement** | `ruvnet/ruflo` | Flow & Optimization |
-| **Memory Engine** | `thedotmack/claude-mem` | Persistent Cognition |
-| **Knowledge Work** | `anthropics/knowledge-work-plugins` | Document Management |
-| **Visual Design** | `Leonxlnx/taste-skill` | Masterpiece UI/UX |
-| **Compound Systems** | `EveryInc/compound-engineering-plugin` | Multi-Agent Design |
-| **Tool Harness** | `revfactory/harness` | Performance Testing |
+Install the global engine and "Ironclad" any project in seconds.
+
+```bash
+# Install globally
+npm install -g ironclad-master-framework
+
+# Initialize framework in your current repo
+ironclad init
+
+# Start the MCP server for your AI assistant
+ironclad mcp
+```
 
 ---
 
-Built with 🧡 by **Rishabh Sharma** | © 2026 Ironclad Master Framework
+## 🏛️ The God-Tier Operational Loop (MANDATORY)
+
+Every task MUST progress through the **Universal Synthesis Loop**. Failure to comply results in terminal slop rejection.
+
+1.  **Understand**: Map architectural dependencies via `Understand-Anything`.
+2.  **Plan**: Draft strategic SPARC specifications in `plans/`.
+3.  **Delegate**: Spawn parallel agent swarms for multi-file implementation.
+4.  **Implement**: Apply cinematic frontend standards & Karpathy-simplicity logic.
+5.  **Verify**: Autonomous visual QA and Truth Factor validation.
+
+---
+
+## 🛠️ Global Command Center
+
+| Command | Action |
+| :--- | :--- |
+| `ironclad audit` | Run a cinematic Truth Score verification on your codebase. |
+| `ironclad plan` | Generate a strategic SPARC specification for any goal. |
+| `ironclad brainstorm` | Access the Intelligence Hub for creative strategic ideation. |
+| `ironclad mcp` | Launch the Model Context Protocol server for AI assistant integration. |
+| `ironclad upgrade` | Perform self-evolution (Audit -> Distill -> Upgrade). |
+
+---
+
+<div align="center">
+
+### **Built for the next generation of Elite AI Engineers.**
+**Stay Ironclad. Engineer the Extraordinary.**
+
+[**Contribute**](./CONTRIBUTING.md) • [**Support**](https://github.com/scream687/Ironclad-Master-Framework/issues) • [**Twitter**](https://twitter.com/scream687)
 
 </div>

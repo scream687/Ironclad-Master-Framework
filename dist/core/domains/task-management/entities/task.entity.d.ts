@@ -5,17 +5,19 @@ import { Priority } from '../value-objects/priority.vo';
 import { TaskResult } from '../events/task-completed.event';
 interface TaskProps {
     id: TaskId;
+    parentId?: string | undefined;
     description: string;
     priority: Priority;
     status: TaskStatus;
-    assignedAgentId?: string;
+    metadata: Record<string, any>;
+    assignedAgentId?: string | undefined;
     createdAt: Date;
     updatedAt: Date;
 }
 export declare class Task extends AggregateRoot<TaskId> {
     private props;
     private constructor();
-    static create(description: string, priority: Priority): Task;
+    static create(description: string, priority: Priority, parentId?: string): Task;
     static reconstitute(props: TaskProps): Task;
     assignTo(agentId: string): void;
     complete(result: TaskResult): void;

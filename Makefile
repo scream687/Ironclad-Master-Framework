@@ -1,12 +1,13 @@
 # Ironclad Framework Maintenance
 
-.PHONY: audit update upgrade fetch-skill clean install help
+.PHONY: audit update upgrade fetch-skill clean install help mcp
 
 help:
 	@echo "🛡️  Ironclad Framework Maintenance"
 	@echo ""
 	@echo "Usage:"
 	@echo "  make audit          Audit the codebase for 'slop' and quality issues"
+	@echo "  make mcp            Start the Ironclad MCP Server (for AI assistants)"
 	@echo "  make update         Sync intelligence assets from system .claude"
 	@echo "  make upgrade        Perform self-evolution (Audit -> Distill -> Upgrade)"
 	@echo "  make fetch-skill    Fetch a specialized skill from GitHub (e.g., REPO=user/repo)"
@@ -15,6 +16,9 @@ help:
 
 audit:
 	@node bin/ironclad.js audit
+
+mcp:
+	@npm run mcp
 
 update:
 	@echo "🔄 Syncing with ~/.claude..."

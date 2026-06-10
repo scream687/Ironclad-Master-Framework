@@ -9,12 +9,14 @@ export class Task extends AggregateRoot {
         super(props.id);
         this.props = props;
     }
-    static create(description, priority) {
+    static create(description, priority, parentId) {
         const task = new Task({
             id: TaskId.create(),
+            parentId,
             description,
             priority,
             status: TaskStatus.pending(),
+            metadata: {},
             createdAt: new Date(),
             updatedAt: new Date()
         });

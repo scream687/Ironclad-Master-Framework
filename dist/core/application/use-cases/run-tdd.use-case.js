@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b;
 import { injectable, inject } from 'inversify';
 import { TddService } from '../../domains/automation/services/tdd.service';
 import { TruthEnforcementService } from '../../domains/quality-assurance/services/truth-enforcement.service';
@@ -30,6 +29,7 @@ RunTddUseCase = __decorate([
     injectable(),
     __param(0, inject(TddService)),
     __param(1, inject(TruthEnforcementService)),
-    __metadata("design:paramtypes", [typeof (_a = typeof TddService !== "undefined" && TddService) === "function" ? _a : Object, typeof (_b = typeof TruthEnforcementService !== "undefined" && TruthEnforcementService) === "function" ? _b : Object])
+    __metadata("design:paramtypes", [TddService,
+        TruthEnforcementService])
 ], RunTddUseCase);
 export { RunTddUseCase };

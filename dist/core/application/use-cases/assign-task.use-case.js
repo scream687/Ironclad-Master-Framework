@@ -11,6 +11,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { injectable, inject } from 'inversify';
+import { TaskRepository } from '../../domains/task-management/repositories/task.repository';
 import { TaskId } from '../../domains/task-management/value-objects/task-id.vo';
 import { EventEmitter } from 'events';
 let AssignTaskUseCase = class AssignTaskUseCase {
@@ -22,7 +23,7 @@ let AssignTaskUseCase = class AssignTaskUseCase {
     }
     async execute(command) {
         const taskId = TaskId.fromString(command.taskId);
-        const task = await this.taskRepository.findById(taskId);
+        const task = await this.taskRepository.findById(taskId.value);
         if (!task) {
             throw new Error(`Task ${command.taskId} not found`);
         }
@@ -37,8 +38,9 @@ let AssignTaskUseCase = class AssignTaskUseCase {
 };
 AssignTaskUseCase = __decorate([
     injectable(),
-    __param(0, inject('TaskRepository')),
+    __param(0, inject(TaskRepository)),
     __param(1, inject('EventBus')),
-    __metadata("design:paramtypes", [Object, EventEmitter])
+    __metadata("design:paramtypes", [TaskRepository,
+        EventEmitter])
 ], AssignTaskUseCase);
 export { AssignTaskUseCase };

@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a;
 import { injectable, inject } from 'inversify';
 import { AgentDBService } from './agent-db.service';
 import Database from 'better-sqlite3';
@@ -103,6 +102,6 @@ let UnifiedMemoryService = class UnifiedMemoryService {
 UnifiedMemoryService = __decorate([
     injectable(),
     __param(0, inject(AgentDBService)),
-    __metadata("design:paramtypes", [typeof (_a = typeof AgentDBService !== "undefined" && AgentDBService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [AgentDBService])
 ], UnifiedMemoryService);
 export { UnifiedMemoryService };

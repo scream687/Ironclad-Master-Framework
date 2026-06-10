@@ -5,6 +5,9 @@ import { GitService } from './services/git.service';
 import { DesignService } from './services/design.service';
 import { WatchService } from './services/watch.service';
 import { DiscoveryService } from './services/discovery.service';
+import { HarnessService } from './services/harness.service';
+import { InfinityHarnessService } from './services/infinity-harness.service';
+import { TaskRepository } from '../task-management/repositories/task.repository';
 import { RunTddUseCase } from '../../application/use-cases/run-tdd.use-case';
 import { RunCommitUseCase } from '../../application/use-cases/run-commit.use-case';
 import { RunDesignUseCase } from '../../application/use-cases/run-design.use-case';
@@ -20,7 +23,10 @@ export class AutomationDomain implements Domain {
     container.bind<DiscoveryService>(DiscoveryService).toSelf().inSingletonScope();
     container.bind<DesignService>(DesignService).toSelf().inSingletonScope();
     container.bind<WatchService>(WatchService).toSelf().inSingletonScope();
-    
+    container.bind<HarnessService>(HarnessService).toSelf().inSingletonScope();
+    container.bind<InfinityHarnessService>(InfinityHarnessService).toSelf().inSingletonScope();
+    container.bind<TaskRepository>(TaskRepository).toSelf().inSingletonScope();
+
     container.bind<RunTddUseCase>(RunTddUseCase).toSelf().inSingletonScope();
     container.bind<RunCommitUseCase>(RunCommitUseCase).toSelf().inSingletonScope();
     container.bind<RunDesignUseCase>(RunDesignUseCase).toSelf().inSingletonScope();

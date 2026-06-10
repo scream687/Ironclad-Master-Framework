@@ -27,7 +27,8 @@ This file is the mandatory lookup table for all AI operations. Before performing
 
 | Task Category | Primary Skill (MANDATORY) | Secondary Skill (IF APPLICABLE) |
 |---|---|---|
-| **Planning & Design** | `sparc-methodology` | `writing-plans`, `architecture-decision-records` |
+| **Planning & Design** | `sparc-methodology` | `writing-plans`, `ironclad_plan` (MCP) |
+| **Brainstorming** | `ironclad_brainstorm` (MCP) | `strategic-ideation` |
 | **New Features** | `subagent-driven-development` | `tdd`, `v3-core-implementation` |
 | **Bug Fixing** | `diagnose` | `systematic-debugging`, `source-command-sparc-debug` |
 | **UI/UX Design** | `ui-ux-pro-max` | `impeccable`, `high-end-visual-design`, `design-motion-principles` |

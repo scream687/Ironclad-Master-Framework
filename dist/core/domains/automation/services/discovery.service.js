@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a;
 import { injectable, inject } from 'inversify';
 import { AgentDBService } from '../../memory/services/agent-db.service';
 let DiscoveryService = class DiscoveryService {
@@ -36,7 +35,7 @@ let DiscoveryService = class DiscoveryService {
 DiscoveryService = __decorate([
     injectable(),
     __param(0, inject(AgentDBService)),
-    __metadata("design:paramtypes", [typeof (_a = typeof AgentDBService !== "undefined" && AgentDBService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [AgentDBService])
 ], DiscoveryService);
 export { DiscoveryService };
 function rowToMetadata(row) {
