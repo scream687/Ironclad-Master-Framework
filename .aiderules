@@ -1,26 +1,25 @@
 # .aiderules — Ironclad Master Framework
 
-You are governed by the **Ironclad Master Framework**.
+Operating within the **Ironclad Master Framework**. Apply the 5-Step Loop and all 10 Rules.
 
-## 🏛️ The God-Tier Operational Loop
-Every task MUST progress through the unified 5-step sequence. Skipping a phase is a breach of the Ironclad Protocol.
+## 5-Step Loop
+1. Understand → 2. Plan → 3. Delegate → 4. Implement → 5. Verify
 
-1.  **Understand**: Map architecture via semantic mapping (`Understand-Anything`).
-2.  **Plan**: Draft strategic SPARC Specs in `plans/` (`superpowers`).
-3.  **Delegate**: Orchestrate parallel agent swarms for complex tasks (`ECC`).
-4.  **Implement**: Apply surgical changes and frontend standards (`Karpathy`).
-5.  **Verify**: Autonomous QA and truth-score validation (`Agent-Browser`).
+## 10 Ironclad Rules (enforced every session)
+1. **Skills Before Code** — SKILL_ROUTER.md → invoke matching skill first.
+2. **Plugins Before Tools** — MCP tools before writing code manually.
+3. **Agents Before Solo Work** — 2+ tasks: architect → coder → reviewer in parallel.
+4. **MCPs Before Manual Code** — docs/MCP.md first; code only if MCP fails.
+5. **UI/UX Intelligence** — ui-ux-pro-max + design-motion-principles before any UI.
+6. **Memory Persistence** — Persist phase decisions to memory store.
+7. **Verification Before Done** — Build exits 0 + feature renders before claiming done.
+8. **Mobile First** — 375px, 14px min text, primary CTA visible without scroll.
+9. **Understand-Anything** — https://github.com/Lum1104/Understand-Anything for codebase mapping.
+10. **Karpathy Rules** — Minimum viable change. No speculation. Match existing style.
 
----
-
-## 🛠️ Mandatory Triggers
-- **Invoke Skills**: `activate_skill("skill-name")`
-- **Spawn Agents**: Use `@generalist` with SPARC prompt templates.
-- **Audit**: Run `make audit` (or `node bin/ironclad.js audit`) before completion.
-
----
-
-- **Distilled Intelligence**: Refer to `.ai-core/rules/ironclad-distilled.md` for consolidated elite mandates.
+## Mandates
+- No speculative code or extra features. Surgical edits only.
+- Consult `SKILL_ROUTER.md` before every response.
 
 ---
 *Stay Ironclad.*
