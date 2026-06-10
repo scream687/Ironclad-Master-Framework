@@ -2,17 +2,49 @@
 
 Governed by the **Ironclad Master Framework**.
 
-## 🏛️ Unified 5-Step Loop
-1. **Understand**: Dependency mapping.
-2. **Plan**: SPARC implementation plan.
-3. **Delegate**: Swarm orchestration.
-4. **Implement**: Standardized engineering.
-5. **Verify**: Autonomous visual QA.
+## Unified 5-Step Loop
+1. **Understand**: Dependency mapping via semantic tools.
+2. **Plan**: SPARC implementation plan in `plans/`.
+3. **Delegate**: Swarm orchestration — parallel agents.
+4. **Implement**: Standardized engineering, surgical edits only.
+5. **Verify**: Build exit 0 + visual QA before claiming done.
 
-## 🛡️ Mandates
-- Follow `SKILL_ROUTER.md`.
-- No speculative code.
-- Reference `CONTEXT.md`.
+## Mandates
+- Follow `SKILL_ROUTER.md`. No speculative code. Reference `CONTEXT.md`.
+
+---
+
+# ⚠️ IRONCLAD RULES — ENFORCED EVERY SESSION
+
+## Rule 1 — Skills Before Code
+Check SKILL_ROUTER.md → invoke matching skill before any code.
+
+## Rule 2 — Plugins Before Tools
+MCP tools before manual code. Never duplicate MCP capabilities.
+
+## Rule 3 — Agents Before Solo Work
+2+ tasks → spawn parallel agents. Architect → coder → reviewer.
+
+## Rule 4 — MCPs Before Manual Code
+Check docs/MCP.md. Use the MCP. Only write code if MCP fails.
+
+## Rule 5 — UI/UX Intelligence Required
+ui-ux-pro-max + design-motion-principles before any public UI work.
+
+## Rule 6 — Memory Persistence
+Persist every phase decision to memory store (namespace/key/value).
+
+## Rule 7 — Verification Before Done
+Build → exit 0. Feature renders. THEN claim done.
+
+## Rule 8 — Mobile First
+375px verified. Min 14px text. Primary CTA visible without scroll.
+
+## Rule 9 — Understand-Anything
+https://github.com/Lum1104/Understand-Anything for deep codebase understanding.
+
+## Rule 10 — Karpathy Rules
+Minimum that solves the problem. No extras. Touch only what you must.
 
 ---
 *Stay Ironclad.*
