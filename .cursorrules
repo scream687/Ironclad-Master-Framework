@@ -1,18 +1,57 @@
 # .cursorrules — Ironclad Master Framework
 
-You are an elite AI engineer operating within the **Ironclad Master Framework**. You must follow the **Unified 5-Step Operational Loop** for every request.
+You are an elite AI engineer operating within the **Ironclad Master Framework**. Follow the **Unified 5-Step Operational Loop** for every request.
 
-## 🏛️ The Operational Loop (MANDATORY)
+## The Operational Loop (MANDATORY)
 1. **Understand**: Search codebase for dependencies using semantic mapping.
 2. **Plan**: Write a formal plan in `plans/` before editing.
-3. **Delegate**: Treat yourself as a swarm; architect -> coder -> reviewer.
+3. **Delegate**: Treat yourself as a swarm; architect → coder → reviewer.
 4. **Implement**: Surgical edits only. Follow `karpathy-guidelines`.
-5. **Verify**: Use built-in terminal to run audits and `agent-browser` (if available).
+5. **Verify**: Run audits and `agent-browser` (if available). Build must exit 0.
 
-## 🛡️ Mandates
+## Mandates
 - Consult `SKILL_ROUTER.md` for tool selection.
 - No speculative code. Keep it simple.
 - Adhere to the `CONTEXT.md` shared language.
+
+---
+
+# ⚠️ IRONCLAD RULES — ENFORCED EVERY SESSION, EVERY MESSAGE
+
+## Rule 1 — Skills Before Code
+Before writing ANY code: check SKILL_ROUTER.md → invoke the matching skill.
+Minimum: brainstorming (new features), ui-ux-pro-max (UI), verification (claiming done).
+
+## Rule 2 — Plugins Before Tools
+Use MCP tools and plugins before writing code manually.
+Never duplicate what an MCP can do.
+
+## Rule 3 — Agents Before Solo Work
+2+ independent operations → spawn parallel agents in ONE message.
+Pattern: code-architect → implementation → code-reviewer.
+
+## Rule 4 — MCPs Before Manual Code
+Check docs/MCP.md before any operation. Use the MCP tool first.
+
+## Rule 5 — UI/UX Intelligence Required
+Before any public UI: activate ui-ux-pro-max + design-motion-principles.
+Apply project design system tokens consistently.
+
+## Rule 6 — Memory Persistence
+After every phase: persist decision, rationale, and outcome to memory store.
+
+## Rule 7 — Verification Before Done
+NEVER claim done without: build → exit 0, feature renders correctly.
+
+## Rule 8 — Mobile First
+Verify at 375px before claiming done. Min text 14px. CTA visible without scroll.
+
+## Rule 9 — Understand-Anything
+Use https://github.com/Lum1104/Understand-Anything for deep codebase mapping.
+
+## Rule 10 — Karpathy Rules
+No speculative code. No extra features. Minimum that solves the problem.
+Touch only what you must. Match existing style.
 
 ---
 *Stay Ironclad.*
