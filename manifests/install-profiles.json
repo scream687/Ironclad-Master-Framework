@@ -1,0 +1,19 @@
+{
+  "enterprise": [
+    "ironclad-tdd",
+    "ironclad-shield",
+    "ironclad-architect"
+  ],
+  "frontend-pro": [
+    "ui-demo",
+    "frontend-patterns",
+    "design-system",
+    "accessibility"
+  ],
+  "backend-pro": [
+    "api-design",
+    "backend-patterns",
+    "database-migrations",
+    "docker-patterns"
+  ]
+}

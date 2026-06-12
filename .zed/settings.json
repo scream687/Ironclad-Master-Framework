@@ -1,0 +1,17 @@
+{
+  "assistant": {
+    "defaultModel": "claude-3-5-sonnet-latest",
+    "features": {
+      "inlineCompletions": true
+    }
+  },
+  "terminal": {
+    "integrated": {
+      "env": {
+        "osx": {
+          "IRONCLAD_ACTIVE": "1"
+        }
+      }
+    }
+  }
+}

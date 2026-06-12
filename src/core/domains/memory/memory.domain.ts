@@ -2,6 +2,7 @@ import { Container } from 'inversify';
 import { Domain } from '../../kernel/ironclad-kernel';
 import { AgentDBService } from './services/agent-db.service';
 import { UnifiedMemoryService } from './services/unified-memory.service';
+import { CloudSyncService } from './services/cloud-sync.service';
 
 export class MemoryDomain implements Domain {
   readonly name = 'memory';
@@ -14,6 +15,7 @@ export class MemoryDomain implements Domain {
     
     container.bind<AgentDBService>(AgentDBService).toConstantValue(this.agentDBService);
     container.bind<UnifiedMemoryService>(UnifiedMemoryService).toConstantValue(this.unifiedMemoryService);
+    container.bind<CloudSyncService>(CloudSyncService).toSelf().inSingletonScope();
   }
 
   async shutdown(): Promise<void> {

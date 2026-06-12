@@ -1,0 +1,11 @@
+{
+  "core": [
+    "rules",
+    "agents",
+    "skills",
+    "hooks"
+  ],
+  "dashboard": [
+    "dashboard"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "matcher": "tool == \"Edit\" || tool == \"Write\"",
+  "hooks": [
+    {
+      "event": "PreToolUse",
+      "type": "command",
+      "command": "node ./scripts/hooks/truth-check.js \"$file_path\""
+    },
+    {
+      "event": "SessionStart",
+      "type": "command",
+      "command": "node ./scripts/hooks/session-start.js"
+    }
+  ]
+}

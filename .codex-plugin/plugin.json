@@ -1,0 +1,17 @@
+{
+  "name": "ironclad-master-framework",
+  "version": "3.5.0",
+  "description": "Ironclad Universal Strategy Engine Plugin for Codex",
+  "engines": {
+    "codex": "^1.0.0"
+  },
+  "main": "index.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ironclad.audit",
+        "title": "Run Truth Audit"
+      }
+    ]
+  }
+}
