@@ -1,4 +1,7 @@
 import 'reflect-metadata';
+import { execFileSync } from 'child_process';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { Command } from 'commander';
 import chalk from 'chalk';
 import ora from 'ora';
@@ -103,9 +106,8 @@ async function main() {
     .description('Initialize Ironclad Framework in the current repository')
     .action(() => {
       console.log(chalk.blue('🛡️ Initializing Ironclad Enterprise Ecosystem...'));
-      const { execSync } = require('child_process');
-      const path = require('path');
-      execSync('node ' + path.resolve(__dirname, '../../install.js'), { stdio: 'inherit' });
+      const moduleDir = path.dirname(fileURLToPath(import.meta.url));
+      execFileSync('node', [path.resolve(moduleDir, '../../install.js')], { stdio: 'inherit' });
     });
 
   program
