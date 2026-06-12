@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 import { Task } from '../../entities/task.entity';
 import { Priority } from '../../value-objects/priority.vo';
 import { TaskAssignedEvent } from '../../events/task-assigned.event';

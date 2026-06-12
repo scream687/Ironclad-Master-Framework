@@ -7,7 +7,8 @@
     "ironclad": "bin/ironclad.js"
   },
   "scripts": {
-    "test": "node tests/run-all.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "build": "tsc",
     "start": "node dist/bin/ironclad.js",
     "mcp": "tsx src/mcp/index.ts",
@@ -69,6 +70,13 @@
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.3",
     "@types/shelljs": "^0.10.0",
-    "tsx": "^4.22.4"
+    "tsup": "^8.5.1",
+    "tsx": "^4.22.4",
+    "vitest": "^4.1.8"
+  },
+  "allowScripts": {
+    "esbuild@0.28.0": true,
+    "esbuild@0.27.7": true,
+    "fsevents@2.3.3": true
   }
 }
