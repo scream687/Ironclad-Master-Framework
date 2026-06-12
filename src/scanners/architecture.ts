@@ -1,7 +1,6 @@
 import { AuditIssue } from '../scoring/types';
 import shell from 'shelljs';
 import fs from 'fs';
-import path from 'path';
 import { ConfigService } from '../core/config/config.service';
 
 export class ArchitectureScanner {
