@@ -32,7 +32,6 @@ describe('${feature} Module', () => {
 });
 `;
       fs.writeFileSync(testFile, testScaffold.trim());
-      console.log(`[TDD] Scaffolded failing test at ${testFile}`);
     }
 
     // 2. Scaffold minimal implementation stub if not exists
@@ -44,25 +43,21 @@ describe('${feature} Module', () => {
       const implScaffold = `
 export class ${feature.replace(/-/g, '')} {
   public execute(): boolean {
-    // TODO: Implement tracer bullet logic
     return false; 
   }
 }
 `;
       fs.writeFileSync(implFile, implScaffold.trim());
-      console.log(`[TDD] Scaffolded implementation stub at ${implFile}`);
     }
 
-    // 3. Execute tracer bullet test loop
-    console.log(`[TDD] Running tracer bullet test cycle for ${feature}...`);
-    const testResult = shell.exec(`npm test -- ${testFile}`, { silent: true });
+    // 3. Execute tracer bullet test loop securely
+    const sanitizedTestFile = testFile.replace(/"/g, '\\"');
+    const testResult = shell.exec(`npm test -- "${sanitizedTestFile}"`, { silent: true });
 
     if (testResult.code !== 0) {
-      console.warn(`[TDD] Tracer bullet failed (Expected in RED phase): ${testResult.stderr}`);
       return false;
     }
 
-    console.log(`[TDD] Tracer bullet passed (GREEN phase achieved)`);
     return true;
   }
 }

@@ -28,7 +28,6 @@ export class StrategicPlanningService {
     };
 
     fs.writeFileSync(roadmapPath, JSON.stringify(payload, null, 2));
-    console.log(`[StrategicPlanning] Initialized master roadmap for mission: ${mission}`);
   }
 
   public async decomposeObjective(title: string, criteria: string[]): Promise<Objective> {
@@ -50,7 +49,6 @@ export class StrategicPlanningService {
     data.objectives.push(newObjective);
     fs.writeFileSync(roadmapPath, JSON.stringify(data, null, 2));
 
-    console.log(`[StrategicPlanning] Objective ${newObjective.id} decomposed and registered.`);
     return newObjective;
   }
 

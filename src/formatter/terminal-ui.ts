@@ -63,16 +63,38 @@ export class TerminalUI {
   }
 
   public static renderCertification(result: TruthScoreResult) {
-    const grade = result.totalScore > 90 ? 'A+' : result.totalScore > 80 ? 'A' : result.totalScore > 70 ? 'B' : 'C';
-    const health = result.totalScore > 80 ? 'EXCELLENT' : result.totalScore > 60 ? 'GOOD' : 'CRITICAL';
-    const healthColor = health === 'EXCELLENT' ? chalk.green : health === 'GOOD' ? chalk.yellow : chalk.red;
+    let grade = 'C';
+    let health = 'CRITICAL';
+    let healthColor = chalk.red;
+
+    if (result.totalScore === 100 && result.totalIssues === 0) {
+      grade = 'SSS';
+      health = 'GOD-TIER (SSS)';
+      healthColor = chalk.hex('#FFD700').bold; // Gold
+    } else if (result.totalScore > 95) {
+      grade = 'A++';
+      health = 'ELITE';
+      healthColor = chalk.green;
+    } else if (result.totalScore > 90) {
+      grade = 'A+';
+      health = 'EXCELLENT';
+      healthColor = chalk.green;
+    } else if (result.totalScore > 80) {
+      grade = 'A';
+      health = 'EXCELLENT';
+      healthColor = chalk.green;
+    } else if (result.totalScore > 70) {
+      grade = 'B';
+      health = 'GOOD';
+      healthColor = chalk.yellow;
+    }
 
     console.log(chalk.dim('  ══════════════════════════\n'));
     console.log(chalk.bold('  IRONCLAD CERTIFICATION\n'));
     console.log(`  Truth Score: ${chalk.bold(result.totalScore)}`);
     console.log(`  Grade:       ${chalk.bold(grade)}`);
     console.log(`  Repository Health:`);
-    console.log(`  ${healthColor.bold(health)}\n`);
+    console.log(`  ${healthColor(health)}\n`);
     console.log(chalk.dim('  ══════════════════════════\n'));
     console.log(chalk.dim('  Share:'));
     console.log(chalk.blue.underline(`  ironclad.dev/share/${Math.random().toString(36).substring(7)}\n`));

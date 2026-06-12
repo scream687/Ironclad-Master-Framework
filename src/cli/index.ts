@@ -99,6 +99,27 @@ async function main() {
     });
 
   program
+    .command('init')
+    .description('Initialize Ironclad Framework in the current repository')
+    .action(() => {
+      console.log(chalk.blue('🛡️ Initializing Ironclad Enterprise Ecosystem...'));
+      const { execSync } = require('child_process');
+      const path = require('path');
+      execSync('node ' + path.resolve(__dirname, '../../install.js'), { stdio: 'inherit' });
+    });
+
+  program
+    .command('dashboard')
+    .description('Launch the Ironclad Pro Control Plane GUI')
+    .action(async () => {
+      console.log(chalk.magenta('🚀 Launching Ironclad Pro Dashboard Server...'));
+      // We import it dynamically to avoid loading dashboard dependencies if not needed
+      const { startDashboardServer } = await import('../pro/dashboard-server.js');
+      // @ts-ignore
+      await startDashboardServer();
+    });
+
+  program
     .command('mcp')
     .description('Start the Ironclad MCP Server')
     .action(async () => {

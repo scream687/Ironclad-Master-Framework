@@ -39,45 +39,59 @@ export class InfinityHarnessService {
 
     while (!rootTask.status.isCompleted()) {
       // 2. Decomposition (AI-driven tactical breakdown)
-      const subTasks = await this.taskRepo.findPendingSubTasks(rootTask.id.value);
+      let subTasks = await this.taskRepo.findPendingSubTasks(rootTask.id.value);
       
       if (subTasks.length === 0) {
-        // Only decompose if we haven't already marked this objective as ready for final verification
-        const meta = (rootTask as any).props.metadata;
-        if (!meta.readyForVerification) {
-          await this.decomposeObjective(rootTask);
-          const newSubTasks = await this.taskRepo.findPendingSubTasks(rootTask.id.value);
-          if (newSubTasks.length === 0) {
-            console.log('✨  No further decomposition required. Moving to global verification.');
-            meta.readyForVerification = true;
-            await this.taskRepo.save(rootTask);
-          }
-          continue; 
-        }
+        const needsMoreWork = await this.ensureDecomposition(rootTask);
+        if (needsMoreWork) continue;
+        subTasks = await this.taskRepo.findPendingSubTasks(rootTask.id.value);
       }
 
       // 3. Process tactical sub-tasks
       for (const subTask of subTasks) {
-        console.log(`\n💎  Executing Tactical Sub-task: ${subTask.description}`);
-        subTask.assignTo('infinity-engine');
-        await this.runMicroLoop(subTask);
-        await this.taskRepo.save(subTask);
+        await this.executeSubTask(subTask);
       }
 
       // 4. Global Verification Loop
-      console.log('\n⚖️  [Global] Running final Truth Factor verification...');
-      const auditResult = await this.auditService.runFullAudit();
-      const criticals = auditResult.issues.filter(i => i.level.value === 'error');
-      
-      if (criticals.length === 0) {
-        rootTask.complete({ success: true, message: 'Objective met globally' });
-        await this.taskRepo.save(rootTask);
-        console.log(`👑  INFINITY LOOP COMPLETE: Objective Met with 1.00 Truth Score.`);
-      } else {
-        console.warn(`⚠️  Global verification failed with ${criticals.length} breaches. Re-routing...`);
-        (rootTask as any).props.metadata.readyForVerification = false; // Trigger re-decomposition
-        await this.backtrackStrategy(rootTask, criticals);
-      }
+      await this.runGlobalVerification(rootTask);
+    }
+  }
+
+  private async ensureDecomposition(rootTask: Task): Promise<boolean> {
+    const meta = (rootTask as any).props.metadata;
+    if (meta.readyForVerification) return false;
+
+    await this.decomposeObjective(rootTask);
+    const newSubTasks = await this.taskRepo.findPendingSubTasks(rootTask.id.value);
+    
+    if (newSubTasks.length === 0) {
+      meta.readyForVerification = true;
+      await this.taskRepo.save(rootTask);
+      return false;
+    }
+    return true;
+  }
+
+  private async executeSubTask(subTask: Task): Promise<void> {
+    console.log(`\n💎  Executing Tactical Sub-task: ${subTask.description}`);
+    subTask.assignTo('infinity-engine');
+    await this.runMicroLoop(subTask);
+    await this.taskRepo.save(subTask);
+  }
+
+  private async runGlobalVerification(rootTask: Task): Promise<void> {
+    console.log('\n⚖️  [Global] Running final Truth Factor verification...');
+    const auditResult = await this.auditService.runFullAudit();
+    const criticals = auditResult.issues.filter(i => i.level.value === 'error');
+    
+    if (criticals.length === 0) {
+      rootTask.complete({ success: true, message: 'Objective met globally' });
+      await this.taskRepo.save(rootTask);
+      console.log(`👑  INFINITY LOOP COMPLETE: Objective Met with 1.00 Truth Score.`);
+    } else {
+      console.warn(`⚠️  Global verification failed with ${criticals.length} breaches. Re-routing...`);
+      (rootTask as any).props.metadata.readyForVerification = false; 
+      await this.backtrackStrategy(rootTask, criticals);
     }
   }
 
@@ -112,39 +126,42 @@ export class InfinityHarnessService {
     let phase = HarnessPhase.UNDERSTAND;
     
     while (phase !== HarnessPhase.COMPLETE) {
-      console.log(`   └─ Phase: ${phase}`);
-      
-      // Checkpoint Mental State
       await this.checkpointThought(task.id.value, `Executing phase ${phase} for task: ${task.description}`);
 
       try {
-        switch (phase) {
-          case HarnessPhase.UNDERSTAND:
-            phase = HarnessPhase.PLAN;
-            break;
-          case HarnessPhase.PLAN:
-            phase = HarnessPhase.IMPLEMENT;
-            break;
-          case HarnessPhase.IMPLEMENT:
-            phase = HarnessPhase.VERIFY;
-            break;
-          case HarnessPhase.VERIFY:
-            const stillBreached = await this.verifyTaskSuccess(task);
-            if (!stillBreached) {
-              task.complete({ success: true, message: 'Sub-task verified' });
-              phase = HarnessPhase.COMPLETE;
-            } else {
-              console.warn(`   ⚠️  Sub-task verification failed. Attempting autonomous heal...`);
-              await this.healTask(task);
-              // Recursive loop handles retry
-            }
-            break;
-        }
+        phase = await this.processMicroPhase(task, phase);
       } catch (error) {
         console.error(`   ❌  Micro-Loop Error:`, error);
         break;
       }
     }
+  }
+
+  private async processMicroPhase(task: Task, phase: HarnessPhase): Promise<HarnessPhase> {
+    switch (phase) {
+      case HarnessPhase.UNDERSTAND:
+        return HarnessPhase.PLAN;
+      case HarnessPhase.PLAN:
+        return HarnessPhase.IMPLEMENT;
+      case HarnessPhase.IMPLEMENT:
+        return HarnessPhase.VERIFY;
+      case HarnessPhase.VERIFY:
+        return await this.finalizeMicroLoop(task);
+      default:
+        return HarnessPhase.COMPLETE;
+    }
+  }
+
+  private async finalizeMicroLoop(task: Task): Promise<HarnessPhase> {
+    const stillBreached = await this.verifyTaskSuccess(task);
+    if (!stillBreached) {
+      task.complete({ success: true, message: 'Sub-task verified' });
+      return HarnessPhase.COMPLETE;
+    }
+    
+    console.warn(`   ⚠️  Sub-task verification failed. Attempting autonomous heal...`);
+    await this.healTask(task);
+    return HarnessPhase.VERIFY;
   }
 
   private async checkpointThought(taskId: string, thought: string): Promise<void> {

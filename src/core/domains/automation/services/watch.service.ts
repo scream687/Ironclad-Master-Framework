@@ -9,35 +9,28 @@ export class WatchService {
 
   public async startDaemon(): Promise<void> {
     if (this.isWatching) {
-      console.log('[WatchDaemon] Already running.');
       return;
     }
 
     const watchDir = path.join(process.cwd(), 'src');
     
     if (!fs.existsSync(watchDir)) {
-      console.warn('[WatchDaemon] src directory not found. Halting daemon.');
       return;
     }
 
-    console.log(`[WatchDaemon] Starting background intelligence watcher on ${watchDir}...`);
-    
     this.watcher = fs.watch(watchDir, { recursive: true }, (eventType, filename) => {
       if (filename && filename.endsWith('.ts')) {
-        console.log(`[WatchDaemon] Detected ${eventType} on ${filename}. Triggering intelligence loop.`);
         this.handleFileChange(filename);
       }
     });
 
     this.isWatching = true;
-    console.log('[WatchDaemon] Active and listening for codebase anomalies.');
   }
 
   public stopDaemon(): void {
     if (this.watcher) {
       this.watcher.close();
       this.isWatching = false;
-      console.log('[WatchDaemon] Daemon terminated.');
     }
   }
 
@@ -47,7 +40,7 @@ export class WatchService {
     const fullPath = path.join(process.cwd(), 'src', filename);
     if (fs.existsSync(fullPath)) {
       const stat = fs.statSync(fullPath);
-      console.log(`[WatchDaemon] File size: ${stat.size} bytes. Analysis queued.`);
+      // Analysis queued silently.
     }
   }
 
