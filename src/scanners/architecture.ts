@@ -2,10 +2,12 @@ import { AuditIssue } from '../scoring/types';
 import shell from 'shelljs';
 import fs from 'fs';
 import path from 'path';
+import { ConfigService } from '../core/config/config.service';
 
 export class ArchitectureScanner {
   public scan(): AuditIssue[] {
     const issues: AuditIssue[] = [];
+    const config = ConfigService.load();
     const searchPaths = ['src', 'lib', 'app', 'pages', 'components'].filter(p => fs.existsSync(p));
     
     // If none of the standard paths exist, we might be in the root of a project that doesn't follow these.
@@ -38,8 +40,14 @@ export class ArchitectureScanner {
         });
       }
 
-      // 2. Deep Nesting
-      const maxNesting = Math.max(...lines.map(line => (line.match(/  |\t/g) || []).length));
+      // 2. Deep Nesting — leading whitespace only
+      const indentLevels = lines.map(line => {
+        const leading = line.match(/^[ \t]*/)?.[0] ?? '';
+        const tabs = (leading.match(/\t/g) || []).length;
+        const spaces = leading.length - tabs;
+        return tabs + Math.floor(spaces / 2);
+      });
+      const maxNesting = Math.max(0, ...indentLevels);
       if (maxNesting > 8) {
          issues.push({
           category: 'architecture',
@@ -53,19 +61,21 @@ export class ArchitectureScanner {
         });
       }
 
-      // 3. Governance Rule 5: Design Intelligence Signature
-      const isUiFile = file.match(/\.(tsx|jsx)$/) || file.includes('page.ts') || file.includes('component.ts');
-      if (isUiFile && !content.includes('@ironclad-design-signature')) {
-        issues.push({
-          category: 'architecture',
-          level: 'critical',
-          name: 'GOVERNANCE BREACH: Rule 5',
-          message: `UI file is missing a mandatory @ironclad-design-signature.`,
-          file,
-          risk: 'Violates mandatory design intelligence protocol. Potential for "slop" UI.',
-          fix: 'Run the design intelligence chain (ui-ux-pro-max) and add the signature header.',
-          autoFixable: false
-        });
+      // 3. Governance Rule 5: Design Intelligence Signature — opt-in via .ironclad.json
+      if (config.rules.designSignature) {
+        const isUiFile = file.match(/\.(tsx|jsx)$/) || file.includes('page.ts') || file.includes('component.ts');
+        if (isUiFile && !content.includes('@ironclad-design-signature')) {
+          issues.push({
+            category: 'architecture',
+            level: 'critical',
+            name: 'GOVERNANCE BREACH: Rule 5',
+            message: `UI file is missing a mandatory @ironclad-design-signature.`,
+            file,
+            risk: 'Violates mandatory design intelligence protocol. Potential for "slop" UI.',
+            fix: 'Run the design intelligence chain (ui-ux-pro-max) and add the signature header.',
+            autoFixable: false
+          });
+        }
       }
     });
 
