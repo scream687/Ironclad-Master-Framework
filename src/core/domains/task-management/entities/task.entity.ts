@@ -75,11 +75,22 @@ export class Task extends AggregateRoot<TaskId> {
     ));
   }
 
+  public getMetadata<T = unknown>(key: string): T | undefined {
+    return this.props.metadata[key] as T | undefined;
+  }
+
+  public setMetadata(key: string, value: unknown): void {
+    this.props.metadata[key] = value;
+    this.props.updatedAt = new Date();
+  }
+
   // Getters
   get description(): string { return this.props.description; }
   get priority(): Priority { return this.props.priority; }
   get status(): TaskStatus { return this.props.status; }
   get assignedAgentId(): string | undefined { return this.props.assignedAgentId; }
+  get parentId(): string | undefined { return this.props.parentId; }
+  get metadata(): Record<string, any> { return this.props.metadata; }
   get createdAt(): Date { return this.props.createdAt; }
   get updatedAt(): Date { return this.props.updatedAt; }
 

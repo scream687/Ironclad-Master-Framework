@@ -96,8 +96,6 @@ export class TerminalUI {
     console.log(`  Repository Health:`);
     console.log(`  ${healthColor(health)}\n`);
     console.log(chalk.dim('  ══════════════════════════\n'));
-    console.log(chalk.dim('  Share:'));
-    console.log(chalk.blue.underline(`  ironclad.dev/share/${Math.random().toString(36).substring(7)}\n`));
   }
 
   public static renderFixPreview(result: TruthScoreResult) {

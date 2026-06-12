@@ -60,14 +60,13 @@ export class InfinityHarnessService {
   }
 
   private async ensureDecomposition(rootTask: Task): Promise<boolean> {
-    const meta = (rootTask as any).props.metadata;
-    if (meta.readyForVerification) return false;
+    if (rootTask.getMetadata<boolean>('readyForVerification')) return false;
 
     await this.decomposeObjective(rootTask);
     const newSubTasks = await this.taskRepo.findPendingSubTasks(rootTask.id.value);
-    
+
     if (newSubTasks.length === 0) {
-      meta.readyForVerification = true;
+      rootTask.setMetadata('readyForVerification', true);
       await this.taskRepo.save(rootTask);
       return false;
     }
@@ -92,7 +91,7 @@ export class InfinityHarnessService {
       console.log(`👑  INFINITY LOOP COMPLETE: Objective Met with 1.00 Truth Score.`);
     } else {
       console.warn(`⚠️  Global verification failed with ${criticals.length} breaches. Re-routing...`);
-      (rootTask as any).props.metadata.readyForVerification = false; 
+      rootTask.setMetadata('readyForVerification', false);
       await this.backtrackStrategy(rootTask, criticals);
     }
   }
@@ -167,15 +166,11 @@ export class InfinityHarnessService {
   }
 
   private async checkpointThought(taskId: string, thought: string): Promise<void> {
-    const db = (this.agentDB as any).dbInstance;
-    db.prepare(`
-      INSERT OR REPLACE INTO thoughts (id, task_id, thought, created_at)
-      VALUES (?, ?, ?, ?)
-    `).run(`thought-${Math.random().toString(36).substring(7)}`, taskId, thought, Date.now());
+    this.agentDB.recordThought(taskId, thought);
   }
 
   private async verifyTaskSuccess(task: Task): Promise<boolean> {
-    const breach = (task as any).props.metadata.breach;
+    const breach = task.getMetadata<any>('breach');
     if (!breach || !breach.file) return false;
 
     // Check if the specific file still has the breach
@@ -193,7 +188,7 @@ export class InfinityHarnessService {
   }
 
   private async healTask(task: Task): Promise<void> {
-    const breach = (task as any).props.metadata.breach;
+    const breach = task.getMetadata<any>('breach');
     if (!breach || !breach.file || !fs.existsSync(breach.file)) return;
 
     console.log(`   🛠️  [Self-Heal] Applying fix to ${breach.file}...`);
@@ -213,13 +208,13 @@ export class InfinityHarnessService {
 
   private async backtrackStrategy(rootTask: Task, issues: any[]): Promise<void> {
     // Increment a "stagnation counter" in metadata
-    const meta = (rootTask as any).props.metadata;
-    meta.stagnationCount = (meta.stagnationCount || 0) + 1;
-    
-    if (meta.stagnationCount > 5) {
+    const count = (rootTask.getMetadata<number>('stagnationCount') ?? 0) + 1;
+    rootTask.setMetadata('stagnationCount', count);
+
+    if (count > 5) {
       throw new Error(`CRITICAL_STAGNATION: Objective ${rootTask.description} cannot be completed autonomously.`);
     }
-    
+
     await this.taskRepo.save(rootTask);
   }
 }

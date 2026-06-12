@@ -130,10 +130,3 @@ export async function runMcpServer() {
   await server.connect(transport);
   console.error("Ironclad MCP Server running on stdio");
 }
-
-if (import.meta.url === `file://${process.argv[1]}`) {
-  runMcpServer().catch((error) => {
-    console.error("Fatal error in MCP server:", error);
-    process.exit(1);
-  });
-}

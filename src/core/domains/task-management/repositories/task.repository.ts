@@ -19,11 +19,11 @@ export class TaskRepository {
     `);
     stmt.run(
       task.id.value,
-      (task as any).props.parentId,
+      task.parentId,
       task.description,
       task.status.value,
       task.priority.value,
-      JSON.stringify((task as any).props.metadata),
+      JSON.stringify(task.metadata),
       task.createdAt.getTime(),
       task.updatedAt.getTime()
     );

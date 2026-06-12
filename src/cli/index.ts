@@ -21,6 +21,8 @@ import { BrainstormUseCase } from '../core/application/use-cases/brainstorm.use-
 import { RunHarnessUseCase } from '../core/application/use-cases/run-harness.use-case';
 import { InfinityHarnessService } from '../core/domains/automation/services/infinity-harness.service';
 import { TerminalUI } from '../formatter/terminal-ui';
+import { startDashboardServer } from '../pro/dashboard-server';
+import { runMcpServer } from '../mcp/index';
 
 async function main() {
   const kernel = new IroncladKernel();
@@ -115,9 +117,6 @@ async function main() {
     .description('Launch the Ironclad Pro Control Plane GUI')
     .action(async () => {
       console.log(chalk.magenta('🚀 Launching Ironclad Pro Dashboard Server...'));
-      // We import it dynamically to avoid loading dashboard dependencies if not needed
-      const { startDashboardServer } = await import('../pro/dashboard-server.js');
-      // @ts-ignore
       await startDashboardServer();
     });
 
@@ -126,9 +125,6 @@ async function main() {
     .description('Start the Ironclad MCP Server')
     .action(async () => {
       console.log(chalk.cyan('Starting Ironclad MCP Server...'));
-      // We import it dynamically to avoid loading MCP dependencies if not needed
-      const { runMcpServer } = await import('../mcp/index.js');
-      // @ts-ignore
       await runMcpServer();
     });
 

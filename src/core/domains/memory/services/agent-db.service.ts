@@ -1,4 +1,5 @@
 import { injectable } from 'inversify';
+import { randomUUID } from 'crypto';
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
@@ -60,8 +61,12 @@ export class AgentDBService {
     this.db.exec(`CREATE INDEX IF NOT EXISTS idx_thoughts_task_id ON thoughts(task_id)`);
   }
 
-  public get dbInstance(): Database.Database {
-    return this.db;
+  public recordThought(taskId: string, thought: string): void {
+    const stmt = this.db.prepare(`
+      INSERT INTO thoughts (id, task_id, thought, created_at)
+      VALUES (?, ?, ?, ?)
+    `);
+    stmt.run(`thought-${randomUUID()}`, taskId, thought, Date.now());
   }
 
   public async store(entry: MemoryEntry): Promise<void> {
