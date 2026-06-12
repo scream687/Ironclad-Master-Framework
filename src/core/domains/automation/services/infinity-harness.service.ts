@@ -7,6 +7,7 @@ import { TaskId } from '../../task-management/value-objects/task-id.vo';
 import { TaskStatus } from '../../task-management/value-objects/task-status.vo';
 import { Priority } from '../../task-management/value-objects/priority.vo';
 import { HarnessPhase } from './harness.service';
+import { SafeWriteService } from '../../../shared/services/safe-write.service';
 import fs from 'fs';
 
 @injectable()
@@ -14,7 +15,8 @@ export class InfinityHarnessService {
   constructor(
     @inject(AgentDBService) private agentDB: AgentDBService,
     @inject(TaskRepository) private taskRepo: TaskRepository,
-    @inject(AuditService) private auditService: AuditService
+    @inject(AuditService) private auditService: AuditService,
+    @inject(SafeWriteService) private safeWrite: SafeWriteService
   ) {}
 
   public async runInfinityLoop(objective: string): Promise<void> {
@@ -203,7 +205,10 @@ export class InfinityHarnessService {
       content = content.replace(/console\.log\(.*\);?/g, '// [Ironclad-Purger] Removed unauthorized log');
     }
 
-    fs.writeFileSync(breach.file, content);
+    const result = this.safeWrite.write(breach.file, content);
+    if (result.backupPath) {
+      console.log(`   💾  Backup saved: ${result.backupPath}`);
+    }
   }
 
   private async backtrackStrategy(rootTask: Task, issues: any[]): Promise<void> {

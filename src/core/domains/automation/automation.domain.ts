@@ -13,6 +13,7 @@ import { RunCommitUseCase } from '../../application/use-cases/run-commit.use-cas
 import { RunDesignUseCase } from '../../application/use-cases/run-design.use-case';
 import { RunWatchUseCase } from '../../application/use-cases/run-watch.use-case';
 import { RunDiscoveryUseCase } from '../../application/use-cases/run-discovery.use-case';
+import { SafeWriteService } from '../../shared/services/safe-write.service';
 
 export class AutomationDomain implements Domain {
   readonly name = 'automation';
@@ -24,6 +25,7 @@ export class AutomationDomain implements Domain {
     container.bind<DesignService>(DesignService).toSelf().inSingletonScope();
     container.bind<WatchService>(WatchService).toSelf().inSingletonScope();
     container.bind<HarnessService>(HarnessService).toSelf().inSingletonScope();
+    container.bind<SafeWriteService>(SafeWriteService).toSelf().inSingletonScope();
     container.bind<InfinityHarnessService>(InfinityHarnessService).toSelf().inSingletonScope();
     container.bind<TaskRepository>(TaskRepository).toSelf().inSingletonScope();
 
